@@ -1,30 +1,30 @@
-project($ENV{ARCH}xx_HAL LANGUAGES C)
+project(${ARCH}xx_HAL LANGUAGES C)
 
-aux_source_directory($ENV{ARCH}xx_HAL_Drivers/Src $ENV{ARCH}xx_HAL_SRC)
+aux_source_directory(${ARCH}xx_HAL_Drivers/Src ${ARCH}xx_HAL_SRC)
 
-ifeq ($ENV{ARCH}, STM32F4)
-	add_library($ENV{ARCH}xx_HAL
-		${$ENV{ARCH}xx_HAL_SRC}
+ifeq (${ARCH}, STM32F4)
+	add_library(${ARCH}xx_HAL
+		${${ARCH}xx_HAL_SRC}
 	)
 endif
 
-ifeq ($ENV{ARCH}, STM32F7)
-	add_library($ENV{ARCH}xx_HAL
-		${$ENV{ARCH}xx_HAL_SRC}
-		CMSIS/Device/$ENV{ARCH}xx/Src/system_stm32f7xx.c
+ifeq (${ARCH}, STM32F7)
+	add_library(${ARCH}xx_HAL
+		${${ARCH}xx_HAL_SRC}
+		CMSIS/Device/${ARCH}xx/Src/system_stm32f7xx.c
 	)
 endif
 
 
 
-target_include_directories($ENV{ARCH}xx_HAL PUBLIC
-   	$ENV{ARCH}xx_HAL_Drivers/Inc
-	CMSIS/Device/$ENV{ARCH}xx/Include
+target_include_directories(${ARCH}xx_HAL PUBLIC
+   	${ARCH}xx_HAL_Drivers/Inc
+	CMSIS/Device/${ARCH}xx/Include
     	CMSIS/Include
 )
 
 # Include HAL configuration from BSP
-target_compile_definitions($ENV{ARCH}xx_HAL PUBLIC USE_HAL_DRIVER)
-target_include_directories($ENV{ARCH}xx_HAL PUBLIC ${CMAKE_SOURCE_DIR}/BSP/config/hal)
+target_compile_definitions(${ARCH}xx_HAL PUBLIC USE_HAL_DRIVER)
+target_include_directories(${ARCH}xx_HAL PUBLIC ${CMAKE_SOURCE_DIR}/BSP/config/hal)
 
-target_link_libraries($ENV{ARCH}xx_HAL PUBLIC DSP)
+target_link_libraries(${ARCH}xx_HAL PUBLIC DSP)
