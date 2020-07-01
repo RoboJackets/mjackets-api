@@ -19,4 +19,4 @@ target_include_directories(FreeRTOS PUBLIC
     src/portable/GCC/ARM_CM7/r0p1
 )
 
-target_link_libraries(FreeRTOS STM32F7xx)
+target_link_libraries(FreeRTOS $ENV{ARCH}xx)
