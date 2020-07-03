@@ -1,17 +1,20 @@
 #pragma once
 
-#ifdef STM32F7xx
-    #include "stm32f7xx_hal.h"
-#endif
-#ifdef STM32F4xx
-    #include "stm32f4xx_hal.h"
-#endif
+// #include "stm32f7xx_hal.h"
+// #include "stm32f4xx_hal.h"
+
+#include <stdint.h>
 
 typedef struct PinName {
-    GPIO_TypeDef* port;
-    uint16_t pin;
+  GPIO_TypeDef* port;
+  uint16_t pin;
 } PinName;
 
+typedef struct ADCPinName {
+  PinName pin_name;
+  ADC_TypeDef* adc;
+  uint32_t channel;
+} ADCPinName;
 
 /* Sample Pin Definition - Replace with the pin definition for your board!! */
 

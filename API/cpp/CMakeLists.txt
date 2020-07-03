@@ -12,7 +12,7 @@ target_include_directories(${ARCH}_API_CPP PUBLIC
     Inc/
     ./
     ../c/Inc/
-    ${CMAKE_SOURCE_DIR}/BSP/config/hal
+    ${CMAKE_SOURCE_DIR}/bsp/config/
 )
 
 target_link_libraries(${ARCH}_API_CPP PUBLIC ${ARCH}xx_HAL)
