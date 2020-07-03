@@ -1,0 +1,3 @@
+[submodule "mjackets-api"]
+	path = mjackets-api
+	url = https://github.com/RoboJackets/mjackets-api.git
