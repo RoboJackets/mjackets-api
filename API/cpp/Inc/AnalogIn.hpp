@@ -1,11 +1,17 @@
 #pragma once
 
-#include "PinDefs.hpp"
+#include "PinCommon.hpp"
+
+typedef struct ADCPinName {
+    PinName pin_name;
+    ADC_TypeDef* adc;
+    uint32_t channel;
+} ADCPinName;
 
 class AnalogIn {
-   private:
+  private:
 
-      ADC_HandleTypeDef ADC_InitStruct = {};
+      ADC_HandleTypeDef ADC_InitStruct = {0};
       uint32_t readValue;
       uint16_t unsignedReadValue;
       void ADC_Init(ADCPinName pin);

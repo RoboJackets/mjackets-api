@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PinDefs.hpp"
+#include "PinCommon.hpp"
 
 class DigitalIn {
 public:
@@ -10,15 +10,15 @@ public:
      * @param pull Pin pull type
      */
     DigitalIn(PinName pin, PullType pull = PullType::PullNone);
-    
+
     ~DigitalIn();
-    
+
     /** Read current value of pin
      *
      * @return true (high) or false (low)
      */
     bool read();
-    
+
     operator bool() {
         return read();
     }

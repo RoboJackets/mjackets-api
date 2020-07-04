@@ -1,7 +1,13 @@
 #ifndef AnalogIn
 #define AnalogIn
 
-#include "pin_defs.h"
+#include "pin_common.h"
+
+typedef struct adc_pin_name {
+    pin_name pin;
+    ADC_TypeDef* adc;
+    uint32_t channel;
+} adc_pin_name;
 
 typedef struct adc_handle {
   ADC_HandleTypeDef ADC_InitStruct;
