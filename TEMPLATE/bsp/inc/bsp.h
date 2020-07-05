@@ -26,8 +26,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 
-#include "bsp_defs.h"
-
 #ifdef STM32F7xx
     #include "stm32f7xx_hal.h"
 #endif

@@ -1,6 +1,6 @@
-project(${ARCH}xx_lib LANGUAGES C ASM)
+project(BSP LANGUAGES C ASM)
 
-add_library(${ARCH}xx
+add_library(BSP
     startup.s
     Src/bsp.c
     Src/interrupt_handlers.c
@@ -10,10 +10,10 @@ add_library(${ARCH}xx
     # Include any other source files here
 )
 
-target_include_directories(${ARCH}xx PUBLIC
+target_include_directories(BSP PUBLIC
     Inc
 )
 
-set_target_properties(${ARCH}xx PROPERTIES LINK_DEPENDS "${CMAKE_SOURCE_DIR}/BSP/flash.ld")
+set_target_properties(BSP PROPERTIES LINK_DEPENDS "${CMAKE_SOURCE_DIR}/BSP/flash.ld")
 
-target_link_libraries(${ARCH}xx PUBLIC DSP ${ARCH}xx_HAL STM32_USB_Device)
+target_link_libraries(BSP PUBLIC DSP ${ARCH}xx_HAL STM32_USB_Device)
