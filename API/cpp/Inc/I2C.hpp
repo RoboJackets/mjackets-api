@@ -1,7 +1,5 @@
 #pragma once
 
-#include "PinDefs.hpp"
-
 #include <vector>
 
 typedef enum I2CBus {

@@ -1,8 +1,5 @@
 #pragma once
 
-#include "PinCommon.hpp"
-
-
 class DigitalOut {
 public:
     /** Configures GPIO pin for digital in
