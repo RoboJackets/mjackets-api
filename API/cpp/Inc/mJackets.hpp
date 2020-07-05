@@ -7,8 +7,6 @@
     #include "stm32f4xx_hal.h"
 #endif
 
-    #include "stm32f4xx_hal.h"
-
 #include "PinDefs.hpp"
 #include "DigitalIn.hpp"
 #include "DigitalOut.hpp"
