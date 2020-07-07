@@ -1,9 +1,5 @@
 #pragma once
 
-// #include "stm32f7xx_hal.h"
-// #include "stm32f4xx_hal.h"
-
-
 typedef struct PinName {
     GPIO_TypeDef* port;
     uint16_t pin;
