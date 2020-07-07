@@ -1,1 +1,7 @@
 
+[submodule "HAL/STM32F4xx_HAL_Drivers"]
+	path = HAL/STM32F4xx_HAL_Drivers
+	url = https://github.com/STMicroelectronics/stm32f4xx_hal_driver.git
+[submodule "HAL/STM32F7xx_HAL_Drivers"]
+	path = HAL/STM32F7xx_HAL_Drivers
+	url = https://github.com/STMicroelectronics/stm32f7xx_hal_driver.git
