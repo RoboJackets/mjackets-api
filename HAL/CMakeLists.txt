@@ -21,7 +21,6 @@ endif
 target_include_directories(${ARCH}xx_HAL PUBLIC
    	${ARCH}xx_HAL_Drivers/Inc
 	CMSIS/Device/${ARCH}xx/Include
-    	CMSIS/Include
 )
 
 # Include HAL configuration from BSP

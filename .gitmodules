@@ -5,3 +5,12 @@
 [submodule "HAL/STM32F7xx_HAL_Drivers"]
 	path = HAL/STM32F7xx_HAL_Drivers
 	url = https://github.com/STMicroelectronics/stm32f7xx_hal_driver.git
+[submodule "HAL/CMSIS/Device/STM32F4"]
+	path = HAL/CMSIS/Device/STM32F4
+	url = https://github.com/STMicroelectronics/cmsis_device_f4.git
+[submodule "HAL/CMSIS/Device/STM32F7"]
+	path = HAL/CMSIS/Device/STM32F7
+	url = https://github.com/STMicroelectronics/cmsis_device_f7.git
+[submodule "LIB/cmsis_core"]
+	path = LIB/cmsis_core
+	url = https://github.com/STMicroelectronics/cmsis_core.git
