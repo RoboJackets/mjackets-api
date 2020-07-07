@@ -24,13 +24,6 @@ add_subdirectory(BSP)
 
 add_compile_definitions( -D${ARCH}xx )
 
-# Hardware Modules to Include
-# add_compile_definitions( -DUSE_USB_FS )
-# add_compile_definitions( -DUSE_USB_HS )
-# add_compile_definitions( -DUSE_QSPI )
-
-# OS Modules to include
-# add_compile_definitions( -DUSE_RTOS )
 
 
 
