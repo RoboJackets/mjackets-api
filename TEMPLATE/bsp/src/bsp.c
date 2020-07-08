@@ -50,16 +50,6 @@ void bsp_config(void) {
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOI_CLK_ENABLE();
 
-  /* User-Defined Hardware Intialization */
-
-  #ifdef USE_USB_HS || USE_USB_FS
-    USB_Config();
-  #endif
-
-  #ifdef USE_QSPI
-    QSPI_Config();
-  #endif
-
 }
 
 /**

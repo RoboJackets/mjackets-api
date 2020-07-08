@@ -11,7 +11,7 @@ add_library(BSP
 )
 
 target_include_directories(BSP PUBLIC
-    Inc
+    inc
 )
 
 set_target_properties(BSP PROPERTIES LINK_DEPENDS "${CMAKE_SOURCE_DIR}/BSP/flash.ld")

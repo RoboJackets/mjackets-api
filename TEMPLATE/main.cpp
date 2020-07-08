@@ -40,6 +40,8 @@ int sampleFunction(int);
   */
 int main(void)
 {
+  bsp_config()
+  
   /* User Code */
 
   /* Infinite loop */

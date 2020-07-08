@@ -9,7 +9,7 @@ add_library(${ARCH}_API_CPP
 target_include_directories(${ARCH}_API_CPP PUBLIC
     inc/
     ./
-    ${CMAKE_SOURCE_DIR}/bsp/config/
+    ${CMAKE_SOURCE_DIR}/bsp/inc
 )
 
 target_link_libraries(${ARCH}_API_CPP PUBLIC ${ARCH}xx_HAL)

@@ -26,12 +26,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 
-#ifdef STM32F7xx
-    #include "stm32f7xx_hal.h"
-#endif
-#ifdef STM32F4xx
-    #include "stm32f7xx_hal.h"
-#endif
+#include "mJackets.hpp"
 
 /* Include board specific hardware initialization files here */
 

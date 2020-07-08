@@ -7,14 +7,12 @@
     defined (STM32F479xx) || defined (STM32F412Cx) || defined (STM32F412Rx) || defined (STM32F412Vx) || \
     defined (STM32F412Zx) || defined (STM32F413xx) || defined (STM32F423xx)
     #include "stm32f4xx.h"
-    #include "stm32f4xx_hal.h"
 #endif
 
 #if defined (STM32F756xx) || defined (STM32F746xx) || defined (STM32F745xx) || defined (STM32F767xx) || \
     defined (STM32F769xx) || defined (STM32F777xx) || defined (STM32F779xx) || defined (STM32F722xx) || \
 	defined (STM32F723xx) || defined (STM32F732xx) || defined (STM32F733xx)
     #include "stm32f7xx.h"
-    #include "stm32f7xx_hal.h"
 #endif
 
 #include "PinDefs.hpp"
