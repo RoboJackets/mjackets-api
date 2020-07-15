@@ -1,15 +1,15 @@
-project(${ARCH}_API_CPP_lib LANGUAGES CXX)
+project(STM32_API_CPP_lib LANGUAGES CXX)
 
-aux_source_directory(src/ API_CPP_SRC)
-
-add_library(${ARCH}_API_CPP
-    ${API_CPP_SRC}
+add_library(STM32_API_CPP
+    src/AnalogIn.cpp
+    src/DigitalIn.cpp
+    src/DigitalOut.cpp
+    src/I2C.cpp
+    src/SPI.cpp
 )
 
-target_include_directories(${ARCH}_API_CPP PUBLIC
+target_include_directories(STM32_API_CPP PUBLIC
     inc/
-    ./
-    ${CMAKE_SOURCE_DIR}/bsp/inc
 )
 
-target_link_libraries(${ARCH}_API_CPP PUBLIC ${ARCH}xx_HAL)
+target_link_libraries(STM32_API_CPP PUBLIC ${STM32_FAMILY}_HAL BSP EXTERN_LIB)

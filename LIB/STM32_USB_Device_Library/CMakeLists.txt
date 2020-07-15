@@ -21,4 +21,4 @@ target_sources(STM32_USB_Device PUBLIC
 )
 
 
-target_link_libraries(STM32_USB_Device PUBLIC ${ARCH}xx_HAL)
+target_link_libraries(STM32_USB_Device PUBLIC ${STM32_FAMILY}_HAL)
