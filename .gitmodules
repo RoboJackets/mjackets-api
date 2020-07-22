@@ -14,3 +14,18 @@
 [submodule "LIB/cmsis_core"]
 	path = LIB/cmsis_core
 	url = https://github.com/STMicroelectronics/cmsis_core.git
+[submodule "LIB/FreeRTOS"]
+	path = LIB/FreeRTOS
+	url = https://github.com/STMicroelectronics/stm32_mw_freertos.git
+[submodule "LIB/FatFS"]
+	path = LIB/FatFS
+	url = https://github.com/STMicroelectronics/stm32_mw_fatfs.git
+[submodule "LIB/LwIP"]
+	path = LIB/LwIP
+	url = https://github.com/STMicroelectronics/stm32_mw_LwIP.git
+[submodule "LIB/STM32_USB_Device"]
+	path = LIB/STM32_USB_Device
+	url = https://github.com/STMicroelectronics/stm32_mw_usb_device.git
+[submodule "LIB/STM32_USB_Host"]
+	path = LIB/STM32_USB_Host
+	url = https://github.com/STMicroelectronics/stm32_mw_usb_host.git
