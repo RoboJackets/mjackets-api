@@ -11,7 +11,7 @@ project(myProject LANGUAGES C CXX)
 include("gcc_stm32")
 
 add_subdirectory(BSP)
-add_subdirectory(mJackets-api)
+add_subdirectory(mjackets-api)
 
 # Top level source files
 add_executable(${CMAKE_PROJECT_NAME} 
