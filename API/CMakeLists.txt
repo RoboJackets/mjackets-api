@@ -25,7 +25,6 @@ target_compile_features(API PRIVATE cxx_std_17)
 set_property(TARGET API PROPERTY CXX_STANDARD 17)
 
 target_link_libraries(API
-    CMSIS::STM32::${DEVICE}
     HAL::STM32::${FAMILY}
     HAL::STM32::${FAMILY}::ADC
     HAL::STM32::${FAMILY}::CORTEX
@@ -34,6 +33,7 @@ target_link_libraries(API
     HAL::STM32::${FAMILY}::GPIO
     HAL::STM32::${FAMILY}::RCC
     HAL::STM32::${FAMILY}::TIM
-    
+    CMSIS::STM32::${DEVICE}
+    STM32::NoSys
 )
 
