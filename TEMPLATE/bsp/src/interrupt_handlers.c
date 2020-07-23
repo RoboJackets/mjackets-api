@@ -19,6 +19,12 @@
 /* Includes ------------------------------------------------------------------*/
 
 #include "bsp.h"
+#if defined STM32F4
+    #include "stm32f4xx_hal.h"
+#endif
+#if defined STM32F7
+    #include "stm32f7xx_hal.h"
+#endif
 
 /* Private function prototypes -----------------------------------------------*/
 
@@ -29,31 +35,5 @@ void SysTick_Handler(void)
     HAL_IncTick();
     osSystickHandler();
 }
-
-/* USB Event Interrupt Handlers */
-#ifdef USE_USB_FS || USE_USB_HS
-    extern PCD_HandleTypeDef hpcd;
-#endif
-#ifdef USE_USB_FS
-    void OTG_FS_IRQHandler(void)
-    {
-        HAL_PCD_IRQHandler(&hpcd);
-    }
-#elif USE_USB_HS
-    void OTG_HS_IRQHandler(void)
-    {
-        HAL_PCD_IRQHandler(&hpcd);
-    }
-#endif
-
-/* QSPI Event Interrupt Handlers */
-#ifdef USE_QSPI
-    extern QSPI_HandleTypeDef QSPIHandle;
-
-    void QUADSPI_IRQHandler(void)
-    {
-        HAL_QSPI_IRQHandler(&QSPIHandle);
-    }
-#endif
 
 /* User-Defined Interrupt Handlers */

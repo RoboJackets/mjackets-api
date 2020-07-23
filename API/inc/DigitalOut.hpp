@@ -1,4 +1,5 @@
 #pragma once
+#include "mJackets.hpp"
 
 class DigitalOut {
 public:

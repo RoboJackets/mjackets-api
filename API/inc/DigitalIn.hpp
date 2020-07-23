@@ -1,5 +1,7 @@
 #pragma once
 
+#include "mJackets.hpp"
+
 class DigitalIn {
 public:
     /** Configures GPIO pin for digital in

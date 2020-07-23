@@ -21,6 +21,17 @@
 #include "bsp.h"
 #include  <unistd.h>
 
+#if defined STM32F405xx
+    #include "stm32f4xx_hal.h"
+    #include "stm32f4xx_hal_conf.h"
+    #include "stm32f4xx.h"
+#endif
+#if defined STM32F7
+    #include "stm32f7xx_hal.h"
+    #include "stm32f7xx_hal_conf.h"
+    #include "stm32f7xx.h"
+#endif
+
 /* Private user code ---------------------------------------------------------*/
 
 /**
@@ -30,16 +41,10 @@
 void bsp_config(void) {
 
   /* Standard Hal Initialization */
-
-  MPU_Config();
-  CPU_CACHE_Enable();
   HAL_Init();
   SystemClock_Config();
-  DWT_Config();
-
-  /* Enable all needed system clocks */
   
-  /* TODO: Dynamic Clock Configuration based on chip being used */
+  /* Enable GPIO Clocks */
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
@@ -96,12 +101,6 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 2;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /**Activate the Over-Drive mode 
-  */
-  if (HAL_PWREx_EnableOverDrive() != HAL_OK)
   {
     Error_Handler();
   }
@@ -172,22 +171,6 @@ void MPU_Config(void)
   * @param  None
   * @retval None
   */
-void CPU_CACHE_Enable(void)
-{
-  /* Enable I-Cache */
-  SCB_EnableICache();
-
-  /* Enable D-Cache */
-  SCB_EnableDCache();
-}
-
-void DWT_Config(void)
-{
-  CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
-  DWT->LAR = 0xC5ACCE55; 
-  DWT->CYCCNT = 0;
-  DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
-}
 
 #ifdef  USE_FULL_ASSERT
 

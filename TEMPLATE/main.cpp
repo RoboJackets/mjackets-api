@@ -16,7 +16,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "mJackets.h"
+#include "mJackets.hpp"
 
 /* Private includes ----------------------------------------------------------*/
 
@@ -40,7 +40,7 @@ int sampleFunction(int);
   */
 int main(void)
 {
-  bsp_config()
+  bsp_config();
   
   /* User Code */
 

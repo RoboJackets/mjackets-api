@@ -26,8 +26,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 
-#include "mJackets.hpp"
-
 /* Include board specific hardware initialization files here */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -36,7 +34,6 @@ extern void bsp_config(void);
 void SystemClock_Config(void);
 void Error_Handler(void);
 void MPU_Config(void);
-void CPU_CACHE_Enable(void);
 void DWT_Config(void);
 
 #ifdef __cplusplus

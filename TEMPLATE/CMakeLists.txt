@@ -1,26 +1,22 @@
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 3.14.7)
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/mjackets-api/cmake/stm32-gcc-arm-none-eabi.cmake)
 
-project(myProject LANGUAGES C CXX)
+# Set your project name
+project(myProject LANGUAGES C CXX ASM)
 
-## Uncomment the line below and specify the full STM32 chip code to hardcode the
-## build target. Otherwise, pass the chip code during build time using the 
-## build flag -DCHIP=<YOUR_CHIP_ID>. The latter option is preferred so you can 
-## easily build for multiple targets.
-# set(CHIP <FULL_STM32_CHIP_ID)
+# Set your full chip model here!
+set(CHIP STM32F405RG CACHE STRING "Full STM32 Chip Model")
+add_definitions(-DSTM32F405xx)
+add_definitions(-DSTM32F4)
 
-include("gcc_stm32")
-
-add_subdirectory(BSP)
 add_subdirectory(mjackets-api)
+add_subdirectory(bsp)
 
-# Top level source files
-add_executable(${CMAKE_PROJECT_NAME} 
-	"${CMAKE_SOURCE_DIR}/main.cpp"
+set(PROJECT_SOURCES
+	main.cpp
 )
 
-# Libraries the top level executable is dependant on
-target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC
-	${STM32_FAMILY}_HAL
-	STM32_API_CPP
-	EXTERN_LIB
-)
+# Add any additional source files here
+add_executable(${CMAKE_PROJECT_NAME} ${PROJECT_SOURCES} ${CMSIS_SOURCES} ${BSP_SOURCES} ${HAL_${FAMILY}_SOURCES})
+
+target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC API BSP)

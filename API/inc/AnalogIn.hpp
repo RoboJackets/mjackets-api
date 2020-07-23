@@ -1,5 +1,7 @@
 #pragma once
 
+#include "PinCommon.hpp"
+
 typedef struct ADCPinName {
     PinName pin_name;
     ADC_TypeDef* adc;
