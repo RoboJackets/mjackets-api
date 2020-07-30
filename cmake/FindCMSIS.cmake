@@ -29,8 +29,12 @@ endif()
 
 include(stm32/devices)
 
+if(NOT CMSIS_PATH)
+    set(CMSIS_PATH ${MJACKETS_PATH}/cmsis CACHE PATH "Path to cmsis")
+endif()
+
 if(NOT CMSIS_CORE_PATH)
-    set(CMSIS_CORE_PATH ${MJACKETS_PATH}/LIB/cmsis_core CACHE PATH "Path to cmsis_core")
+    set(CMSIS_CORE_PATH ${CMSIS_PATH}/cmsis_core CACHE PATH "Path to cmsis_core")
 endif()
 
 if(NOT CMSIS_CORE_VERSION)
@@ -102,14 +106,14 @@ foreach(COMP ${CMSIS_FIND_COMPONENTS})
 
     find_path(CMSIS_${FAMILY}_INCLUDE
         NAMES stm32${FAMILY_L}xx.h
-        PATHS "${MJACKETS_PATH}/HAL/CMSIS/Device/STM32${FAMILY}/Include"
+        PATHS "${CMSIS_PATH}/cmsis_device_${FAMILY_L}/Include"
         NO_DEFAULT_PATH
     )
     list(APPEND CMSIS_INCLUDE_DIRS "${CMSIS_${FAMILY}_INCLUDE}")
 
     find_file(CMSIS_${FAMILY}_SOURCE
         NAMES system_stm32${FAMILY_L}xx.c
-        PATHS "${MJACKETS_PATH}/HAL/CMSIS/Device/STM32${FAMILY}/Source/Templates"
+        PATHS "$${CMSIS_PATH}/cmsis_device_${FAMILY_L}/Source/Templates"
         NO_DEFAULT_PATH
     )
     list(APPEND CMSIS_SOURCES "${CMSIS_${FAMILY}_SOURCE}")
@@ -147,7 +151,7 @@ foreach(COMP ${CMSIS_FIND_COMPONENTS})
         if(NOT(${CMSIS_${FAMILY}_${TYPE}_STARTUP}))
             find_file(CMSIS_${FAMILY}_${TYPE}_STARTUP
                 NAMES startup_stm32${TYPE_L}.s
-                PATHS "${MJACKETS_PATH}/HAL/CMSIS/Device/STM32${FAMILY}/Source/Templates/gcc"
+                PATHS "${CMSIS_PATH}/cmsis_device_${FAMILY_L}/Source/Templates/gcc"
                 NO_DEFAULT_PATH
             )
             message(STATUS "Startup file not specified. Using default file: ${CMSIS_${FAMILY}_${TYPE}_STARTUP}")

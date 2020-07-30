@@ -1,31 +1,91 @@
 
-[submodule "HAL/STM32F4xx_HAL_Drivers"]
-	path = HAL/STM32F4xx_HAL_Drivers
-	url = https://github.com/STMicroelectronics/stm32f4xx_hal_driver.git
-[submodule "HAL/STM32F7xx_HAL_Drivers"]
-	path = HAL/STM32F7xx_HAL_Drivers
-	url = https://github.com/STMicroelectronics/stm32f7xx_hal_driver.git
-[submodule "HAL/CMSIS/Device/STM32F4"]
-	path = HAL/CMSIS/Device/STM32F4
-	url = https://github.com/STMicroelectronics/cmsis_device_f4.git
-[submodule "HAL/CMSIS/Device/STM32F7"]
-	path = HAL/CMSIS/Device/STM32F7
-	url = https://github.com/STMicroelectronics/cmsis_device_f7.git
-[submodule "LIB/cmsis_core"]
-	path = LIB/cmsis_core
+[submodule "cmsis/cmsis_core"]
+	path = cmsis/cmsis_core
 	url = https://github.com/STMicroelectronics/cmsis_core.git
-[submodule "LIB/FreeRTOS"]
-	path = LIB/FreeRTOS
+[submodule "external/FreeRTOS"]
+	path = external/FreeRTOS
 	url = https://github.com/STMicroelectronics/stm32_mw_freertos.git
-[submodule "LIB/FatFS"]
-	path = LIB/FatFS
+[submodule "external/FatFS"]
+	path = external/FatFS
 	url = https://github.com/STMicroelectronics/stm32_mw_fatfs.git
-[submodule "LIB/LwIP"]
-	path = LIB/LwIP
+[submodule "external/LwIP"]
+	path = external/LwIP
 	url = https://github.com/STMicroelectronics/stm32_mw_LwIP.git
-[submodule "LIB/STM32_USB_Device"]
-	path = LIB/STM32_USB_Device
+[submodule "external/STM32_USB_Device"]
+	path = external/STM32_USB_Device
 	url = https://github.com/STMicroelectronics/stm32_mw_usb_device.git
-[submodule "LIB/STM32_USB_Host"]
-	path = LIB/STM32_USB_Host
+[submodule "external/STM32_USB_Host"]
+	path = external/STM32_USB_Host
 	url = https://github.com/STMicroelectronics/stm32_mw_usb_host.git
+[submodule "cmsis/cmsis_device_f1"]
+	path = cmsis/cmsis_device_f1
+	url = https://github.com/STMicroelectronics/cmsis_device_f1.git
+[submodule "cmsis/cmsis_device_f2"]
+	path = cmsis/cmsis_device_f2
+	url = https://github.com/STMicroelectronics/cmsis_device_f2.git
+[submodule "cmsis/cmsis_device_f3"]
+	path = cmsis/cmsis_device_f3
+	url = https://github.com/STMicroelectronics/cmsis_device_f3.git
+[submodule "cmsis/cmsis_device_f4"]
+	path = cmsis/cmsis_device_f4
+	url = https://github.com/STMicroelectronics/cmsis_device_f4.git
+[submodule "cmsis/cmsis_device_f7"]
+	path = cmsis/cmsis_device_f7
+	url = https://github.com/STMicroelectronics/cmsis_device_f7.git
+[submodule "cmsis/cmsis_device_h7"]
+	path = cmsis/cmsis_device_h7
+	url = https://github.com/STMicroelectronics/cmsis_device_h7.git
+[submodule "cmsis/cmsis_device_g0"]
+	path = cmsis/cmsis_device_g0
+	url = https://github.com/STMicroelectronics/cmsis_device_g0.git
+[submodule "cmsis/cmsis_device_g4"]
+	path = cmsis/cmsis_device_g4
+	url = https://github.com/STMicroelectronics/cmsis_device_g4.git
+[submodule "cmsis/cmsis_device_l0"]
+	path = cmsis/cmsis_device_l0
+	url = https://github.com/STMicroelectronics/cmsis_device_l0.git
+[submodule "cmsis/cmsis_device_l1"]
+	path = cmsis/cmsis_device_l1
+	url = https://github.com/STMicroelectronics/cmsis_device_l1.git
+[submodule "cmsis/cmsis_device_l4"]
+	path = cmsis/cmsis_device_l4
+	url = https://github.com/STMicroelectronics/cmsis_device_l4.git
+[submodule "cmsis/cmsis_device_l5"]
+	path = cmsis/cmsis_device_l5
+	url = https://github.com/STMicroelectronics/cmsis_device_l5.git
+[submodule "cmsis/cmsis_device_wb"]
+	path = cmsis/cmsis_device_wb
+	url = https://github.com/STMicroelectronics/cmsis_device_wb.git
+[submodule "drivers/stm32f0xx_hal_driver"]
+	path = drivers/stm32f0xx_hal_driver
+	url = https://github.com/STMicroelectronics/stm32f0xx_hal_driver.git
+[submodule "drivers/stm32f1xx_hal_driver"]
+	path = drivers/stm32f1xx_hal_driver
+	url = https://github.com/STMicroelectronics/stm32f1xx_hal_driver.git
+[submodule "drivers/stm32f2xx_hal_driver"]
+	path = drivers/stm32f2xx_hal_driver
+	url = https://github.com/STMicroelectronics/stm32f2xx_hal_driver.git
+[submodule "drivers/stm32f3xx_hal_driver"]
+	path = drivers/stm32f3xx_hal_driver
+	url = https://github.com/STMicroelectronics/stm32f3xx_hal_driver.git
+[submodule "drivers/stm32f4xx_hal_driver"]
+	path = drivers/stm32f4xx_hal_driver
+	url = https://github.com/STMicroelectronics/stm32f4xx_hal_driver.git
+[submodule "drivers/stm32f7xx_hal_driver"]
+	path = drivers/stm32f7xx_hal_driver
+	url = https://github.com/STMicroelectronics/stm32f7xx_hal_driver.git
+[submodule "drivers/stm32h7xx_hal_driver"]
+	path = drivers/stm32h7xx_hal_driver
+	url = https://github.com/STMicroelectronics/stm32h7xx_hal_driver.git
+[submodule "drivers/stm32l0xx_hal_driver"]
+	path = drivers/stm32l0xx_hal_driver
+	url = https://github.com/STMicroelectronics/stm32l0xx_hal_driver.git
+[submodule "drivers/stm32l1xx_hal_driver"]
+	path = drivers/stm32l1xx_hal_driver
+	url = https://github.com/STMicroelectronics/stm32l1xx_hal_driver.git
+[submodule "drivers/stm32l4xx_hal_driver"]
+	path = drivers/stm32l4xx_hal_driver
+	url = https://github.com/STMicroelectronics/stm32l4xx_hal_driver.git
+[submodule "drivers/stm32wbxx_hal_driver"]
+	path = drivers/stm32wbxx_hal_driver
+	url = https://github.com/STMicroelectronics/stm32wbxx_hal_driver.git

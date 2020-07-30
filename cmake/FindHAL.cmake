@@ -182,7 +182,11 @@ set(HAL_LL_DRIVERS_L4
 
 if(NOT HAL_FIND_COMPONENTS)
     set(HAL_FIND_COMPONENTS
-        STM32F4 STM32F7
+        STM32F0 STM32F1 STM32F2 STM32F3 STM32F4 STM32F7
+        STM32H7
+        STM32G0 STM32G4
+        STM32L0 STM32L1 STM32L4 STM32L5
+        STM32WB
     )
 endif()
 
@@ -200,12 +204,12 @@ foreach(COMP ${HAL_FIND_COMPONENTS})
     string(TOLOWER ${FAMILY} FAMILY_L)
     
     if(NOT MJACKETS_HAL_PATH)
-        set(MJACKETS_HAL_PATH ${MJACKETS_PATH}/HAL CACHE PATH "Path to mJackets HAL")
+        set(MJACKETS_HAL_PATH ${MJACKETS_PATH}/drivers/hal CACHE PATH "Path to mJackets HAL")
     endif()
         
     find_path(HAL_${FAMILY}_PATH
         NAMES Inc/stm32${FAMILY_L}xx_hal.h
-        PATHS "${MJACKETS_HAL_PATH}/STM32${FAMILY}xx_HAL_Drivers"
+        PATHS "${MJACKETS_HAL_PATH}/stm32${FAMILY_L}xx_hal_driver"
         NO_DEFAULT_PATH
     )
     

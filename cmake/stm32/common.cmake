@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-set(STM32_SUPPORTED_FAMILIES F4 F7)
+set(STM32_SUPPORTED_FAMILIES F0 F1 F2 F3 F4 F7 L0 L1 L4 L5 G0 G4 H7 WB)
 
 function(stm32_get_chip_type FAMILY DEVICE TYPE)
     set(INDEX 0)
@@ -144,18 +144,19 @@ endif()
 
 
 include(stm32/utilities)
-# include(stm32/f0)
-# include(stm32/f1)
-# include(stm32/f2)
-# include(stm32/f3)
+include(stm32/f0)
+include(stm32/f1)
+include(stm32/f2)
+include(stm32/f3)
 include(stm32/f4)
 include(stm32/f7)
-# include(stm32/g0)
-# include(stm32/g4)
-# include(stm32/h7)
-# include(stm32/l0)
-# include(stm32/l1)
-# include(stm32/l4)
+include(stm32/g0)
+include(stm32/g4)
+include(stm32/h7)
+include(stm32/l0)
+include(stm32/l1)
+include(stm32/l4)
+include(stm32/wb)
 
 stm32_get_chip_info(${CHIP} STM32_FAMILY STM32_TYPE STM32_DEVICE)
 set(FAMILY ${STM32_FAMILY} CACHE STRING "STM32 Target Device Family")
