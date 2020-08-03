@@ -156,7 +156,6 @@ include(stm32/h7)
 include(stm32/l0)
 include(stm32/l1)
 include(stm32/l4)
-include(stm32/wb)
 
 stm32_get_chip_info(${CHIP} STM32_FAMILY STM32_TYPE STM32_DEVICE)
 set(FAMILY ${STM32_FAMILY} CACHE STRING "STM32 Target Device Family")

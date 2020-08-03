@@ -18,7 +18,15 @@
 
 /* Includes ------------------------------------------------------------------*/
 
-#include "bsp.h"
+#if defined STM32F1
+    #include "stm32f1xx_hal.h"
+#endif
+#if defined STM32F2
+    #include "stm32f2xx_hal.h"
+#endif
+#if defined STM32F3
+    #include "stm32f3xx_hal.h"
+#endif
 #if defined STM32F4
     #include "stm32f4xx_hal.h"
 #endif
@@ -35,5 +43,3 @@ void SysTick_Handler(void)
     HAL_IncTick();
     osSystickHandler();
 }
-
-/* User-Defined Interrupt Handlers */

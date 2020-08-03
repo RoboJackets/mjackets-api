@@ -34,6 +34,7 @@ void Handler_Nothing(void)
 {
 }
 
+void Error_Handler(void)                    __attribute__ ((weak, alias ("Handler_Loop")));
 void NMI_Handler(void)                      __attribute__ ((weak, alias ("Handler_Nothing")));
 void HardFault_Handler(void)                __attribute__ ((weak, alias ("Handler_Loop")));
 void MemManage_Handler(void)                __attribute__ ((weak, alias ("Handler_Loop")));

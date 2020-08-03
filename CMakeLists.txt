@@ -13,10 +13,16 @@ add_library(API
     api/AnalogIn.cpp
     api/DigitalIn.cpp
     api/DigitalOut.cpp
+    api/default_handlers.c
+    api/interrupt_handlers.c
+    api/hardware_init.c
 )
 
 target_include_directories(API PUBLIC
-    incclude/
+    include/
+)
+
+target_include_directories(API PRIVATE
     ${CMAKE_SOURCE_DIR}/bsp/inc
 )
 

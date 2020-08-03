@@ -113,7 +113,7 @@ foreach(COMP ${CMSIS_FIND_COMPONENTS})
 
     find_file(CMSIS_${FAMILY}_SOURCE
         NAMES system_stm32${FAMILY_L}xx.c
-        PATHS "$${CMSIS_PATH}/cmsis_device_${FAMILY_L}/Source/Templates"
+        PATHS "${CMSIS_PATH}/cmsis_device_${FAMILY_L}/Source/Templates"
         NO_DEFAULT_PATH
     )
     list(APPEND CMSIS_SOURCES "${CMSIS_${FAMILY}_SOURCE}")
