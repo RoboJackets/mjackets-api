@@ -12,3 +12,6 @@ doxygen
 
 # verilog synthesis and simulation tool
 iverilog
+
+# Flash Scripts
+stm32loader

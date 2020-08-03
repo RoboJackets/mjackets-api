@@ -128,3 +128,6 @@
 [submodule "external/stm32_mw_fatfs"]
 	path = external/stm32_mw_fatfs
 	url = https://github.com/STMicroelectronics/stm32_mw_fatfs.git
+[submodule "external/pystlink"]
+	path = external/pystlink
+	url = https://github.com/pavelrevak/pystlink.git
