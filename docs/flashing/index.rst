@@ -14,9 +14,10 @@ for programming STM32 products. It comes with both a GUI and CLI, and it
 supports reading, writing and verifying device memory through both the debug 
 interface (JTAG and SWD) and the bootloader interface (UART, USB DFU, I2C, 
 SPI, and CAN). You can download STM32CubeProgrammer for free from 
-`ST Microelectronics`_. STM32CubeProg is the most flexible option for flashing
- your application, and is the recommended programming method. Review the 
-`STM32CubeProgrammer Users Manual`_ for a detailed reference on how to use the application.
+`ST Microelectronics`_. STM32CubeProg is the most flexible option for 
+flashing your application, and is the recommended programming method. 
+Review the `STM32CubeProgrammer Users Manual`_ for a detailed reference on 
+how to use the application.
 
 Installation
 ------------
