@@ -26,7 +26,7 @@ their respective websites.
 The project's documentation contains the following items:
 
 * ReStructuredText source files used to generate documentation found at the
-  https://docs.zephyrproject.org website. Most of the reStructuredText sources
+  https://docs.robojackets.org/mjackets-api website. Most of the reStructuredText sources
   are found in the ``/doc`` directory, but others are stored within the
   code source tree near their specific component (such as ``/samples`` and
   ``/boards``)
