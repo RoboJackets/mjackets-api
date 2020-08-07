@@ -1,23 +1,32 @@
-.. _api-contributing:
+.. _api-development:
 
-API Contributing
+API Development
 ################
 
 This is a technical guide on how to approach adding new features and functionality
 to the mJackets API. 
 
+Contents
+********
+.. toctree::
+   :maxdepth: 3
 
-Structure
-*********
+Organization
+************
 
 The API components of mJackets are organized into two directories:
 
-- :file:`include` : This directory contains all of the public headers for the 
+- `include` - This directory contains all of the public headers for the 
   mJackets API functions. When adding a new API source file to mJackets, its
   corresponding header file MUST be included in this directory.
 
-- :file:`api` : This directory contains the source code for any API specific
+- `api` - This directory contains the source code for any API specific
   functions and classes. 
+
+Additionally, the `drivers` directory can be used to store the source code and
+include headers for any peripheral drivers. For example, if you wanted to add
+a driver for a Lidar Lite V3, you would add the source code, header files, and
+`CMakeList.txt` file in `drivers/sensors/lidar_lite_v3/`. 
 
 Format
 ******
@@ -28,7 +37,7 @@ All header files should have :code:`#define` guards to prevent multiple inclusio
 The format of the symbol name should be <PROJECT>_<PATH>_<FILE>_H_.
 
 To guarantee uniqueness, they should be based on the full path in a project's source tree. 
-For example, the file :file:`foo/src/bar/baz.h` in project :file:`foo` should have the 
+For example, the file `foo/src/bar/baz.h` in project `foo` should have the 
 following guard:
 
 .. code-block:: c++
@@ -43,10 +52,7 @@ following guard:
 Naming Conventions
 ******************
 
-API classes, member functions, and parameters must adhere to the google `C++ coding standards`_
-
-Naming rules are pretty arbitrary, but we feel that consistency is more important than individual 
-preferences in this area, so regardless of whether you find them sensible or not, the rules are the rules.
+Naming for API classes, member functions, and parameters must adhere to the Google `C++ coding standards`_
 
 .. _C++ Coding Standards:
    https://google.github.io/styleguide/cppguide.html
@@ -82,6 +88,7 @@ These often correspond to actual member variables, but this is not required.
 Example: 
 
 .. code-block:: c++
+
     class NameOneTwo
     {
         public:
@@ -93,6 +100,7 @@ Example:
     }
 
 .. code-block:: c++
+
     AddTableEntry()
     DeleteUrl()
     OpenFileOrDie()
@@ -110,6 +118,7 @@ Data members of classes, both static and non-static, are named like ordinary non
 but with a trailing underscore.
 
 .. code-block:: c++
+
     class TableInfo {
         ...
         private:
@@ -123,6 +132,7 @@ Data members of structs, both static and non-static, are named like ordinary non
 They do not have the trailing underscores that data members in classes have.
 
 .. code-block:: c++
+
     struct UrlTableProperties {
         std::string name;
         int num_entries;
@@ -136,6 +146,7 @@ named with a leading "k" followed by mixed case. Underscores can be used as sepa
 cases where capitalization cannot be used for separation. For example:
 
 .. code-block:: c++
+
     const int kDaysInAWeek = 7;
     const int kAndroid8_0_0 = 24;  // Android 8.0.0
 
@@ -157,6 +168,7 @@ That is, use kEnumName not ENUM_NAME.
 Example:
 
 .. code-block:: c++
+
     enum class UrlTableError {
         kOk = 0,
         kOutOfMemory,
@@ -174,7 +186,7 @@ When writing your comments, write for your audience: the next contributor who wi
 to understand your code. Be generous — the next one may be you!
 
 For automatically generating api documentation, it is important
-that doxygen Javadoc-style formatting is used when writing comments for functions and classes.
+that Doxygen Javadoc-style formatting is used when writing comments for functions and classes.
 
 File Comments
 =============
@@ -190,12 +202,12 @@ the contents of the file, and how the abstractions are related. A 1 or 2 sentenc
 file-level comment may be sufficient. The detailed documentation about individual 
 abstractions belongs with those abstractions, not at the file level.
 
-Do not duplicate comments in both the .h and the .cc. Duplicated comments diverge.
+Do not duplicate comments in both the .h and the .cpp. Duplicated comments diverge.
 
 Class Comments
 ==============
 
-All classes should be commented with the following:
+All classes should be commented with the following at a minimum:
 
 - Class description
 - Member function comments with description, paramaters, and return values
@@ -352,14 +364,14 @@ Including HAL Components
 ************************
 
 You can directly use HAL components from your API source code without needing include
-statements. The :file:`mJackets.hpp` file automatically includes the appropriate HAL 
+statements. The `mJackets.hpp` file automatically includes the appropriate HAL 
 drivers into the project, which are selected by the target device definition in the 
 build system as well as the HAL configuration file. 
 
 You will also need to make sure that the appropriate HAL driver libraries are linked with 
 the API to ensure that the driver source files, linker and compiler flags, and header files 
 are imported into the project. This can all be accomplished by adding a single line to the 
-:file:`CMakeLists.txt` file in the top level mjacket-api directory. For each driver library
+`CMakeLists.txt` file in the top level mjacket-api directory. For each driver library
 you want to link, add a line with the format 
 :code:`HAL::STM32::${FAMILY}::<your_driver_name>` in the :code:`target_link_libraries`
 function. The :code:`${FAMILY}` variable will automatically be populated by the build
@@ -368,6 +380,7 @@ is shown below for implementation of a few HAL drivers including the ADC, DAC, a
 drivers.
 
 .. code-block:: cmake
+
     target_link_libraries(API
         HAL::STM32::${FAMILY}
         HAL::STM32::${FAMILY}::ADC
@@ -386,3 +399,57 @@ The below libraries are required as a bare minimum:
 - :code:`HAL::STM32::${FAMILY}::RCC`
 - :code:`CMSIS::STM32::${DEVICE}`
 - :code:`STM32::NoSys`
+
+Peripheral Drivers
+******************
+
+As mentioned in the Organization section above, peripheral drivers 
+should be stored in an appropriate category with the folder structure
+being `drivers/<category>/<driver_name>/`. Under that directory you
+will need three files at a minimum.
+
+- C++ source code file
+- C++ header file
+- CMakeList.txt build system file
+
+The build system will generate a library for each driver. A driver can
+be included in an API function or application code by including the 
+driver header file and linking with the library in the appropriate 
+API or application CMakeLists.txt file. For example, if you want to use
+a Lidar Lite V3 driver in your application code, your application 
+CMakeList.txt file would need to include the following:
+
+.. code-block:: c++
+
+    find_package(DRIVERS COMPONENTS SENSORS REQUIRED)
+
+    ...
+
+    target_link_libraries(myProject
+        DRIVERS::SENSORS::LIDAR_LITE_V3
+    )
+
+The CMakeLists.txt file in the driver directory will need to have the
+following components to ensure compatability with the build system:
+
+.. code-block:: cmake
+
+    add_library(DRIVERS::<CATEGORY>::<DRIVER_NAME> INTERFACE IMPORTED 
+        <LIST_SOURCE_FILES_HERE>   
+    )
+
+    target_include_directories(DRIVERS::<CATEGORY>::<DRIVER_NAME> INTERFACE
+        .
+    )
+
+Additionally, if any HAL drivers or API functions are used, they will need
+to be linked with the peripheral driver using:
+
+.. code-block:: cmake
+
+    target_link_libraries(DRIVERS::<CATEGORY>::<DRIVER_NAME> INTERFACE
+        <Libraries_To_Link>
+    )
+
+
+

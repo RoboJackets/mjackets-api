@@ -11,9 +11,9 @@ Contents
 ********
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
-   api_contributing
+   api_development
    commit_guidelines
    workflow
 
@@ -25,7 +25,8 @@ contributions will be small; it takes time to learn the project structure and an
 languages and skills each particular project requires. Contributions of any size
 will be greatly appreciated, and you should have realistic expectations of what
 a first contribution might be (if you dont believe me, you can look at my first
-contribution [here](https://github.com/RoboJackets/robocup-software/commit/6ce98fc0f8d88b6d145700779e126c0f1b99bb92#diff-71a3477f37bd5b20744e292eda2e3fbc). It's two lines of 'code'). This guide will help you learn to navigate our code base, and
+contribution `here <https://github.com/RoboJackets/robocup-software/commit/6ce98fc0f8d88b6d145700779e126c0f1b99bb92#diff-71a3477f37bd5b20744e292eda2e3fbc>`_ . 
+It's two lines of 'code'). This guide will help you learn to navigate our code base, and
 work toward an initial contribution.
 
 Licensing
@@ -75,7 +76,7 @@ Prerequisites
 
 As a contributor, you'll want to be familiar with the mJackets project, how to
 configure, install, and use it, and how to set up your development environment 
-as introduced in the mJackets :ref:`getting_started_guide`.
+as introduced in the mJackets `Getting Started Guide <../getting_started/index.rst>`.
 
 You should be familiar with common developer tools such as Git and CMake, and
 platforms such as GitHub.
@@ -143,7 +144,7 @@ If the overall set of code is complex and new, consider editing or adding to
 the wiki.
 
 C/C++/Python is documented using doxygen. You can view the guide for writing doxygen
-comments and documentation [here](http://www.stack.nl/~dimitri/doxygen/manual/docblocks.html).
+comments and documentation `here <http://www.stack.nl/~dimitri/doxygen/manual/docblocks.html>`_ .
 
 Text file types that are not supported by doxygen should still be documented
 using what ever commenting style that format supports.
@@ -151,9 +152,13 @@ using what ever commenting style that format supports.
 Style and Formatting
 ********************
 In order to keep the code more readable, code should be formatted and styled
-uniformly. This would be difficult to coordinate across multiple users, so we
-have a program that automatically restyles the code for you. If you submit a
-pull request before restyling the code, it will likely fail the CI check. You
-can auto-format the code by running `make pretty`. If you have a lot of code,
-you may have to run this a few times. You can check if the style is passing
-by running `make checkstyle`. If there are no errors, then you are good to go.
+uniformly according to the `Google C++ Style Guide`_ . This would be difficult 
+to coordinate across multiple users, so we have a program that automatically 
+restyles the code for you. If you submit a pull request before restyling the 
+code, it will likely fail the CI style check. You can auto-format the code 
+by running `make pretty`. If you have a lot of code, you may have to run this 
+a few times. You can check if the style is passing by running `make checkstyle`. 
+If there are no errors, then you are good to go.
+
+.. _Google C++ Style Guide:
+   https://google.github.io/styleguide/cppguide.html
