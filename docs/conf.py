@@ -48,7 +48,11 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
+    "breathe",
 ]
+
+# Breathe Configuration
+breathe_default_project = "mjackets-api"
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['sphinx_templates']

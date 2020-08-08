@@ -28,11 +28,16 @@ Welcome to mjackets-api's documentation!
   flashing/index
 
 
-
-
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+API Docs
+====
+.. autodoxygenindex::
+   :project: ...
+   :outline:
+   :no-link:

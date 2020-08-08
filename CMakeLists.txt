@@ -43,4 +43,6 @@ target_link_libraries(API
     HAL::STM32::${FAMILY}::TIM
     CMSIS::STM32::${DEVICE}
     STM32::NoSys
-)
+    )
+
+add_subdirectory ("docs")
