@@ -7,25 +7,25 @@ Welcome to mjackets-api's documentation!
 ========================================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+    :maxdepth: 2
+    :caption: Contents:
 
-  README
-  build_system/CMakeDetails
-  getting_started/index
-  contributing/commit_guidelines
-  contributing/workflow
-  contributing/api_development
-  contributing/index
-  contributing/code_component_README
-  development_process/api_lifecycle
-  development_process/issues
-  development_process/feature_tracking
-  development_process/code_flow
-  development_process/dev_env_and_tools
-  development_process/index
-  development_process/documentation
-  flashing/index
+    README
+    build_system/CMakeDetails
+    getting_started/index
+    contributing/commit_guidelines
+    contributing/workflow
+    contributing/api_development
+    contributing/index
+    contributing/code_component_README
+    development_process/api_lifecycle
+    development_process/issues
+    development_process/feature_tracking
+    development_process/code_flow
+    development_process/dev_env_and_tools
+    development_process/index
+    development_process/documentation
+    flashing/index
 
 
 Indices and tables
@@ -35,9 +35,9 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
-API Docs
+Docs
 ====
 .. autodoxygenindex::
-   :project: ...
+   :project: mjackets-api
    :outline:
    :no-link:

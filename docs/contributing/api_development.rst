@@ -4,7 +4,7 @@ API Development
 ################
 
 This is a technical guide on how to approach adding new features and functionality
-to the mJackets API. 
+to the mJackets API.
 
 Contents
 ********
@@ -16,28 +16,28 @@ Organization
 
 The API components of mJackets are organized into two directories:
 
-- `include` - This directory contains all of the public headers for the 
+- `include` - This directory contains all of the public headers for the
   mJackets API functions. When adding a new API source file to mJackets, its
   corresponding header file MUST be included in this directory.
 
 - `api` - This directory contains the source code for any API specific
-  functions and classes. 
+  functions and classes.
 
 Additionally, the `drivers` directory can be used to store the source code and
 include headers for any peripheral drivers. For example, if you wanted to add
 a driver for a Lidar Lite V3, you would add the source code, header files, and
-`CMakeList.txt` file in `drivers/sensors/lidar_lite_v3/`. 
+`CMakeList.txt` file in `drivers/sensors/lidar_lite_v3/`.
 
 Format
 ******
 
 Define Guards
 =============
-All header files should have :code:`#define` guards to prevent multiple inclusion. 
+All header files should have :code:`#define` guards to prevent multiple inclusion.
 The format of the symbol name should be <PROJECT>_<PATH>_<FILE>_H_.
 
-To guarantee uniqueness, they should be based on the full path in a project's source tree. 
-For example, the file `foo/src/bar/baz.h` in project `foo` should have the 
+To guarantee uniqueness, they should be based on the full path in a project's source tree.
+For example, the file `foo/src/bar/baz.h` in project `foo` should have the
 following guard:
 
 .. code-block:: c++
@@ -60,12 +60,12 @@ Naming for API classes, member functions, and parameters must adhere to the Goog
 General Naming Rules
 ====================
 - Optimize for readability using names that would be clear even to people on a different team.
-- Use names that describe the purpose or intent of the object. Do not worry about saving horizontal 
-  space as it is far more important to make your code immediately understandable by a new reader. 
-  Minimize the use of abbreviations that would likely be unknown to someone outside your project 
-  (especially acronyms and initialisms). Do not abbreviate by deleting letters within a word. As 
-  a rule of thumb, an abbreviation is probably OK if it's listed in Wikipedia. Generally speaking, 
-  descriptiveness should be proportional to the name's scope of visibility. For example, n may be a 
+- Use names that describe the purpose or intent of the object. Do not worry about saving horizontal
+  space as it is far more important to make your code immediately understandable by a new reader.
+  Minimize the use of abbreviations that would likely be unknown to someone outside your project
+  (especially acronyms and initialisms). Do not abbreviate by deleting letters within a word. As
+  a rule of thumb, an abbreviation is probably OK if it's listed in Wikipedia. Generally speaking,
+  descriptiveness should be proportional to the name's scope of visibility. For example, n may be a
   fine name within a 5-line function, but within the scope of a class, it's likely too vague.
 
 Class Naming
@@ -82,10 +82,10 @@ Function Naming
 ===============
 Functions, including class member functions, use the same rule as for class names.
 
-Accessors and mutators (get and set functions) may be named like variables. 
-These often correspond to actual member variables, but this is not required. 
+Accessors and mutators (get and set functions) may be named like variables.
+These often correspond to actual member variables, but this is not required.
 
-Example: 
+Example:
 
 .. code-block:: c++
 
@@ -107,14 +107,14 @@ Example:
 
 Variable Names
 ==============
-The names of variables (including function parameters) and data members are all lowercase, 
-with underscores between words. Data members of classes (but not structs) additionally 
-have trailing underscores. For instance: :code:`a_local_variable`, :code:`a_struct_data_member`, 
+The names of variables (including function parameters) and data members are all lowercase,
+with underscores between words. Data members of classes (but not structs) additionally
+have trailing underscores. For instance: :code:`a_local_variable`, :code:`a_struct_data_member`,
 :code:`a_class_data_member_`.
 
 Class Data Members
 ++++++++++++++++++
-Data members of classes, both static and non-static, are named like ordinary nonmember variables, 
+Data members of classes, both static and non-static, are named like ordinary nonmember variables,
 but with a trailing underscore.
 
 .. code-block:: c++
@@ -128,7 +128,7 @@ but with a trailing underscore.
 
 Struct Data Members
 +++++++++++++++++++
-Data members of structs, both static and non-static, are named like ordinary nonmember variables. 
+Data members of structs, both static and non-static, are named like ordinary nonmember variables.
 They do not have the trailing underscores that data members in classes have.
 
 .. code-block:: c++
@@ -141,8 +141,8 @@ They do not have the trailing underscores that data members in classes have.
 
 Constant Names
 ==============
-Variables declared constexpr or const, and whose value is fixed for the duration of the program, are 
-named with a leading "k" followed by mixed case. Underscores can be used as separators in the rare 
+Variables declared constexpr or const, and whose value is fixed for the duration of the program, are
+named with a leading "k" followed by mixed case. Underscores can be used as separators in the rare
 cases where capitalization cannot be used for separation. For example:
 
 .. code-block:: c++
@@ -157,12 +157,13 @@ Typedef names should use the same naming policy as for a class with the word Typ
 Example:
 
 .. code-block:: c++
+
     typedef uint16  ModuleType;
     typedef uint32  SystemType;
 
 Enumerated Type Names
 =====================
-Enumerators (for both scoped and unscoped enums) should be named like constants, not like macros. 
+Enumerators (for both scoped and unscoped enums) should be named like constants, not like macros.
 That is, use kEnumName not ENUM_NAME.
 
 Example:
@@ -177,12 +178,12 @@ Example:
 
 Comments
 ********
-Comments are absolutely vital to keeping our code readable. The following rules describe 
-what you should comment and where. But remember: while comments are very important, the 
-best code is self-documenting. Giving sensible names to types and variables is much better 
+Comments are absolutely vital to keeping our code readable. The following rules describe
+what you should comment and where. But remember: while comments are very important, the
+best code is self-documenting. Giving sensible names to types and variables is much better
 than using obscure names that you must then explain through comments.
 
-When writing your comments, write for your audience: the next contributor who will need 
+When writing your comments, write for your audience: the next contributor who will need
 to understand your code. Be generous — the next one may be you!
 
 For automatically generating api documentation, it is important
@@ -190,16 +191,16 @@ that Doxygen Javadoc-style formatting is used when writing comments for function
 
 File Comments
 =============
-Start each file with license and project boilerplate. A template is provided `here 
+Start each file with license and project boilerplate. A template is provided `here
 <https://github.com/RoboJackets/mjackets-api/tree/master/docs/contributing/boilerplate_template.txt>`_.
 
-File comments describe the contents of a file. If a file declares, implements, or tests 
-exactly one abstraction that is documented by a comment at the point of declaration, file 
+File comments describe the contents of a file. If a file declares, implements, or tests
+exactly one abstraction that is documented by a comment at the point of declaration, file
 comments are not required. All other files must have file comments.
 
-If a .h declares multiple abstractions, the file-level comment should broadly describe 
-the contents of the file, and how the abstractions are related. A 1 or 2 sentence 
-file-level comment may be sufficient. The detailed documentation about individual 
+If a .h declares multiple abstractions, the file-level comment should broadly describe
+the contents of the file, and how the abstractions are related. A 1 or 2 sentence
+file-level comment may be sufficient. The detailed documentation about individual
 abstractions belongs with those abstractions, not at the file level.
 
 Do not duplicate comments in both the .h and the .cpp. Duplicated comments diverge.
@@ -220,36 +221,36 @@ Example:
     /**
     *  A test class. A more elaborate class description.
     */
-    
+
     class Javadoc_Test
     {
     public:
-    
-        /** 
+
+        /**
         * An enum.
         * More detailed enum description.
         */
-    
-        enum TEnum { 
-            TVal1, /**< enum value TVal1. */  
-            TVal2, /**< enum value TVal2. */  
-            TVal3  /**< enum value TVal3. */  
-            } 
+
+        enum TEnum {
+            TVal1, /**< enum value TVal1. */
+            TVal2, /**< enum value TVal2. */
+            TVal3  /**< enum value TVal3. */
+            }
         *enumPtr, /**< enum pointer. Details. */
         enumVar;  /**< enum variable. Details. */
-        
+
         /**
         * A constructor.
         * A more elaborate description of the constructor.
         */
         Javadoc_Test();
-    
+
         /**
         * A destructor.
         * A more elaborate description of the destructor.
         */
         ~Javadoc_Test();
-        
+
         /**
         * a normal member taking two arguments and returning an integer value.
         * @param a an integer argument.
@@ -261,7 +262,7 @@ Example:
         * @return The test results
         */
         int testMe(int a,const char *s);
-        
+
         /**
         * A pure virtual member.
         * @see testMe()
@@ -269,13 +270,13 @@ Example:
         * @param c2 the second argument.
         */
         virtual void testMeToo(char c1,char c2) = 0;
-    
-        /** 
+
+        /**
         * a public variable.
         * Details.
         */
         int publicVar;
-        
+
         /**
         * a function variable.
         * Details.
@@ -298,7 +299,7 @@ Doxygen Comment Structure
     *               set of rules and equations.
     */
     void cstyle( int theory );
-    
+
     /*******************************************************************************
     * A brief history of JavaDoc-style (C-style) banner comments.
     *
@@ -322,16 +323,17 @@ Doxygen Comment Structure
 
 JavaDoc Tags
 ============
+
 +---------------------------------+-------------------------------------------------------------+---------------------------------------+
-| Tag & Parameter	              | Usage	                                                      | Applies to                            |
+| Tag & Parameter	              | Usage	                                                    | Applies to                            |
 +=================================+=============================================================+=======================================+
-| *@author* John Smith            | Describes an author.	                                      | Class, Interface, Enum                |
+| *@author* John Smith            | Describes an author.	                                    | Class, Interface, Enum                |
 +---------------------------------+-------------------------------------------------------------+---------------------------------------+
-| *@param* name description       |	Describes a method parameter.                             |	Method	                              |
+| *@param* name description       |	Describes a method parameter.                               | Method	                            |
 +---------------------------------+-------------------------------------------------------------+---------------------------------------+
-| *@return* description	          | Describes the return value.	                              | Method	                              |
+| *@return* description	          | Describes the return value.	                                | Method	                            |
 +---------------------------------+-------------------------------------------------------------+---------------------------------------+
-| *@throws* classname description | Describes an exception that may be thrown from this method. | Method	                              |
+| *@throws* classname description | Describes an exception that may be thrown from this method. | Method	                            |
 +---------------------------------+-------------------------------------------------------------+---------------------------------------+
 | *@deprecated* description       | Describes an outdated method.                               | Class, Interface, Enum, Field, Method |
 +---------------------------------+-------------------------------------------------------------+---------------------------------------+
@@ -364,18 +366,18 @@ Including HAL Components
 ************************
 
 You can directly use HAL components from your API source code without needing include
-statements. The `mJackets.hpp` file automatically includes the appropriate HAL 
-drivers into the project, which are selected by the target device definition in the 
-build system as well as the HAL configuration file. 
+statements. The `mJackets.hpp` file automatically includes the appropriate HAL
+drivers into the project, which are selected by the target device definition in the
+build system as well as the HAL configuration file.
 
-You will also need to make sure that the appropriate HAL driver libraries are linked with 
-the API to ensure that the driver source files, linker and compiler flags, and header files 
-are imported into the project. This can all be accomplished by adding a single line to the 
+You will also need to make sure that the appropriate HAL driver libraries are linked with
+the API to ensure that the driver source files, linker and compiler flags, and header files
+are imported into the project. This can all be accomplished by adding a single line to the
 `CMakeLists.txt` file in the top level mjacket-api directory. For each driver library
-you want to link, add a line with the format 
+you want to link, add a line with the format
 :code:`HAL::STM32::${FAMILY}::<your_driver_name>` in the :code:`target_link_libraries`
 function. The :code:`${FAMILY}` variable will automatically be populated by the build
-system, and ensure the appropriate driver is included for the target device. An example 
+system, and ensure the appropriate driver is included for the target device. An example
 is shown below for implementation of a few HAL drivers including the ADC, DAC, and GPIO
 drivers.
 
@@ -403,7 +405,7 @@ The below libraries are required as a bare minimum:
 Peripheral Drivers
 ******************
 
-As mentioned in the Organization section above, peripheral drivers 
+As mentioned in the Organization section above, peripheral drivers
 should be stored in an appropriate category with the folder structure
 being `drivers/<category>/<driver_name>/`. Under that directory you
 will need three files at a minimum.
@@ -413,10 +415,10 @@ will need three files at a minimum.
 - CMakeList.txt build system file
 
 The build system will generate a library for each driver. A driver can
-be included in an API function or application code by including the 
-driver header file and linking with the library in the appropriate 
+be included in an API function or application code by including the
+driver header file and linking with the library in the appropriate
 API or application CMakeLists.txt file. For example, if you want to use
-a Lidar Lite V3 driver in your application code, your application 
+a Lidar Lite V3 driver in your application code, your application
 CMakeList.txt file would need to include the following:
 
 .. code-block:: c++
@@ -434,8 +436,8 @@ following components to ensure compatability with the build system:
 
 .. code-block:: cmake
 
-    add_library(DRIVERS::<CATEGORY>::<DRIVER_NAME> INTERFACE IMPORTED 
-        <LIST_SOURCE_FILES_HERE>   
+    add_library(DRIVERS::<CATEGORY>::<DRIVER_NAME> INTERFACE IMPORTED
+        <LIST_SOURCE_FILES_HERE>
     )
 
     target_include_directories(DRIVERS::<CATEGORY>::<DRIVER_NAME> INTERFACE
@@ -450,6 +452,3 @@ to be linked with the peripheral driver using:
     target_link_libraries(DRIVERS::<CATEGORY>::<DRIVER_NAME> INTERFACE
         <Libraries_To_Link>
     )
-
-
-
