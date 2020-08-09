@@ -1,12 +1,22 @@
+
+cmake_minimum_required(VERSION 3.14.7)
+
+project(
+  mjackets-api-documentation
+)
+
+# So that this project can build independently dont rely on incoming variables from the top level cmake
+set(MJACKETS_PATH ..)
+set(CMAKE_MODULE_PATH ${MJACKETS_PATH}/cmake)
+
 find_package(Doxygen REQUIRED)
 find_package(Sphinx REQUIRED)
 
 # Find all the public headers
-get_target_property(MJACKETS_PUBLIC_HEADER_DIR mjackets-api INTERFACE_INCLUDE_DIRECTORIES)
+set(MJACKETS_PUBLIC_HEADER_DIR ${MJACKETS_PATH}/include)
 file(GLOB_RECURSE MJACKETS_PUBLIC_HEADERS ${MJACKETS_PUBLIC_HEADER_DIR}/*.h)
 
-
-set(DOXYGEN_INPUT_DIR "${MJACKETS_PATH}/api \ ${MJACKETS_PATH}/include")
+set(DOXYGEN_INPUT_DIR "${MJACKETS_PATH}/include")
 set(DOXYGEN_OUTPUT_DIR ${MJACKETS_PATH}/build/doxygen_docs)
 set(DOXYGEN_INDEX_FILE ${DOXYGEN_OUTPUT_DIR}/html/index.html)
 set(DOXYFILE_IN ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in)
@@ -17,7 +27,7 @@ configure_file(${DOXYFILE_IN} ${DOXYFILE_OUT} @ONLY)
 
 file(MAKE_DIRECTORY ${DOXYGEN_OUTPUT_DIR}) #Doxygen won't create this for us
 add_custom_command(OUTPUT ${DOXYGEN_INDEX_FILE}
-    DEPENDS ${CAT_CUTIFIER_PUBLIC_HEADERS}
+    DEPENDS ${MJACKETS_PUBLIC_HEADERS}
     COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYFILE_OUT}
     MAIN_DEPENDENCY ${DOXYFILE_OUT} ${DOXYFILE_IN}
     COMMENT "Generating docs")

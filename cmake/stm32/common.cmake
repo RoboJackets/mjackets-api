@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-set(STM32_SUPPORTED_FAMILIES F0 F1 F2 F3 F4 F7 L0 L1 L4 L5 G0 G4 H7 WB)
+set(STM32_SUPPORTED_FAMILIES F4 F7)
 
 function(stm32_get_chip_type FAMILY DEVICE TYPE)
     set(INDEX 0)
@@ -40,34 +40,34 @@ endfunction()
 
 function(stm32_get_chip_info CHIP FAMILY TYPE DEVICE)
     string(TOUPPER ${CHIP} CHIP)
-        
+
     string(REGEX MATCH "^STM32([A-Z][0-9])([0-9A-Z][0-9][A-Z][0-9A-Z]).*$" CHIP ${CHIP})
-    
+
     if((NOT CMAKE_MATCH_1) OR (NOT CMAKE_MATCH_2))
         message(FATAL_ERROR "Unknown chip ${CHIP}")
     endif()
-    
+
     set(STM32_FAMILY ${CMAKE_MATCH_1})
     set(STM32_DEVICE "${CMAKE_MATCH_1}${CMAKE_MATCH_2}")
-    
+
     list(FIND STM32_SUPPORTED_FAMILIES ${STM32_FAMILY} STM32_FAMILY_INDEX)
     if (STM32_FAMILY_INDEX EQUAL -1)
         message(FATAL_ERROR "Unsupported family ${STM32_FAMILY} for device ${CHIP}")
     endif()
 
     stm32_get_chip_type(${STM32_FAMILY} ${STM32_DEVICE} STM32_TYPE)
-    
+
     set(${FAMILY} ${STM32_FAMILY} PARENT_SCOPE)
     set(${DEVICE} ${STM32_DEVICE} PARENT_SCOPE)
     set(${TYPE} ${STM32_TYPE} PARENT_SCOPE)
 endfunction()
 
-function(stm32_get_memory_info FAMILY DEVICE 
-    FLASH_SIZE RAM_SIZE CCRAM_SIZE STACK_SIZE HEAP_SIZE 
+function(stm32_get_memory_info FAMILY DEVICE
+    FLASH_SIZE RAM_SIZE CCRAM_SIZE STACK_SIZE HEAP_SIZE
     FLASH_ORIGIN RAM_ORIGIN CCRAM_ORIGIN
 )
     string(REGEX REPLACE "^[FGHL][0-9][0-9A-Z][0-9].([3468BCDEFGHIZ])$" "\\1" SIZE_CODE ${DEVICE})
-    
+
     if(SIZE_CODE STREQUAL "3")
         set(FLASH "8K")
     elseif(SIZE_CODE STREQUAL "4")
@@ -98,12 +98,12 @@ function(stm32_get_memory_info FAMILY DEVICE
         set(FLASH "16K")
         message(WARNING "Unknow flash size for device ${DEVICE}. Set to ${FLASH}")
     endif()
-    
+
     stm32_get_chip_type(${FAMILY} ${DEVICE} TYPE)
     list(FIND STM32_${FAMILY}_TYPES ${TYPE} TYPE_INDEX)
     list(GET STM32_${FAMILY}_RAM_SIZES ${TYPE_INDEX} RAM)
     list(GET STM32_${FAMILY}_CCRAM_SIZES ${TYPE_INDEX} CCRAM)
-    
+
     if(FAMILY STREQUAL "F1")
         stm32f1_get_memory_info(${DEVICE} ${TYPE} FLASH RAM)
     elseif(FAMILY STREQUAL "L1")

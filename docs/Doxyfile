@@ -1,3 +1,5 @@
+# NOTE The file Doxyfile.in the original copy of the Doxyfile. It holds placeholders that are replaced by cmake when it runs doxygen to create the normal Doxyfile.
+
 # Doxyfile 1.8.6
 
 # This file describes the settings to be used by the documentation system
@@ -58,7 +60,7 @@ PROJECT_LOGO           = images/rj_logo.png
 # entered, it will be relative to the location where doxygen was started. If
 # left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = ../build/generated-docs/
+OUTPUT_DIRECTORY = "..//build/doxygen_docs"
 
 # If the CREATE_SUBDIRS tag is set to YES, then doxygen will create 4096 sub-
 # directories (in 2 levels) under the output directory of each output format and
@@ -752,8 +754,7 @@ WARN_LOGFILE           =
 # spaces.
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ../api \
-                         ../include \
+INPUT = "..//include"
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -820,7 +821,7 @@ RECURSIVE              = YES
 # Note that relative paths are relative to the directory from which doxygen is
 # run.
 
-EXCLUDE                = 
+EXCLUDE                =
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
@@ -1821,7 +1822,7 @@ MAN_LINKS              = NO
 # captures the structure of the code including all documentation.
 # The default value is: NO.
 
-GENERATE_XML           = NO
+GENERATE_XML           = YES
 
 # The XML_OUTPUT tag is used to specify where the XML pages will be put. If a
 # relative path is entered the value of OUTPUT_DIRECTORY will be put in front of

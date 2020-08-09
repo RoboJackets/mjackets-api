@@ -4,3 +4,8 @@ build
 GPATH
 GRTAGS
 GTAGS
+
+*.swp
+
+CMakeCache.txt
+CMakeFiles/

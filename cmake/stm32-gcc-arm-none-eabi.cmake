@@ -27,7 +27,7 @@ list(APPEND CMAKE_MODULE_PATH ${STM32_CMAKE_DIR})
 set(MJACKETS_PATH ${STM32_CMAKE_DIR} CACHE PATH "Path to mJackets-api directory")
 
 if(NOT STM32_TOOLCHAIN_PATH)
-     set(STM32_TOOLCHAIN_PATH "/usr")
+     set(STM32_TOOLCHAIN_PATH "/usr/lib/arm-none-eabi")
      message(WARNING "No STM32_TOOLCHAIN_PATH specified, using default: " ${STM32_TOOLCHAIN_PATH})
 else()
      file(TO_CMAKE_PATH "${STM32_TOOLCHAIN_PATH}" STM32_TOOLCHAIN_PATH)
