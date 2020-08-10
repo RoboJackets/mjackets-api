@@ -5,7 +5,7 @@ project(
 )
 
 # So that this project can build independently dont rely on incoming variables from the top level cmake
-set(MJACKETS_PATH ..)
+set(MJACKETS_PATH ${CMAKE_CURRENT_SOURCE_DIR}/..)
 set(CMAKE_MODULE_PATH ${MJACKETS_PATH}/cmake)
 
 find_package(Doxygen REQUIRED)
@@ -16,7 +16,7 @@ set(MJACKETS_PUBLIC_HEADER_DIR ${MJACKETS_PATH}/include)
 file(GLOB_RECURSE MJACKETS_PUBLIC_HEADERS ${MJACKETS_PUBLIC_HEADER_DIR}/*.h)
 
 set(DOXYGEN_INPUT_DIR ${MJACKETS_PATH}/include)
-set(DOXYGEN_OUTPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/doxygen_docs)
+set(DOXYGEN_OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/docs_build/doxygen_docs)
 set(DOXYGEN_INDEX_FILE ${DOXYGEN_OUTPUT_DIR}/html/index.html)
 set(DOXYFILE_IN ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in)
 set(DOXYFILE_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
@@ -35,10 +35,10 @@ add_custom_command(OUTPUT ${DOXYGEN_INDEX_FILE}
                    VERBATIM)
 
 # Nice named target so we can run the job easily
-add_custom_target(Doxygen ALL DEPENDS ${DOXYGEN_INDEX_FILE})
+add_custom_target(doxygen ALL DEPENDS ${DOXYGEN_INDEX_FILE})
 
 set(SPHINX_SOURCE ${CMAKE_CURRENT_SOURCE_DIR})
-set(SPHINX_BUILD ${CMAKE_CURRENT_BINARY_DIR}/build/sphinx_docs)
+set(SPHINX_BUILD ${CMAKE_CURRENT_BINARY_DIR}/docs_build/sphinx_docs)
 set(SPHINX_INDEX_FILE ${SPHINX_BUILD}/index.html)
 
 # Only regenerate Sphinx when:
@@ -46,7 +46,7 @@ set(SPHINX_INDEX_FILE ${SPHINX_BUILD}/index.html)
 # - Our doc files have been updated
 # - The Sphinx config has been updated
 add_custom_command(OUTPUT ${SPHINX_INDEX_FILE}
-                   COMMAND 
+                   COMMAND
                      ${SPHINX_EXECUTABLE} -b html
                      # Tell Breathe where to find the Doxygen output
                      -Dbreathe_projects.mjackets-api=${DOXYGEN_OUTPUT_DIR}/xml
@@ -60,7 +60,7 @@ add_custom_command(OUTPUT ${SPHINX_INDEX_FILE}
                    COMMENT "Generating documentation with Sphinx")
 
 # Nice named target so we can run the job easily
-add_custom_target(Sphinx ALL DEPENDS ${SPHINX_INDEX_FILE})
+add_custom_target(sphinx ALL DEPENDS ${SPHINX_INDEX_FILE})
 
 # Add an install target to install the docs
 include(GNUInstallDirs)
