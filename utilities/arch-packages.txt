@@ -1,5 +1,4 @@
-
-# python 3
+# Python 3
 python
 python-pip
 
@@ -12,6 +11,9 @@ doxygen
 
 # verilog synthesis and simulation tool
 iverilog
+
+# Toolchain
+arm-none-eabi-gcc
 
 # Flash Scripts
 stm32loader

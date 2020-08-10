@@ -10,12 +10,13 @@ ccache
 # program to generate api documentation from comments in code files
 doxygen
 
-# C/C++ (and more) code-formatting tool
-clang-format-3.9
+# C/C++ (and more) code-formatting tool (just use the newest version)
+clang-format
 
 # AVR
 avr-libc
 avrdude
+gcc-arm-none-eabi
 
 python3-pip
 python3-setuptools
