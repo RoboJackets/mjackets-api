@@ -11,7 +11,7 @@ Contents
 ********
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    api_development
    commit_guidelines
@@ -25,7 +25,7 @@ contributions will be small; it takes time to learn the project structure and an
 languages and skills each particular project requires. Contributions of any size
 will be greatly appreciated, and you should have realistic expectations of what
 a first contribution might be (if you dont believe me, you can look at my first
-contribution `here <https://github.com/RoboJackets/robocup-software/commit/6ce98fc0f8d88b6d145700779e126c0f1b99bb92#diff-71a3477f37bd5b20744e292eda2e3fbc>`_ . 
+contribution `here <https://github.com/RoboJackets/robocup-software/commit/6ce98fc0f8d88b6d145700779e126c0f1b99bb92#diff-71a3477f37bd5b20744e292eda2e3fbc>`_ .
 It's two lines of 'code'). This guide will help you learn to navigate our code base, and
 work toward an initial contribution.
 
@@ -75,7 +75,7 @@ Prerequisites
 *************
 
 As a contributor, you'll want to be familiar with the mJackets project, how to
-configure, install, and use it, and how to set up your development environment 
+configure, install, and use it, and how to set up your development environment
 as introduced in the mJackets `Getting Started Guide <../getting_started/index.rst>`.
 
 You should be familiar with common developer tools such as Git and CMake, and
@@ -101,7 +101,7 @@ are merged into the main respository and have a chance to cause problems. Every
 time you submit a Pull Request (PR), the CI tool is run and it will assign a passing
 or failing mark to the request. If the CI fails, you will need to fix the error
 in your code before the code review. If the reason for the failure isn't
-obvious or it's a problem in the CI check itself, seek some help. The CI system 
+obvious or it's a problem in the CI check itself, seek some help. The CI system
 verifies several aspects of the PR:
 
 * Git commit formatting
@@ -152,12 +152,12 @@ using what ever commenting style that format supports.
 Style and Formatting
 ********************
 In order to keep the code more readable, code should be formatted and styled
-uniformly according to the `Google C++ Style Guide`_ . This would be difficult 
-to coordinate across multiple users, so we have a program that automatically 
-restyles the code for you. If you submit a pull request before restyling the 
-code, it will likely fail the CI style check. You can auto-format the code 
-by running `make pretty`. If you have a lot of code, you may have to run this 
-a few times. You can check if the style is passing by running `make checkstyle`. 
+uniformly according to the `Google C++ Style Guide`_ . This would be difficult
+to coordinate across multiple users, so we have a program that automatically
+restyles the code for you. If you submit a pull request before restyling the
+code, it will likely fail the CI style check. You can auto-format the code
+by running `make pretty`. If you have a lot of code, you may have to run this
+a few times. You can check if the style is passing by running `make checkstyle`.
 If there are no errors, then you are good to go.
 
 .. _Google C++ Style Guide:

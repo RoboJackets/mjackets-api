@@ -7,26 +7,19 @@ Welcome to mjackets-api's documentation!
 ========================================
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
     :caption: Contents:
 
-    README
-    getting_started/index
-    build_system/CMakeDetails
-    contributing/commit_guidelines
-    contributing/workflow
-    contributing/api_development
-    contributing/index
-    contributing/code_component_README
-    development_process/api_lifecycle
-    development_process/issues
-    development_process/feature_tracking
-    development_process/code_flow
-    development_process/dev_env_and_tools
-    development_process/index
-    development_process/documentation
-    flashing/index
+    getting_started/index.rst
+    contributing/index.rst
+    development_process/index.rst
+    flashing/index.rst
+    build_system/CMakeDetails.rst
 
+.. doxygenindex::
+   :project: mjackets-api
+   :outline:
+   :no-link:
 
 Indices and tables
 ==================
@@ -34,10 +27,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
-Docs
-====
-.. doxygenindex::
-   :project: mjackets-api-docs
-   :outline:
-   :no-link:

@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'mjackets-api-docs'
+project = 'mjackets-api'
 copyright = '2020, Austin Keener, Collin Avidano'
 author = 'Austin Keener, Collin Avidano'
 
@@ -52,7 +52,7 @@ extensions = [
 ]
 
 # Breathe Configuration
-breathe_default_project = "mjackets-api-docs"
+breathe_default_project = "mjackets-api"
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['sphinx_templates']
@@ -114,7 +114,7 @@ html_static_path = ['sphinx_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'mjackets-api-docs'
+htmlhelp_basename = 'mjackets-api'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -141,7 +141,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'mjackets-api-docs.tex', 'mjackets-api-docs Documentation',
+    (master_doc, 'mjackets-api.tex', 'mjackets-api Documentation',
      'Austin Keener, Collin Avidano', 'manual'),
 ]
 
@@ -151,7 +151,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'mjackets-api-docs', 'mjackets-api Documentation',
+    (master_doc, 'mjackets-api', 'mjackets-api Documentation',
      [author], 1)
 ]
 
@@ -162,8 +162,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'mjackets-api-docs', 'mjackets-api Documentation',
-     author, 'mjackets-api-docs', 'One line description of project.',
+    (master_doc, 'mjackets-api', 'mjackets-api Documentation',
+     author, 'mjackets-api', 'One line description of project.',
      'Miscellaneous'),
 ]
 
