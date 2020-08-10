@@ -11,8 +11,8 @@ Welcome to mjackets-api's documentation!
     :caption: Contents:
 
     README
-    build_system/CMakeDetails
     getting_started/index
+    build_system/CMakeDetails
     contributing/commit_guidelines
     contributing/workflow
     contributing/api_development
@@ -37,7 +37,7 @@ Indices and tables
 
 Docs
 ====
-.. autodoxygenindex::
-   :project: mjackets-api
+.. doxygenindex::
+   :project: mjackets-api-docs
    :outline:
    :no-link:

@@ -9,3 +9,5 @@ GTAGS
 
 CMakeCache.txt
 CMakeFiles/
+CMakeDoxygenDefaults.cmake
+cmake_install.cmake
