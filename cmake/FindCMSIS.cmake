@@ -148,7 +148,7 @@ foreach(COMP ${CMSIS_FIND_COMPONENTS})
             message(STATUS "Using startup_stm32${TYPE_L}.s found in BSP sources")
         endif()
 
-        if(NOT(${CMSIS_${FAMILY}_${TYPE}_STARTUP}))
+        if(NOT(CMSIS_${FAMILY}_${TYPE}_STARTUP))
             find_file(CMSIS_${FAMILY}_${TYPE}_STARTUP
                 NAMES startup_stm32${TYPE_L}.s
                 PATHS "${CMSIS_PATH}/cmsis_device_${FAMILY_L}/Source/Templates/gcc"
