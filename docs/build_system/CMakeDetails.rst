@@ -1,8 +1,10 @@
+.. _cmake_details: 
+
 CMake Details
-*************
+#############
 
 Overview
-========
+********
 
 CMake is used to build your application together with the mJackets API. A
 CMake build is done in two stages. The first stage is called
@@ -44,7 +46,7 @@ source file :file:`src/main.c`, behavior that we surely do not want. The
 paths of a target library.
 
 Application CMakeLists.txt
-==========================
+**************************
 
 Every application must have a :file:`CMakeLists.txt` file. This file is the
 entry point, or top level, of the build system. The final :file:`mJackets.elf`
@@ -99,7 +101,7 @@ Below is a simple example :file:`CMakeList.txt`:
    add_executable(app src/main.c)
 
 CMakeCache.txt
-==============
+**************
 
 CMake uses a CMakeCache.txt file as persistent key/value string
 storage used to cache values between runs, including compile and build
@@ -107,6 +109,6 @@ options and paths to library dependencies. This cache file is created
 when CMake is run in an empty build folder.
 
 For more details about the CMakeCache.txt file see the official CMake
-documentation `runningcmake`_ .
+documentation `Running CMake`_ .
 
-.. _runningcmake: http://cmake.org/runningcmake/
+.. _Running CMake: http://cmake.org/runningcmake/

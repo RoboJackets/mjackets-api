@@ -3,19 +3,16 @@
 Contribution Guide
 ##################
 
-This guide targets new members looking for a guide on contributing to the
-project. This guide will focus on the overall picture of effective coding and
-contributions. It is not intended to be a technical guide.
-
-Contents
-********
-
 .. toctree::
    :maxdepth: 1
 
    api_development
    commit_guidelines
    workflow
+
+This guide targets new members looking for a guide on contributing to the
+project. This guide will focus on the overall picture of effective coding and
+contributions. It is not intended to be a technical guide.
 
 Initial Notes
 *************
