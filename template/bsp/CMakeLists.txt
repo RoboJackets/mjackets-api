@@ -8,13 +8,13 @@ string(TOLOWER ${TYPE} TYPE_L)
 
 
 find_path(BSP_INCLUDE_PATH
-    NAMES PinDefs.hpp
-    PATHS "${BSP_PATH}/inc"
+    NAMES stm32${FAMILY_L}xx_hal_conf.h
+    PATHS "${BSP_PATH}"
     NO_DEFAULT_PATH
     REQUIRED
 )
 
-add_library(BSP "${BSP_SOURCES}")
-target_include_directories(BSP PUBLIC "${BSP_INCLUDE_PATH}")
-target_link_libraries(BSP PUBLIC API)
+add_library(BSP INTERFACE)
+target_include_directories(BSP INTERFACE "${BSP_INCLUDE_PATH}")
+target_link_libraries(BSP INTERFACE API)
 

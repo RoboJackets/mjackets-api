@@ -3,5 +3,5 @@ wheel
 conan
 sphinx
 breathe
-sphinx_rtd_theme
-
+sphinx-tabs
+sphinx-rtd-theme

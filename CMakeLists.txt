@@ -43,6 +43,8 @@ target_link_libraries(API
     HAL::STM32::${FAMILY}::TIM
     CMSIS::STM32::${DEVICE}
     STM32::NoSys
-    )
+    BSP
+)
 
 add_subdirectory ("docs")
+add_subdirectory("tests")

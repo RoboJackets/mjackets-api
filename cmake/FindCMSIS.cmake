@@ -141,14 +141,14 @@ foreach(COMP ${CMSIS_FIND_COMPONENTS})
         
         find_file(CMSIS_${FAMILY}_${TYPE}_STARTUP
             NAMES startup_stm32${TYPE_L}.s
-            PATHS "${CMAKE_SOURCE_DIR}/bsp/src"
+            PATHS "${CMAKE_SOURCE_DIR}"
             NO_DEFAULT_PATH
         )
         if(CMSIS_${FAMILY}_${TYPE}_STARTUP)
-            message(STATUS "Using startup_stm32${TYPE_L}.s found in BSP sources")
+            message(STATUS "Using startup_stm32${TYPE_L}.s found in ${CMAKE_SOURCE_DIR}")
         endif()
 
-        if(NOT(${CMSIS_${FAMILY}_${TYPE}_STARTUP}))
+        if(NOT(CMSIS_${FAMILY}_${TYPE}_STARTUP))
             find_file(CMSIS_${FAMILY}_${TYPE}_STARTUP
                 NAMES startup_stm32${TYPE_L}.s
                 PATHS "${CMSIS_PATH}/cmsis_device_${FAMILY_L}/Source/Templates/gcc"

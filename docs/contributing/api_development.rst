@@ -6,11 +6,6 @@ API Development
 This is a technical guide on how to approach adding new features and functionality
 to the mJackets API.
 
-Contents
-********
-.. toctree::
-   :maxdepth: 3
-
 Organization
 ************
 

@@ -45,7 +45,20 @@ Click the operating system you are using.
       Select *Start* > *Settings* > *Update & Security* > *Windows Update*.
       Click *Check for updates* and install any that are available.
 
-.. _install-required-tools:
+.. _clone_api:
+
+.. rst-class:: numbered-step
+
+Clone mJackets API
+******************
+
+Next, clone the mJackets API:
+
+.. code-block:: console
+
+   git clone https://github.com/RoboJackets/mjackets-api.git
+
+.. _install_dependancies:
 
 .. rst-class:: numbered-step
 
@@ -58,11 +71,12 @@ Next, you'll install some host dependencies using your package manager.
 
    .. group-tab:: Ubuntu
 
-      #. Use ``apt`` to install dependencies (TODO: Complete list):
+      #. Use the :file:`ubuntu-setup.sh` script in the :file:`./utilities` directory to automatically install all the required dependancies:
 
          .. code-block:: bash
 
-            sudo apt install --no-install-recommends git cmake
+            cd mjackets-api
+            ./utilities/ubuntu-setup.sh
 
       #. Verify the version of cmake installed on your system using::
 
@@ -94,17 +108,12 @@ Next, you'll install some host dependencies using your package manager.
 
    .. group-tab:: macOS
 
-      #. Install `Homebrew <https://brew.sh/>`_:
+      #. Use the :file:`osx-setup.sh` script in the :file:`./utilities` directory to automatically install all the required dependancies:
 
          .. code-block:: bash
 
-            /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-      #. Use ``brew`` to install dependencies (TODO: Complete list):
-
-         .. code-block:: bash
-
-            brew install cmake
+            cd mjackets-api
+            ./utilities/osx-setup.sh
 
    .. group-tab:: Windows
 
@@ -143,28 +152,17 @@ Next, you'll install some host dependencies using your package manager.
 .. _Chocolatey: https://chocolatey.org/
 .. _Install chocolatey: https://chocolatey.org/install
 
-.. _get_the_code:
-.. _clone-mjackets:
 
 .. rst-class:: numbered-step
 
-Clone mJackets API
-******************
+Create Template Project Repository
+**********************************
 
-Next, clone mJackets API and install the project template into a new workspace
-named :file:`mjacketproject`.
+Next, install the project template into a new workspace named :file:`mjacketproject`.
 
 .. tabs::
 
    .. group-tab:: Ubuntu
-
-      #. Get the mJacket API source code:
-
-         .. code-block:: bash
-
-            git clone https://github.com/RoboJackets/mjackets-api.git
-
-      #. Install the template to the :file:`~\mjacketproject` directory
 
          .. code-block:: bash
          
@@ -174,14 +172,6 @@ named :file:`mjacketproject`.
 
    .. group-tab:: macOS
 
-      #. Get the mJacket API source code:
-
-         .. code-block:: bash
-
-            git clone https://github.com/RoboJackets/mjackets-api.git
-
-      #. Install the template to the :file:`~\mjacketproject` directory
-
          .. code-block:: bash
          
             cd mjackets-api
@@ -190,14 +180,6 @@ named :file:`mjacketproject`.
 
 
    .. group-tab:: Windows
-
-      #. Get the mJacket API source code:
-
-         .. code-block:: bash
-
-            git clone https://github.com/RoboJackets/mjackets-api.git
-
-      #. Install the template to the :file:`%HOMEPATH%\mjacketproject` directory
 
          .. code-block:: bash
          
@@ -272,7 +254,7 @@ Connect your board, usually via USB or JTAG, and turn it on if there's a
 power switch.
 
 Then flash the sample using the python flasher script provided in the 
-:file:`utilities`directory. Follow the steps provided in the 
+:file:`utilities` directory. Follow the steps provided in the 
 :ref:`flashing guide <flashing>` to flash the firmware executable to your board 
 using your preferred method. An example is provided below.
 
@@ -294,9 +276,9 @@ Here are some next steps for exploring mJackets:
 * Check out the :ref:`Application Development Guide 
   <application-development-guide>` for an in-depth guide on developing
   mJackets API applications. 
-* Check out the :ref:`Build System Guide <build-systen-guide>` for an 
+* Check out the :ref:`Build System Guide <cmake_details>` for an 
   in-depth explaination on how the build system works. 
 * Check out the :ref:`Debugging Guide <debugging-guide>` for how to get 
   debugging set up in your IDE. 
-* Check out the :ref:`Contribution Guide <contribution-guide>` for information
+* Check out the :ref:`Contribution Guide <contribution_guide>` for information
   on how to contribute to the mJackets API.

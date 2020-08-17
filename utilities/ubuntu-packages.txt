@@ -13,12 +13,8 @@ doxygen
 # C/C++ (and more) code-formatting tool (just use the newest version)
 clang-format
 
-# AVR
-avr-libc
-avrdude
+# Arm GCC Toolchain
 gcc-arm-none-eabi
 
 python3-pip
 python3-setuptools
-
-iverilog
