@@ -2,3 +2,6 @@ stylize>=0.3.0 # code reformatting and checkstyling
 wheel
 conan
 sphinx
+breathe
+sphinx_rtd_theme
+
