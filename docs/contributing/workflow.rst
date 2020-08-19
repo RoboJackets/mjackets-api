@@ -1,4 +1,4 @@
-.. _Contribution workflow:
+.. _contribution_workflow:
 
 Contribution Workflow
 *********************

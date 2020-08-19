@@ -49,7 +49,7 @@ Application CMakeLists.txt
 **************************
 
 Every application must have a :file:`CMakeLists.txt` file. This file is the
-entry point, or top level, of the build system. The final :file:`mJackets.elf`
+entry point, or top level, of the build system. The final :file:`<your_project>.elf`
 image contains the application and API libraries.
 
 This section describes some of what you can do in your top-level :file:`CMakeLists.txt`.
@@ -84,21 +84,65 @@ files.
    - Finally, if you set ``CHIP`` in your application :file:`CMakeLists.txt`
      as described in this step, this value will be used.
 
-#. Now add any application source files to the 'app' target
-   library, each on their own line, like so:
+#. If using the template project structure, you will need to let CMake know
+   that you want to configure the mJackets API and BSP CMake projects. To do 
+   this, add the below lines to your application :file:`CMakeLists.txt` :
 
    .. code-block:: cmake
 
-      target_sources(app PRIVATE src/main.c)
+      add_subdirectory(mjackets-api)
+      add_subdirectory(bsp)
+
+#. Now add any application source files to the project sources, and then create
+   a target executable: 
+
+   .. code-block:: cmake
+
+      set(PROJECT_SOURCES
+	      main.cpp
+      )
+
+      add_executable(${CMAKE_PROJECT_NAME} ${PROJECT_SOURCES})
+
+#. You then need to link all of the dependant libraries to your application. This
+   can be done by linking to the API library using the `target_link_libraries` 
+   directive, which in turn includes all of the needed libraries. 
+
+.. code-block:: cmake
+
+   target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC API)
+
+#. Finally, you can create an output binary using the `STM32_ADD_HEX_BIN_TARGETS` 
+   function:
+
+.. code-block:: cmake
+
+   STM32_ADD_HEX_BIN_TARGETS(${CMAKE_PROJECT_NAME})
+
 
 Below is a simple example :file:`CMakeList.txt`:
 
 .. code-block:: cmake
 
-   project(my_app)
-   set(CHIP STM32F405RG)   
+   cmake_minimum_required(VERSION 3.14.7)
 
-   add_executable(app src/main.c)
+   project(my_app LANGUAGES C CXX)
+
+   set(CHIP STM32F405RG)  
+
+   add_subdirectory(mjackets-api)
+   add_subdirectory(bsp) 
+
+   set(PROJECT_SOURCES
+      main.cpp
+   )
+
+   add_executable(${CMAKE_PROJECT_NAME} ${PROJECT_SOURCES})
+
+   target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC API)
+
+   STM32_ADD_HEX_BIN_TARGETS(${CMAKE_PROJECT_NAME})
+
 
 CMakeCache.txt
 **************
