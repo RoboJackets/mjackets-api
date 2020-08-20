@@ -22,10 +22,6 @@ target_include_directories(API PUBLIC
     include/
 )
 
-target_include_directories(API PRIVATE
-    ${CMAKE_SOURCE_DIR}/bsp/inc
-)
-
 find_package(HAL COMPONENTS STM32${FAMILY} REQUIRED)
 find_package(CMSIS COMPONENTS STM32${DEVICE} REQUIRED)
 
