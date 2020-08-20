@@ -49,8 +49,8 @@ breathe_projects = {}
 
 # TODO Way too hardcoded
 if read_the_docs_build:
-    input_dir = './include'
-    output_dir = './build/docs_build/doxygen_docs'
+    input_dir = '../include'
+    output_dir = '../build/docs_build/doxygen_docs'
     configureDoxyfile(input_dir, output_dir)
     subprocess.call('doxygen', shell=True)
     breathe_projects['mjackets-api'] = output_dir + '/xml'
