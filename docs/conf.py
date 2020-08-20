@@ -49,7 +49,7 @@ breathe_projects = {}
 
 # TODO Way too hardcoded
 if read_the_docs_build:
-    input_dir = '../mjackets-api'
+    input_dir = './include'
     output_dir = './build/docs_build/doxygen_docs'
     configureDoxyfile(input_dir, output_dir)
     subprocess.call('doxygen', shell=True)
