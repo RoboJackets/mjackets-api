@@ -357,6 +357,40 @@ Example:
         // ...body
     }
 
+Online Documentation
+********************
+
+After making sure that your code is thouroughly documented according to the above
+specifications, you will need to add the corresponding API reference page for
+the `online documentation`_. The source files for the API documentation, written in the 
+reStructured Text format, are located in the :file:`docs/api_reference` directory.
+
+Make sure to name the documentation page the same as the source file or class you are 
+documenting, and add a link to the new documentation page in the toc-tree of the 
+:file:`doc/api_reference/index.rst` file. 
+
+At a minimum, you need to add the code documentation and example usage to your
+documentation page.
+
+.. _online documentation: https://mjackets-api.readthedocs.io/en/latest
+
+Code Documentation
+==================
+
+This is the part where all of your hard work adding comments to your code pays off!
+By adding various `Breathe Directives`_, you can automatically pull in a complete
+reference of your code for the end user to use. 
+
+Below is an example for pulling in documentation for an API Class:
+
+.. code-block:: reST
+
+    .. doxygenclass:: <YOUR_CLASS_NAME>
+        :project: mjackets-api
+        :members:
+ 
+.. _Breathe Directives: https://breathe.readthedocs.io/en/latest/directives.html
+
 Including HAL Components
 ************************
 
