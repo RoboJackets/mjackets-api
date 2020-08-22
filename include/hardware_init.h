@@ -31,7 +31,9 @@ typedef struct
 void SystemClock_Config(ClockInitStruct);
 void MPU_Config(void);
 void CPU_CACHE_Enable(void);
+void DWT_Config(void);
 void assert_failed(uint8_t* file, uint32_t line);
+void HAL_MspInit(void);
 
 #ifdef __cplusplus
 }
