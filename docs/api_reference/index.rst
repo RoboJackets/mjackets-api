@@ -8,3 +8,5 @@ API Reference
 
     DigitalIn.rst
     DigitalOut.rst
+    mJackets.rst
+    Miscellaneous.rst

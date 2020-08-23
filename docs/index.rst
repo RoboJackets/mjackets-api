@@ -14,6 +14,7 @@ Welcome to mjackets-api's documentation!
     getting_started/index.rst
     contributing/index.rst
     development_process/index.rst
+    debugging/index.rst
     flashing/index.rst
     build_system/CMakeDetails.rst
 
