@@ -40,7 +40,22 @@ int sampleFunction(int);
   */
 int main(void)
 {
-  bsp_config();
+  /* Standard Hal Initialization */
+  HAL_Init();
+
+  /* Clock Setup - Change to match your target config*/
+  ClockInitStruct init;
+  init.ClockSource = CLOCK_SOURCE_HSE;
+  init.SystemFrequency = SYS_FREQ_100MHZ;
+  init.HSEMultiplier = 432;
+  init.HSEDivider1 =  25;
+  init.HSEDivider2 = RCC_PLLP_DIV2;
+  init.HSE48CKDivider = 2;
+  init.AHBClkDivider = RCC_SYSCLK_DIV1;
+  init.APB1ClkDivider = RCC_HCLK_DIV4;
+  init.APB2ClkDivider = RCC_HCLK_DIV2;
+  init.FlashLatency = 7;
+  SystemClock_Config(init);
   
   /* User Code */
 
