@@ -3,7 +3,7 @@ Welcome to the mJackets API! The mJackets API is a collaborative effort among th
 
 # Documentation
 
-Checkout the latest [mJacket's API documentation](https://mjackets-api.reathedocs.io/en/latest) over at Read the Docs!
+Checkout the latest [mJacket's API documentation](https://mjackets-api.readthedocs.io/en/latest) over at Read the Docs!
 
 # Repository Overview
 
