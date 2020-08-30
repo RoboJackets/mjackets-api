@@ -1,3 +1,5 @@
+[![GitHub license](https://img.shields.io/github/license/robojackets/mjackets-api.svg?style=flat-square)](https://raw.githubusercontent.com/robojackets/mjackets-api/master/LICENSE) 
+
 # mJackets-api Repository
 Welcome to the mJackets API! The mJackets API is a collaborative effort among the RoboJackets competitive robotic teams at the Georgia Institute of Technology to provide a common platform for STM32 MCU firmware development.
 
