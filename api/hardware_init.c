@@ -129,6 +129,13 @@ void MPU_Config(void)
 }
 #endif
 
+void DWT_Config(void)
+{
+  CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
+  DWT->CYCCNT = 0;
+  DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
+}
+
 #if defined(__ICACHE_PRESENT) && defined (__DCACHE_PRESENT)
 /**
   * @brief  CPU L1-Cache enable.
@@ -165,3 +172,9 @@ void assert_failed(uint8_t* file, uint32_t line)
   }
 }
 #endif
+
+void HAL_MspInit(void)
+{
+  __HAL_RCC_PWR_CLK_ENABLE();
+  __HAL_RCC_SYSCFG_CLK_ENABLE();
+}

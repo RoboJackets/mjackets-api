@@ -10,20 +10,16 @@ Welcome to mjackets-api's documentation!
     :maxdepth: 1
     :caption: Contents:
 
+    api_reference/index.rst
     getting_started/index.rst
     contributing/index.rst
     development_process/index.rst
+    debugging/index.rst
     flashing/index.rst
     build_system/CMakeDetails.rst
-
-.. doxygenindex::
-   :project: mjackets-api
-   :outline:
-   :no-link:
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`

@@ -5,22 +5,19 @@ set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/mjackets-api/cmake/stm32-gc
 project(myProject LANGUAGES C CXX ASM)
 
 # Set your full chip model here!
-set(CHIP STM32F405RG CACHE STRING "Full STM32 Chip Model")
-add_definitions(-DSTM32F405xx)
-add_definitions(-DSTM32F4)
+set(CHIP STM32F769NI CACHE STRING "Full STM32 Chip Model")
+add_definitions(-DSTM32F769NI)
+add_definitions(-DSTM32F7)
 
 add_subdirectory(mjackets-api)
 add_subdirectory(bsp)
 
-# Add any additional source files here
+# Source files go here!
 set(PROJECT_SOURCES
 	main.cpp
 )
 
-add_executable(${CMAKE_PROJECT_NAME} ${PROJECT_SOURCES})
+add_executable(mJackets.elf ${PROJECT_SOURCES})
 
-target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC API)
-
-STM32_ADD_HEX_BIN_TARGETS(${CMAKE_PROJECT_NAME})
-STM32_PRINT_SIZE_OF_TARGETS(${CMAKE_PROJECT_NAME})
+target_link_libraries(mJackets.elf PUBLIC API)
 

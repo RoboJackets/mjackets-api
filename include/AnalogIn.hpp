@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PinCommon.hpp"
+#include "mJackets.hpp"
 
 typedef struct ADCPinName {
     PinName pin_name;

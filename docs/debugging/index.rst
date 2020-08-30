@@ -159,6 +159,3 @@ use the below configuration, editing the `device`, `interface`, and `executable`
     }
   ]
 }
-
-
-
