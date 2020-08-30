@@ -1,0 +1,5 @@
+breathe 
+sphinx 
+sphinx-tabs 
+sphinx_rtd_theme 
+cmake

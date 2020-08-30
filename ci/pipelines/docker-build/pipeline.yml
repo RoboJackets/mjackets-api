@@ -1,0 +1,37 @@
+---
+resources:
+ - name: mjackets-build-dockerfile
+   public: true
+   type: git
+   source: 
+    uri: https://github.com/RoboJacket/mjackets-api.git
+    branch: master
+    paths: [ci/dockerfiles/mjackets-build/Dockerfile]
+
+ - name: weekly-timer
+   type: time
+   source:
+     interval: 10080m
+
+ - name: mjackets-build-docker-image
+   type: registry-image
+   public: true
+   icon: docker
+   source:
+     repository: docker.robojackets.org/robojackets/mjackets-build
+     username: ((docker-robojackets-org.username))
+     password: ((docker-robojackets-org.password))
+
+jobs: 
+ - name: build-image
+   public: true
+   serial: true
+   plan:
+      - get: mjackets-build-dockerfile
+        trigger: true
+      - put: mjackets-build-docker-image
+        params:
+          build: mjackets-build-dockerfile
+
+
+
