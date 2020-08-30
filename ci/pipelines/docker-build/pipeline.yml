@@ -1,37 +1,51 @@
 ---
 resources:
- - name: mjackets-build-dockerfile
-   public: true
+
+ - name: mjackets-api
    type: git
-   source: 
-    uri: https://github.com/RoboJacket/mjackets-api.git
-    branch: master
-    paths: [ci/dockerfiles/mjackets-build/Dockerfile]
-
- - name: weekly-timer
-   type: time
+   public: true
+   icon: github
    source:
-     interval: 10080m
+     uri: https://github.com/RoboJackets/mjackets-api.git
+     branch: master
+     paths: [ci/dockerfiles/mjackets-build/Dockerfile]
+     username: x-access-token
+     password: ((github-com/token))
+   webhook_token: ((webhook-token))
 
- - name: mjackets-build-docker-image
+ - name: mjackets-build-image
    type: registry-image
    public: true
    icon: docker
    source:
-     repository: docker.robojackets.org/robojackets/mjackets-build
-     username: ((docker-robojackets-org.username))
-     password: ((docker-robojackets-org.password))
+     repository: robojackets/mjackets-dev
+     username: ((hub-docker-com.username))
+     password: ((hub-docker-com.password))
 
-jobs: 
- - name: build-image
-   public: true
-   serial: true
-   plan:
-      - get: mjackets-build-dockerfile
-        trigger: true
-      - put: mjackets-build-docker-image
-        params:
-          build: mjackets-build-dockerfile
+jobs:
+- name: docker-build
+  plan:
+  - get: mjackets-api
+    trigger: true
+  - task: build-task-image
+    privileged: true
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: vito/oci-build-task
+      inputs:
+      - name: mjackets-api
+      outputs:
+      - name: image
+      params:
+        CONTEXT: mjackets-api/ci/dockerfiles/mjackets-build
+      run:
+        path: build
+  - put: mjackets-build-image
+    params:
+      image: image/image.tar
 
 
 
