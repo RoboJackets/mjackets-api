@@ -116,7 +116,8 @@ VSCode / VSCodium Setup
 
 
 Cortex-Debug
-------------
+============
+
 The Cortex-Debug extension is the glue that pulls in all of the capabilites of GDB into VSCode.
 You will need to enable the extension from the extension marketplace. 
 
@@ -128,10 +129,6 @@ where your JLink GDB server executable lives:
         .. code-block:: json
 
             "cortex-debug.JLinkGDBServerPath": "/opt/SEGGER/JLink/JLinkGDBServerCLExe"
-
-   .. group-tab:: OSX
-
-   .. group-tab:: Windows
 
 You then need to add a debug configuration to your :file:`.vscode/launch.json`. For the reccommended setup,
 use the below configuration, editing the `device`, `interface`, and `executable` parameters to match your project.
