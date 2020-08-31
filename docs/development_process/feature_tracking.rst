@@ -25,22 +25,10 @@ Hardware Support
   A request or plan to port an existing feature or enhancement to a particular
   hardware platform.
 
-Meta
-  A label to group other GitHub issues that are part of a single feature or unit
-  of work.
-
-The following workflow should be used to process features:.
-
-This is the formal way for asking for a new feature and indicating its
-importance to the project.  Often, the requester may have a readiness and
-willingness to drive implementation of the feature in an upcoming release, and
-should assign the request to themselves.
-If not though, an owner will be assigned after evaluation by the TSC.
-A feature request can also have a companion RFC with more details on the feature
-and a proposed design or implementation.
+The following workflow should be used to process features:
 
 - Label new features requests as ``feature-request``
-- The TSC discusses new ``feature-request`` items regularly and triages them.
+- The project maintainers discuss ``feature-request`` items regularly and triages them.
   Items are examined for similarity with existing features, how they fit with
   the project goals and other timeline considerations. The priority is
   determined as follows:
@@ -56,6 +44,15 @@ All items marked as ``feature-request`` are non-binding and those without an
 assignee are open for grabs, meaning that they can be picked up and implemented
 by any project member or the community. You should contact an assigned owner if
 you'd like to discuss or contribute to that feature's implementation
+
+This is the formal way for asking for a new feature and indicating its
+importance to the project.  Often, the requester may have a readiness and
+willingness to drive implementation of the feature in an upcoming release, and
+should assign the request to themselves. Otherwise, the feature will be triaged
+by the project maintainers.
+ 
+A feature request can also have a companion RFC with more details on the feature
+and a proposed design or implementation.
 
 
 .. _rfcs:
@@ -102,7 +99,7 @@ Some changes do not require an RFC:
 
 The process in itself consists in creating a GitHub issue with the :ref:`RFC
 label <gh_labels>` that documents the proposal thoroughly. There is an `RFC
-template`_ included in the main mJacke API GitHub repository that serves as a
+template`_ included in the main mJackets API GitHub repository that serves as a
 guideline to write a new RFC.
 
 As with Pull Requests, RFCs might require discussion in order to move it forward 

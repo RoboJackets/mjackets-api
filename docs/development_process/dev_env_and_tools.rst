@@ -81,17 +81,16 @@ Maintainer
 
 Any changes that touch the logic or the original design of a subsystem or
 component will need to be reviewed by the code owner or the designated subsystem
-maintainer. If the code changes is initiated by a contributor or developer other
+maintainer. If the code change is initiated by a contributor or developer other
 than the owner the pull request needs to be assigned to the code owner who will
 have to drive the pull request to a mergeable state by giving feedback to the
 author and asking for more reviews from other developers.
 
-TSC and Working Groups
-++++++++++++++++++++++
+Development Group
++++++++++++++++++
 
 Changes that introduce new features or functionality or change the way the
-overall system works need to be reviewed by the STM32 Development comittee or the 
-responsible Working Group.
+overall system works need to be reviewed by the STM32 Development group.
 
 A Pull-Request should have an Assignee
 =======================================
