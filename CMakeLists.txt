@@ -8,6 +8,7 @@ project(
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 set(MJACKETS_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 include(stm32/common REQUIRED)
+# add_subdirectory(external)
 
 add_library(API
     api/AnalogIn.cpp
