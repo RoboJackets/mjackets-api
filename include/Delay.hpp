@@ -24,6 +24,6 @@ void DelayUs(uint32_t us);
  *
  * No need to check an overflow. Let it just tick :)
  *
- * @param us  Number of milliseconds to delay for
+ * @param ms  Number of milliseconds to delay for
  */
-void DelayMs(uint32_t us);
+void DelayMs(uint32_t ms);
