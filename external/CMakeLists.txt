@@ -35,4 +35,6 @@ if(PORT)
         stm32_mw_freertos/Source/CMSIS_RTOS
         stm32_mw_freertos/Source/portable/GCC/${PORT}
     )
+
+    target_link_libraries(FreeRTOS PRIVATE BSP)
 endif()
