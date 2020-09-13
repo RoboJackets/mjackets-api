@@ -17,7 +17,7 @@ add_library(API
     api/default_handlers.c
     api/interrupt_handlers.c
     api/hardware_init.c
-    api/delay.c
+    api/Delay.cpp
 )
 
 target_include_directories(API PUBLIC

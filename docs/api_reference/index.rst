@@ -9,5 +9,6 @@ API Reference
     AnalogIn.rst
     DigitalIn.rst
     DigitalOut.rst
+    Delay.rst
     mJackets.rst
     Miscellaneous.rst
