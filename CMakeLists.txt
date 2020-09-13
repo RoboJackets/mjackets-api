@@ -46,8 +46,8 @@ target_link_libraries(API
     ${HAL_${FAMILY}_DRIVERS_LL}
     CMSIS::STM32::${DEVICE}
     STM32::NoSys
-    BSP
     FreeRTOS
+    BSP
 )
 
 add_subdirectory ("docs")
