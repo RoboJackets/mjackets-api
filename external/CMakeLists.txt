@@ -18,7 +18,7 @@ endif()
 if(PORT)
 
     add_library(FreeRTOS  STATIC
-        stm32_mw_freertos/Source/CMSIS_RTOS/cmsis_os.c
+        stm32_mw_freertos/Source/CMSIS_RTOS_V2/cmsis_os2.c
         stm32_mw_freertos/Source/croutine.c
         stm32_mw_freertos/Source/event_groups.c
         stm32_mw_freertos/Source/list.c
