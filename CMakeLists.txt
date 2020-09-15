@@ -14,6 +14,7 @@ add_library(API
     api/AnalogIn.cpp
     api/DigitalIn.cpp
     api/DigitalOut.cpp
+    api/InterruptIn.cpp
     api/default_handlers.c
     api/interrupt_handlers.c
     api/hardware_init.c

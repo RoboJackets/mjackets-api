@@ -1,5 +1,6 @@
 #include "SPI.hpp"
 #include "stm32f7xx_ll_spi.h"
+#include <vector>
 
 // TODO: cleanup
 SPI::SPI(SpiBus spiBus, std::optional<PinName> cs, int hz): chipSelect(cs) {
@@ -10,11 +11,11 @@ SPI::SPI(SpiBus spiBus, std::optional<PinName> cs, int hz): chipSelect(cs) {
         GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
         GPIO_InitStruct.Pull = GPIO_NOPULL;
         GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-        
+
         HAL_GPIO_Init(chipSelect->port, &GPIO_InitStruct);
         HAL_GPIO_WritePin(chipSelect->port, chipSelect->pin, (GPIO_PinState)1);
     }
-    
+
     switch (spiBus) {
         case SpiBus::SpiBus2:
             spiHandle.Instance = SPI2;
