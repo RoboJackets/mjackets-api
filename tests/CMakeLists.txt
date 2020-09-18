@@ -4,7 +4,7 @@ function(add_test test_file)
     get_filename_component(test_name ${test_file} NAME_WE)
 
     add_executable(${test_name}.elf
-        ../rtos_hooks.c
+        rtos_hooks.c
         ${test_file}
     )
 
@@ -16,7 +16,7 @@ function(add_test test_file)
         DEPENDS ${test_name}.elf
         COMMENT "objcopying to make binary executable for ${test_name}"
     )
-    
+
 endfunction()
 
 file(GLOB files "./*.cpp")
