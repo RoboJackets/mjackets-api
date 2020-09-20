@@ -68,6 +68,7 @@ function(cmsis_generate_default_linker_script FAMILY DEVICE)
         FLASH_SIZE RAM_SIZE CCRAM_SIZE STACK_SIZE HEAP_SIZE
         FLASH_ORIGIN RAM_ORIGIN CCRAM_ORIGIN
     )
+
     add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/STM32${DEVICE}.ld"
         COMMAND ${CMAKE_COMMAND}
             -DFLASH_ORIGIN="${FLASH_ORIGIN}"
@@ -80,7 +81,7 @@ function(cmsis_generate_default_linker_script FAMILY DEVICE)
             -DHEAP_SIZE="${HEAP_SIZE}"
             -DLINKER_SCRIPT="${CMAKE_CURRENT_BINARY_DIR}/STM32${DEVICE}.ld"
             -P "${MJACKETS_PATH}/cmake/stm32/linker_ld.cmake"
-    )
+            )
     add_custom_target(CMSIS_LD_STM32_${DEVICE} DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/STM32${DEVICE}.ld)
     add_dependencies(CMSIS::STM32::${DEVICE} CMSIS_LD_STM32_${DEVICE})
     stm32_add_linker_script(CMSIS::STM32::${DEVICE} INTERFACE "${CMAKE_CURRENT_BINARY_DIR}/STM32${DEVICE}.ld")
@@ -171,7 +172,20 @@ foreach(COMP ${CMSIS_FIND_COMPONENTS})
 
         add_library(CMSIS::STM32::${DEVICE} INTERFACE IMPORTED)
         target_link_libraries(CMSIS::STM32::${DEVICE} INTERFACE CMSIS::STM32::${TYPE})
-        cmsis_generate_default_linker_script(${FAMILY} ${DEVICE})
+
+        find_file(CUSTOM_CMSIS_STARTUP
+            NAMES STM32${DEVICE}.ld
+            PATHS "${BSP_PATH}"
+            NO_DEFAULT_PATH
+            )
+
+        if(CUSTOM_CMSIS_STARTUP)
+            add_custom_target(CMSIS_LD_STM32_${DEVICE} DEPENDS ${CUSTOM_CMSIS_STARTUP})
+            add_dependencies(CMSIS::STM32::${DEVICE} CMSIS_LD_STM32_${DEVICE})
+            stm32_add_linker_script(CMSIS::STM32::${DEVICE} INTERFACE "${CMAKE_CURRENT_BINARY_DIR}/STM32${DEVICE}.ld")
+        else()
+            cmsis_generate_default_linker_script(${FAMILY} ${DEVICE})
+        endif()
     endforeach()
 
     if(CMSIS_CORE_COMMON_INCLUDE AND
