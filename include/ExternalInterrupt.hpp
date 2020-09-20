@@ -6,10 +6,10 @@
  * @brief External Interrupt Modes
  *
  */
-typedef enum InterruptMode {
-  INTERRUPT_RISING = GPIO_MODE_IT_RISING,
-  INTERRUPT_FALLING = GPIO_MODE_IT_FALLING,
-  INTERRUPT_RISING_FALLING = GPIO_MODE_IT_RISING_FALLING
+enum InterruptMode {
+  kInterruptRising = GPIO_MODE_IT_RISING,
+  kInterruptFalling = GPIO_MODE_IT_FALLING,
+  kInterruptEdge = GPIO_MODE_IT_RISING_FALLING
 };
 
 class ExternalInterrupt {
@@ -23,7 +23,7 @@ class ExternalInterrupt {
    * @param priority Interrupt priority
    */
   ExternalInterrupt(PinName pin, void (*function)(), PullType pull = PullNone,
-                    InterruptMode mode = INTERRUPT_RISING,
+                    InterruptMode mode = kInterruptRising,
                     uint32_t priority = 0);
 
   ~ExternalInterrupt();
@@ -35,8 +35,21 @@ class ExternalInterrupt {
    */
   int Read(void);
 
+  /**
+   * @brief Disables the interrupt request
+   *
+   */
+  void DisableIRQn(void);
+
+  /**
+   * @brief Enables the interrupt request
+   *
+   */
+  void EnableIRQn();
+
  protected:
   PinName pin_;
+  IRQn_Type irqn_;
 
   /**
    * @brief Configures external interrupt
@@ -50,12 +63,3 @@ class ExternalInterrupt {
    */
   void Config(uint16_t pin, void (*function)(), uint32_t priority);
 };
-
-/**
- * @brief Checks if interrupt is active on the specified line
- *
- * @param line
- * @return true
- * @return false
- */
-bool Pending(uint32_t line);
