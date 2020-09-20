@@ -10,6 +10,7 @@ API Reference
     DigitalIn.rst
     DigitalOut.rst
     Delay.rst
+    ExternalInterrupt.rst
     mJackets.rst
     Miscellaneous.rst
 

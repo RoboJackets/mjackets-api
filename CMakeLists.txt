@@ -27,6 +27,7 @@ add_library(API
     api/hardware_init.c
     api/Delay.cpp
     api/ClockHandler.cpp
+    api/ExternalInterrupt.cpp
 )
 
 target_include_directories(API PUBLIC
