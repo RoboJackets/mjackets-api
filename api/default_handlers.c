@@ -34,6 +34,7 @@ void Handler_Nothing(void)
 {
 }
 
+void BoardConfigExternal(void)              __attribute__ ((weak, alias ("Handler_Nothing")));
 void Error_Handler(void)                    __attribute__ ((weak, alias ("Handler_Loop")));
 void NMI_Handler(void)                      __attribute__ ((weak, alias ("Handler_Nothing")));
 void HardFault_Handler(void)                __attribute__ ((weak, alias ("Handler_Loop")));
@@ -43,7 +44,6 @@ void UsageFault_Handler(void)               __attribute__ ((weak, alias ("Handle
 void SVC_Handler(void)                      __attribute__ ((weak, alias ("Handler_Nothing")));
 void DebugMon_Handler(void)                 __attribute__ ((weak, alias ("Handler_Nothing")));
 void PendSV_Handler(void)                   __attribute__ ((weak, alias ("Handler_Nothing")));
-void SysTick_Handler(void)                  __attribute__ ((weak, alias ("Handler_Nothing")));
 void WWDG_IRQHandler(void)                  __attribute__ ((weak, alias ("Handler_Nothing")));
 void PVD_IRQHandler(void)                   __attribute__ ((weak, alias ("Handler_Nothing")));
 void TAMP_STAMP_IRQHandler(void)            __attribute__ ((weak, alias ("Handler_Nothing")));
@@ -153,3 +153,10 @@ void CAN3_RX1_IRQHandler(void)              __attribute__ ((weak, alias ("Handle
 void CAN3_SCE_IRQHandler(void)              __attribute__ ((weak, alias ("Handler_Nothing")));
 void JPEG_IRQHandler(void)                  __attribute__ ((weak, alias ("Handler_Nothing")));
 void MDIOS_IRQHandler(void)                 __attribute__ ((weak, alias ("Handler_Nothing")));
+
+// TODO: Put this in interrupt handlers or hardware init
+void SysTick_Handler(void)
+{
+    HAL_IncTick();
+    HAL_SYSTICK_IRQHandler();
+}

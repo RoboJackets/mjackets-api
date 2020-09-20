@@ -15,7 +15,6 @@ add_library(API
     api/DigitalIn.cpp
     api/DigitalOut.cpp
     api/default_handlers.c
-    api/interrupt_handlers.c
     api/hardware_init.c
     api/Delay.cpp
 )
