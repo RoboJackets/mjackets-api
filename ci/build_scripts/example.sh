@@ -5,5 +5,5 @@ cd mjackets-api
 git submodule init && git submodule update
 cd ..
 cmake configure .
-cmake build
+make
 
