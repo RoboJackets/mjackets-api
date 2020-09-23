@@ -40,3 +40,15 @@ Contain CI unit tests.
 ### utilities
 Contains useful tools and scripts for installing dependancies, flashing, etc. 
 
+## API STATUS
+
+| Peripheral API     | Status          |
+|--------------------|-----------------|
+| Analog In          | Experimental    |
+| Delay              | Stable          |
+| Digital In         | Stable          |
+| Digital Out        | Stable          |
+| I2C                | TODO            |
+| SPI                | Dev in Progress |
+| External Interrupt | Dev in Progress |
+| Timer Interrupt    | TODO            |
