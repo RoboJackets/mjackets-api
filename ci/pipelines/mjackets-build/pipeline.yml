@@ -15,7 +15,6 @@ resources:
    source:
      uri: https://github.com/RoboJackets/mjackets-api.git
      branch: master
-     paths: [ci/dockerfiles/mjackets-build/Dockerfile]
      username: x-access-token
      password: ((github-com/token))
    webhook_token: ((webhook-token))
@@ -54,8 +53,11 @@ jobs:
       outputs:
        - name: sonarqube-analysis-input
       run:
-        path: ci/build_scripts/example.sh
-        dir: mjackets-api
+        path: sh 
+        args:
+        - -exc
+        - |
+          ./mjackets-api/ci/build_scripts/example.sh
   - in_parallel:
       - put: code-analysis
         params:
