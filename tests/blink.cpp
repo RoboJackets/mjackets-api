@@ -24,6 +24,7 @@ int main(void)
     init.FlashLatency = 7;
     SystemClock_Config(init);
 
+    DWT_Config();
 
     /* GPIO Configuration */
     __HAL_RCC_GPIOA_CLK_ENABLE();
