@@ -23,7 +23,7 @@ resources:
    type: sonar-runner
    source:
      host_url: https://sonarcloud.io/
-     organization: RoboJackets
+     organization: robojackets
      login: ((sonarcloud-io))
      __debug: true
 
