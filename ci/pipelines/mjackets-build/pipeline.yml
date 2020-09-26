@@ -19,14 +19,6 @@ resources:
      password: ((github-com/token))
    webhook_token: ((webhook-token))
 
- - name: code-analysis
-   type: sonar-runner
-   source:
-     host_url: https://sonarcloud.io/
-     organization: robojackets
-     login: ((sonarcloud-io))
-     __debug: true
-
 jobs:
 - name: build-and-analyze
   plan:
