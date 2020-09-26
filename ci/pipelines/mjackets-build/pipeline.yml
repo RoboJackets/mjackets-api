@@ -28,15 +28,6 @@ resources:
      __debug: true
 
 jobs:
-
-# The build job performs fetches stuff from the "sources" resource
-# and executes a task that builds and tests everything. Once compilation,
-# test execution and <whatever> has been performed, we copy the whole
-# working directory into the output folder "sonarqube-analysis-input"
-# and push the package that has been created by the "build" task to the
-# artifact resource and utilize the sonarqube-resource to perform static
-# code analysis.
-
 - name: build-and-analyze
   plan:
   - get: mjackets-api
@@ -48,6 +39,8 @@ jobs:
         type: docker-image
         source:
           repository: robojackets/mjackets-dev
+      params:
+          SONAR_TOKEN: ((sonarcloud-io))
       inputs:
        - name: mjackets-api
       outputs:
@@ -58,41 +51,4 @@ jobs:
         - -exc
         - |
           ./mjackets-api/ci/build_scripts/example.sh
-  - in_parallel:
-      - put: code-analysis
-        params:
-          project_path: sonarqube-analysis-input
-          project_key: RoboJackets_mjackets-api
-          sources: ["."]
-          tests: ["."]
-          additional_properties:
-            # Will be passed as "-Dsonar.javascript.lcov.reportPaths="coverage/lcov.info" to the scanner.
-            sonar.javascript.lcov.reportPaths: coverage/lcov.info
-        get_params:
-          quality_gate:
-            ignore_errors: ['new_coverage', 'violations']
-            ignore_warns: ['new_duplicated_lines_density', 'violations']
-
-# The qualitygate task breaks the build if the analysis result from SonarQube
-# indicates that any of our quality metrics have not been met.
-- name: qualitygate
-  plan:
-  - in_parallel:
-    - get: code-analysis
-      passed:
-      - build-and-analyze
-      trigger: true
-  - task: check-sonarqube-quality-gate
-    config:
-      platform: linux
-      image_resource:
-        type: docker-image
-        source:
-          repository: cathive/concourse-sonarqube-qualitygate-task
-          tag: latest # Use one of the versioned tags for reproducible builds!
-      inputs:
-      - name: code-analysis
-      run:
-        path: /sonarqube-qualitygate-check
-        dir: code-analysis
 

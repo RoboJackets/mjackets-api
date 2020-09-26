@@ -1,15 +1,21 @@
-shopt -s dotglob
 git clone https://github.com/akeener97/mJackets-test2.git
 cd mJackets-test2
-ls
 git submodule init && git submodule update
 cd mjackets-api
 git submodule init && git submodule update
+
+# Setup the build system
 cd ..
 cmake configure .
-make
-cd ..
-cp -r mJackets-test2/ sonarqube-analysis-input/  
-ls sonarqube-analysis-input  
-cd sonarqube-analysis-input  
-git init
+
+# Build inside the build-wrapper
+build-wrapper-linux-x86-64 --out-dir bw-output make clean all
+
+# Run sonar scanner
+sonar-scanner \
+  -Dsonar.organization=robojackets \
+  -Dsonar.projectKey=RoboJackets_mjackets-api \
+  -Dsonar.sources=. \
+  -Dsonar.cfamily.build-wrapper-output=bw-output \
+  -Dsonar.host.url=https://sonarcloud.io
+  -Dsonar.cfamily.cache.enabled=false
