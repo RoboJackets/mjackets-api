@@ -9,5 +9,7 @@ cd ..
 cmake configure .
 make
 cd ..
-cp -rp mJackets-test2/* sonarqube-analysis-input  
+cp -r mJackets-test2/ sonarqube-analysis-input/  
 ls sonarqube-analysis-input  
+cd sonarqube-analysis-input  
+git init
