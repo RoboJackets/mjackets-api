@@ -1,3 +1,10 @@
+wget -O cpp-build-wrapper.zip https://sonarcloud.io/static/cpp/build-wrapper-linux-x86.zip \
+	&& unzip cpp-build-wrapper.zip \
+	&& export PATH=/$(pwd)/build-wrapper-linux-x86:$PATH \
+    && wget -O sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.4.0.2170-linux.zip \
+	&& unzip sonar-scanner-cli.zip \
+	&& export PATH=/$(pwd)/sonar-scanner-4.4.0.2170-linux/bin:$PATH
+
 git clone https://github.com/akeener97/mJackets-test2.git
 cd mJackets-test2
 git submodule init && git submodule update
