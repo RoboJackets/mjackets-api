@@ -18,5 +18,5 @@ sonar-scanner \
   -Dsonar.sources=. \
   -Dsonar.cfamily.build-wrapper-output=bw-output \
   -Dsonar.host.url=https://sonarcloud.io \
-  -Dsonar.cfamily.cache.enabled=false
+  -Dsonar.cfamily.cache.enabled=false \
   -Dsonar.scm.disabled=true
