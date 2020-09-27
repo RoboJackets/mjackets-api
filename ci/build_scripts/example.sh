@@ -15,7 +15,7 @@ build-wrapper-linux-x86-64 --out-dir bw-output make
 sonar-scanner \
   -Dsonar.organization=robojackets \
   -Dsonar.projectKey=RoboJackets_mjackets-api \
-  -Dsonar.sources=mjackets-.,mjackets-api,bsp \
+  -Dsonar.sources=.,mjackets-api,bsp \
   -Dsonar.cfamily.build-wrapper-output=bw-output \
   -Dsonar.host.url=https://sonarcloud.io \
   -Dsonar.cfamily.cache.enabled=false
