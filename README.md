@@ -1,5 +1,5 @@
 [![GitHub license](https://img.shields.io/github/license/robojackets/mjackets-api.svg?style=flat-square)](https://raw.githubusercontent.com/robojackets/mjackets-api/master/LICENSE) 
-[![CI](https://concourse.robojackets.org/api/v1/teams/roboracing/pipelines/mjackets-build/jobs/build-and-analyze/badge)](https://concourse.robojackets.org/teams/roboracing/pipelines/mjackets-build)
+[![CI](https://concourse.robojackets.org/api/v1/teams/roboracing/pipelines/mjackets-build/jobs/build-master/badge)](https://concourse.robojackets.org/teams/roboracing/pipelines/mjackets-build)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=RoboJackets_mjackets-api&metric=alert_status)](https://sonarcloud.io/dashboard?id=RoboJackets_mjackets-api)
 
 # mJackets-api Repository

@@ -1,46 +1,168 @@
 ---
-resource_types:
- - name: sonar-runner
-   type: docker-image
-   source:
-     repository: cathive/concourse-sonarqube-resource
-     tag: latest # For reproducible builds use a specific tag and don't rely on "latest".
-
-resources:
-
- - name: mjackets-api
-   type: git
-   public: true
-   icon: github
-   source:
-     uri: https://github.com/RoboJackets/mjackets-api.git
-     branch: master
-     username: x-access-token
-     password: ((github-com/token))
-   webhook_token: ((webhook-token))
-
 jobs:
-- name: build-and-analyze
+- name: build-master
   plan:
   - get: mjackets-api
     trigger: true
-  - task: build
-    config:
-      platform: linux
+  - do:
+    - inputs:
+      - mjackets-api
+      put: build-check
+    - config:
+        image_resource:
+          source:
+            repository: robojackets/mjackets-dev
+          type: docker-image
+        inputs:
+        - name: mjackets-api
+        params:
+          SONAR_TOKEN: ((sonarcloud-io))
+        platform: linux
+        run:
+          args:
+          - -exc
+          - |
+            ./mjackets-api/ci/build_scripts/example.sh
+          path: sh
+      on_abort:
+        inputs:
+        - build-check
+        - mjackets-api
+        params:
+          conclusion: cancelled
+        put: build-check
+      on_error:
+        inputs:
+        - build-check
+        - mjackets-api
+        params:
+          conclusion: action_required
+        put: build-check
+      on_failure:
+        inputs:
+        - build-check
+        - mjackets-api
+        params:
+          conclusion: failure
+          summary: Review the output within Concourse.
+          title: Sanity build failed
+        put: build-check
+      task: build
+  - inputs:
+    - build-check
+    - mjackets-api
+    params:
+      conclusion: success
+      summary: mJackets sanity build compiled sucessfully.
+      title: Sanity Build Success
+    put: build-check
+  public: true
+- name: build-pull-request
+  plan:
+  - get: pull-request
+    params:
+      integration_tool: checkout
+    trigger: true
+    version: every
+  - config:
       image_resource:
-        type: docker-image
         source:
           repository: robojackets/mjackets-dev
-      params:
-          SONAR_TOKEN: ((sonarcloud-io))
+        type: docker-image
       inputs:
-       - name: mjackets-api
-      outputs:
-       - name: sonarqube-analysis-input
+      - name: pull-request
+      params:
+        SONAR_TOKEN: ((sonarcloud-io))
+      platform: linux
       run:
-        path: sh 
         args:
         - -exc
         - |
           ./mjackets-api/ci/build_scripts/example.sh
+        path: sh
+    on_abort:
+      inputs:
+      - build-check
+      - pull-request
+      params:
+        conclusion: cancelled
+      put: build-check
+    on_error:
+      inputs:
+      - build-check
+      - pull-request
+      params:
+        conclusion: action_required
+      put: build-check
+    on_failure:
+      inputs:
+      - build-check
+      - pull-request
+      params:
+        conclusion: failure
+        summary: Review the output within Concourse.
+        title: Sanity build failed
+      put: build-check
+    task: build
+  - inputs:
+    - build-check
+    - pull-request
+    params:
+      conclusion: success
+      summary: mJackets sanity build compiled sucessfully.
+      title: Image built
+    put: build-check
+  public: true
+
+resource_types:
+- name: github-check
+  source:
+    password: ((docker-robojackets-org.password))
+    repository: docker.robojackets.org/robojackets/concourse-github-check-resource
+    username: ((docker-robojackets-org.username))
+  type: registry-image
+- name: pull-request
+  source:
+    repository: teliaoss/github-pr-resource
+  type: docker-image
+- name: sonar-runner
+  source:
+    repository: cathive/concourse-sonarqube-resource
+    tag: latest
+  type: docker-image
+
+resources:
+- icon: check-bold
+  name: build-check
+  public: true
+  source:
+    check_name: mJackets Sanity Build
+    pull_request: pull-request
+    repository: mjackets-api
+    resource_name: build-check
+    token: ((github-com/token))
+  type: github-check
+- icon: github
+  name: mjackets-api
+  public: true
+  source:
+    branch: master
+    password: ((github-com/token))
+    uri: https://github.com/RoboJackets/mjackets-api
+    username: x-access-token
+  type: git
+  webhook_token: ((webhook-token))
+- icon: source-pull
+  name: pull-request
+  public: true
+  source:
+    access_token: ((github-com/token))
+    base_branch: master
+    disable_forks: true
+    repository: mjackets-api
+    v3_endpoint: ((github-rest-api-endpoint))
+    v4_endpoint: ((github-graphql-api-endpoint))
+  type: pull-request
+  webhook_token: ((webhook-token))
+
 

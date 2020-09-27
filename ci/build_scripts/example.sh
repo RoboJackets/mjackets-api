@@ -17,5 +17,6 @@ sonar-scanner \
   -Dsonar.projectKey=RoboJackets_mjackets-api \
   -Dsonar.sources=. \
   -Dsonar.cfamily.build-wrapper-output=bw-output \
-  -Dsonar.host.url=https://sonarcloud.io
-  -Dsonar.cfamily.cache.enabled=false
+  -Dsonar.host.url=https://sonarcloud.io \
+  -Dsonar.cfamily.cache.enabled=false \
+  -Dsonar.scm.disabled=true
