@@ -7,7 +7,6 @@ Development Model
 .. toctree::
    :maxdepth: 1
 
-   release_process
    feature_tracking
    code_flow
    dev_env_and_tools

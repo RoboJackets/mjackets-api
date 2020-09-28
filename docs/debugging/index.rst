@@ -100,9 +100,10 @@ Connect to Target and Download Application
 ------------------------------------------
 
 - Make sure that your board is power up, and that you have connected your debug probe
-   to the board and your host computer. 
+  to the board and your host computer. 
+
 - Click on `Debug->Start Debug Session->Download and Reset Program` to start the debugging session and 
-   set a breakpoint at the beginning of the application's `main()` function.
+  set a breakpoint at the beginning of the application's `main()` function.
 
 Breakpoints and Stepping Through the Code
 -----------------------------------------
@@ -126,14 +127,14 @@ where your JLink GDB server executable lives:
 
 .. tabs::
    .. group-tab:: Ubuntu
-        .. code-block:: json
+        .. code-block:: javascript
 
             "cortex-debug.JLinkGDBServerPath": "/opt/SEGGER/JLink/JLinkGDBServerCLExe"
 
 You then need to add a debug configuration to your :file:`.vscode/launch.json`. For the reccommended setup,
 use the below configuration, editing the `device`, `interface`, and `executable` parameters to match your project.
 
-.. code-block:: json
+.. code-block:: javascript
 
 {
   "version": "0.2.0",
