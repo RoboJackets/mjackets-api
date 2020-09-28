@@ -5,6 +5,9 @@
  extern "C" {
 #endif
 
+#include "mJackets.hpp"
+#include "PinDefs.hpp"
+
 /**
  * @brief System clock initialization struct
  * 
@@ -86,5 +89,13 @@ void HAL_MspInit(void);
 #ifdef __cplusplus
 }
 #endif
+
+/**
+ * @brief Initializes the clock source for a GPIO pin
+ * 
+ * @param pin 
+ * @return HAL_StatusTypeDef 
+ */
+HAL_StatusTypeDef GpioClockInit(PinName pin);
 
 #endif // _HARWARE_INIT_H

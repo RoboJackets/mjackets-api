@@ -15,7 +15,7 @@
   ******************************************************************************
   */
 
-/* Private functions -----------------------------------------------*/
+#include "default_handlers.h"
 
 /**
   * @brief  Infinite loop event handler

@@ -15,31 +15,6 @@
   ******************************************************************************
   */
 
-#if defined STM32F0
-    #include "stm32f0xx_hal_conf.h"
-    #include "stm32f0xx_hal.h"
-#endif
-#if defined STM32F1
-    #include "stm32f1xx_hal_conf.h"
-    #include "stm32f1xx_hal.h"
-#endif
-#if defined STM32F2
-    #include "stm32f2xx_hal_conf.h"
-    #include "stm32f2xx_hal.h"
-#endif
-#if defined STM32F3
-    #include "stm32f3xx_hal_conf.h"
-    #include "stm32f3xx_hal.h"
-#endif
-#if defined STM32F4
-    #include "stm32f4xx_hal_conf.h"
-    #include "stm32f4xx_hal.h"
-#endif
-#if defined STM32F7
-    #include "stm32f7xx_hal_conf.h"
-    #include "stm32f7xx_hal.h"
-#endif
-
 #include "hardware_init.h"
 
 /**
@@ -194,4 +169,92 @@ __attribute__((weak)) void HAL_MspInit(void)
 {
   __HAL_RCC_PWR_CLK_ENABLE();
   __HAL_RCC_SYSCFG_CLK_ENABLE();
+}
+
+HAL_StatusTypeDef GpioClockInit(PinName pin)
+{
+    assert_param(IS_GPIO_ALL_INSTANCE(pin.port));
+    
+    #if defined(GPIOA)
+    if (pin.port == GPIOA){
+      if (__HAL_RCC_GPIOA_IS_CLK_ENABLED() == 0)
+          {
+              __HAL_RCC_GPIOA_CLK_ENABLE();
+          }
+    }
+    #endif //GPIOA
+
+    #if defined(GPIOB)
+    if (pin.port == GPIOB){
+      if (__HAL_RCC_GPIOB_IS_CLK_ENABLED() == 0)
+          {
+              __HAL_RCC_GPIOB_CLK_ENABLE();
+          }
+    }
+    #endif //GPIOB
+
+    #if defined(GPIOC)
+    if (pin.port == GPIOC){
+      if (__HAL_RCC_GPIOC_IS_CLK_ENABLED() == 0)
+          {
+              __HAL_RCC_GPIOC_CLK_ENABLE();
+          }
+    }
+    #endif //GPIOC
+
+    #if defined(GPIOD)
+    if (pin.port == GPIOD){
+      if (__HAL_RCC_GPIOD_IS_CLK_ENABLED() == 0)
+          {
+              __HAL_RCC_GPIOD_CLK_ENABLE();
+          }
+    }
+    #endif //GPIOD
+    
+    #if defined(GPIOE)
+    if (pin.port == GPIOE){
+      if (__HAL_RCC_GPIOE_IS_CLK_ENABLED() == 0)
+          {
+              __HAL_RCC_GPIOE_CLK_ENABLE();
+          }
+    }
+    #endif //GPIOE
+
+    #if defined(GPIOF)
+    if (pin.port == GPIOF){
+      if (__HAL_RCC_GPIOF_IS_CLK_ENABLED() == 0)
+          {
+              __HAL_RCC_GPIOF_CLK_ENABLE();
+          }
+    }
+    #endif //GPIOF
+
+    #if defined(GPIOG)
+    if (pin.port == GPIOG){
+      if (__HAL_RCC_GPIOG_IS_CLK_ENABLED() == 0)
+          {
+              __HAL_RCC_GPIOG_CLK_ENABLE();
+          }
+    }
+    #endif //GPIOG
+
+    #if defined(GPIOH)
+    if (pin.port == GPIOH){
+      if (__HAL_RCC_GPIOH_IS_CLK_ENABLED() == 0)
+          {
+              __HAL_RCC_GPIOH_CLK_ENABLE();
+          }
+    }
+    #endif //GPIOH
+
+    #if defined(GPIOI)
+    if (pin.port == GPIOI){
+      if (__HAL_RCC_GPIOI_IS_CLK_ENABLED() == 0)
+          {
+              __HAL_RCC_GPIOI_CLK_ENABLE();
+          }
+    }
+    #endif //GPIOI
+
+    return HAL_OK;
 }
