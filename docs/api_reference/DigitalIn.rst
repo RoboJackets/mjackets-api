@@ -14,7 +14,7 @@ Example Usage:
 
     DigitalIn myInput(PIN_E5, PullNone);
     
-    if (myInput.read())
+    if (myInput.Read())
     {
         print("myInput is high!");
     }

@@ -87,4 +87,12 @@ void HAL_MspInit(void);
 }
 #endif
 
+/**
+ * @brief Initializes the clock source for a GPIO pin
+ * 
+ * @param pin 
+ * @return HAL_StatusTypeDef 
+ */
+HAL_StatusTypeDef GpioClockInit(PinName pin);
+
 #endif // _HARWARE_INIT_H
