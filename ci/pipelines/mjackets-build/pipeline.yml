@@ -4,10 +4,14 @@ jobs:
   plan:
   - get: mjackets-api
     trigger: true
-  - do:
+  - in_parallel:
     - inputs:
       - mjackets-api
       put: build-check
+    - inputs:
+      - mjackets-api
+      put: documentation-check
+  - in_parallel:
     - config:
         image_resource:
           source:
@@ -22,7 +26,7 @@ jobs:
           args:
           - -exc
           - |
-            ./mjackets-api/ci/build_scripts/example.sh
+            ./mjackets-api/ci/scripts/example.sh
           path: sh
       on_abort:
         inputs:
@@ -48,15 +52,66 @@ jobs:
           title: Sanity build failed
         put: build-check
       task: build
-  - inputs:
-    - build-check
-    - mjackets-api
-    params:
-      conclusion: success
-      summary: mJackets sanity build compiled sucessfully.
-      title: Sanity Build Success
-    put: build-check
-  public: true
+    - config:
+        image_resource:
+          source:
+            repository: robojackets/mjackets-dev
+          type: docker-image
+        inputs:
+        - name: mjackets-api
+        params:
+          SONAR_TOKEN: ((sonarcloud-io))
+        platform: linux
+        run:
+          args:
+          - -exc
+          - |
+            ./mjackets-api/ci/scripts/documentation_coverage.sh
+          path: sh
+      on_abort:
+        inputs:
+        - documentation-check
+        - mjackets-api
+        params:
+          conclusion: cancelled
+        put: documentation-check
+      on_error:
+        inputs:
+        - documentation-check
+        - mjackets-api
+        params:
+          conclusion: action_required
+        put: documentation-check
+      on_failure:
+        inputs:
+        - documentation-check
+        - mjackets-api
+        params:
+          conclusion: failure
+          summary: Review the output within Concourse.
+          title: Insuffient API Documenation Coverage
+        put: documentation-check
+      task: documentation-coverage
+
+  - in_parallel:
+    - inputs:
+      - build-check
+      - mjackets-api
+      params:
+        conclusion: success
+        summary: mJackets sanity build compiled sucessfully.
+        title: Sanity Build Success
+      put: build-check
+    - inputs:
+      - documentation-check
+      - mjackets-api
+      params:
+        conclusion: success
+        summary: mJackets API has 100% documentation coverage.
+        title: 100% API Documentation Coverage
+      put: build-check
+    public: true
+
 - name: build-pull-request
   plan:
   - get: pull-request
@@ -64,55 +119,105 @@ jobs:
       integration_tool: checkout
     trigger: true
     version: every
-  - config:
-      image_resource:
-        source:
-          repository: robojackets/mjackets-dev
-        type: docker-image
-      inputs:
-      - name: pull-request
-      params:
-        SONAR_TOKEN: ((sonarcloud-io))
-      platform: linux
-      run:
-        args:
-        - -exc
-        - |
-          ./mjackets-api/ci/build_scripts/example.sh
-        path: sh
-    on_abort:
-      inputs:
+  - in_parallel:
+    - config:
+        image_resource:
+          source:
+            repository: robojackets/mjackets-dev
+          type: docker-image
+        inputs:
+        - name: pull-request
+        platform: linux
+        run:
+          args:
+          - -exc
+          - |
+            ./mjackets-api/ci/scripts/documentation_coverage.sh
+          path: sh
+      on_abort:
+        inputs:
+        - documenation-check
+        - pull-request
+        params:
+          conclusion: cancelled
+        put: documenation-check
+      on_error:
+        inputs:
+        - documenation-check
+        - pull-request
+        params:
+          conclusion: action_required
+        put: documenation-check
+      on_failure:
+        inputs:
+        - documenation-check
+        - pull-request
+        params:
+          conclusion: failure
+          summary: Review the output within Concourse.
+          title: Insuffient API Documenation Coverage
+        put: documenation-check
+      task: documenation-coverage
+
+    - config:
+        image_resource:
+          source:
+            repository: robojackets/mjackets-dev
+          type: docker-image
+        inputs:
+        - name: pull-request
+        params:
+          SONAR_TOKEN: ((sonarcloud-io))
+        platform: linux
+        run:
+          args:
+          - -exc
+          - |
+            ./mjackets-api/ci/scripts/example.sh
+          path: sh
+      on_abort:
+        inputs:
+        - build-check
+        - pull-request
+        params:
+          conclusion: cancelled
+        put: build-check
+      on_error:
+        inputs:
+        - build-check
+        - pull-request
+        params:
+          conclusion: action_required
+        put: build-check
+      on_failure:
+        inputs:
+        - build-check
+        - pull-request
+        params:
+          conclusion: failure
+          summary: Review the output within Concourse.
+          title: Sanity build failed
+        put: build-check
+      task: build
+  - in_parallel:
+    - inputs:
       - build-check
       - pull-request
       params:
-        conclusion: cancelled
+        conclusion: success
+        summary: mJackets sanity build compiled sucessfully.
+        title: Image built
       put: build-check
-    on_error:
-      inputs:
-      - build-check
+      public: true
+    - inputs:
+      - documentation-check
       - pull-request
       params:
-        conclusion: action_required
-      put: build-check
-    on_failure:
-      inputs:
-      - build-check
-      - pull-request
-      params:
-        conclusion: failure
-        summary: Review the output within Concourse.
-        title: Sanity build failed
-      put: build-check
-    task: build
-  - inputs:
-    - build-check
-    - pull-request
-    params:
-      conclusion: success
-      summary: mJackets sanity build compiled sucessfully.
-      title: Image built
-    put: build-check
-  public: true
+        conclusion: success
+        summary: mJackets API has 100% documentation coverage.
+        title: 100% Documenation Coverage
+      put: documentation-check
+      public: true
 
 resource_types:
 - name: github-check
@@ -140,6 +245,16 @@ resources:
     pull_request: pull-request
     repository: mjackets-api
     resource_name: build-check
+    token: ((github-com/token))
+  type: github-check
+- icon: check-bold
+  name: documentation-check
+  public: true
+  source:
+    check_name: API Documenation Coverage
+    pull_request: pull-request
+    repository: mjackets-api
+    resource_name: documentation-check
     token: ((github-com/token))
   type: github-check
 - icon: github
