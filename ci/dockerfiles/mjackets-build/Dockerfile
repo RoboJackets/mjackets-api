@@ -8,7 +8,7 @@ COPY requirements.txt /work
 
 RUN apt-get update && \
 	apt-get upgrade -y && \
-    apt-get install --no-install-recommends -yy  git make curl python3 python3-pip doxygen graphviz wget unzip build-essential && \
+    apt-get install --no-install-recommends -yy  git make curl python python3 python3-pip doxygen graphviz wget unzip build-essential && \
 	apt-get clean
 
 RUN pip3 install --upgrade pip && \
