@@ -9,7 +9,7 @@ resource_types:
 - name: pull-request
   source:
     repository: teliaoss/github-pr-resource
-  type: docker-image
+  type: registry-image
 - name: sonar-runner
   source:
     repository: cathive/concourse-sonarqube-resource
@@ -47,132 +47,135 @@ resources:
     username: x-access-token
   type: git
   webhook_token: ((webhook-token))
+
 - icon: source-pull
   name: pull-request
   public: true
   source:
     access_token: ((github-com/token))
-    base_branch: master
-    disable_forks: false
-    repository: mjackets-api
-    v3_endpoint: https://api.github.com
-    v4_endpoint: https://api.github.com/graphql
+    repository: RoboJackets/mjackets-api
   type: pull-request
-  webhook_token: ((webhook-token))
 
 jobs:
 - name: build-master
   plan:
   - get: mjackets-api
     trigger: true
-  - in_parallel:
-    - inputs:
-      - mjackets-api
-      put: build-check
-    - inputs:
-      - mjackets-api
-      put: documentation-check
-  - in_parallel:
-    - config:
-        image_resource:
-          source:
-            repository: robojackets/mjackets-dev
-          type: docker-image
-        inputs:
-        - name: mjackets-api
-        params:
-          SONAR_TOKEN: ((sonarcloud-io))
-        platform: linux
-        run:
-          args:
-          - -exc
-          - |
-            ./mjackets-api/ci/scripts/example.sh
-          path: sh
-      on_abort:
-        inputs:
-        - build-check
-        - mjackets-api
-        params:
-          conclusion: cancelled
-        put: build-check
-      on_error:
-        inputs:
-        - build-check
-        - mjackets-api
-        params:
-          conclusion: action_required
-        put: build-check
-      on_failure:
-        inputs:
-        - build-check
-        - mjackets-api
-        params:
-          conclusion: failure
-          summary: Review the output within Concourse.
-          title: Sanity build failed
-        put: build-check
-      task: build
-    - config:
-        image_resource:
-          source:
-            repository: robojackets/mjackets-dev
-          type: docker-image
-        inputs:
-        - name: mjackets-api
-        platform: linux
-        run:
-          args:
-          - -exc
-          - |
-            cd mjackets-api/docs 
-            cmake configure .
-            make
-            ../utilities/doxygen-coverage/doxy-coverage.py docs_build/doxygen_docs/xml/ --threshold 100
-          path: sh
-      on_abort:
-        inputs:
-        - documentation-check
-        - mjackets-api
-        params:
-          conclusion: cancelled
-        put: documentation-check
-      on_error:
-        inputs:
-        - documentation-check
-        - mjackets-api
-        params:
-          conclusion: action_required
-        put: documentation-check
-      on_failure:
-        inputs:
-        - documentation-check
-        - mjackets-api
-        params:
-          conclusion: failure
-          summary: Review the output within Concourse.
-          title: Insuffient API Documenation Coverage
-        put: documentation-check
-      task: documentation-coverage
 
-  - in_parallel:
-    - inputs:
+  - inputs:
+    - mjackets-api
+    put: build-check
+
+  - config:
+      image_resource:
+        source:
+          repository: robojackets/mjackets-dev
+        type: docker-image
+      inputs:
+      - name: mjackets-api
+      params:
+        SONAR_TOKEN: ((sonarcloud-io))
+      platform: linux
+      run:
+        args:
+        - -exc
+        - |
+          ./mjackets-api/ci/scripts/example.sh
+        path: sh
+    on_abort:
+      inputs:
       - build-check
       - mjackets-api
       params:
-        conclusion: success
-        summary: mJackets sanity build compiled sucessfully.
-        title: Sanity Build Success
+        conclusion: cancelled
       put: build-check
-    - inputs:
+    on_error:
+      inputs:
+      - build-check
+      - mjackets-api
+      params:
+        conclusion: action_required
+      put: build-check
+    on_failure:
+      inputs:
+      - build-check
+      - mjackets-api
+      params:
+        conclusion: failure
+        summary: Review the output within Concourse.
+        title: Sanity build failed
+      put: build-check
+    task: build
+  
+  - inputs:
+    - build-check
+    - mjackets-api
+    params:
+      conclusion: success
+      summary: mJackets sanity build compiled sucessfully.
+      title: Sanity Build Success
+    put: build-check
+
+- name: documentation-check-master
+  plan:
+  - get: mjackets-api
+    trigger: true
+
+  - inputs:
+    - mjackets-api
+    put: documentation-check
+  
+  - config:
+      image_resource:
+        source:
+          repository: robojackets/mjackets-dev
+        type: docker-image
+      inputs:
+      - name: mjackets-api
+      platform: linux
+      run:
+        args:
+        - -exc
+        - |
+          cd mjackets-api/docs 
+          cmake configure .
+          make
+          python ../utilities/doxy-coverage/doxy-coverage.py docs_build/doxygen_docs/xml/ --threshold 100
+        path: sh
+    on_abort:
+      inputs:
       - documentation-check
       - mjackets-api
       params:
-        conclusion: success
-        summary: mJackets API has 100% documentation coverage.
-        title: 100% API Documentation Coverage
-      put: build-check
+        conclusion: cancelled
+      put: documentation-check
+    on_error:
+      inputs:
+      - documentation-check
+      - mjackets-api
+      params:
+        conclusion: action_required
+      put: documentation-check
+    on_failure:
+      inputs:
+      - documentation-check
+      - mjackets-api
+      params:
+        conclusion: failure
+        summary: Review the output within Concourse.
+        title: Insuffient API Documenation Coverage
+      put: documentation-check
+    task: documentation-coverage
 
+  - inputs:
+    - documentation-check
+    - mjackets-api
+    params:
+      conclusion: success
+      summary: mJackets API has 100% documentation coverage.
+      title: 100% API Documentation Coverage
+    put: documentation-check
+  
 - name: build-pull-request
   plan:
 
