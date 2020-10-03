@@ -185,6 +185,10 @@ jobs:
     trigger: true
     version: every
 
+  - inputs:
+    - pull-request
+    put: build-check
+
   - config:
       image_resource:
         source:
@@ -199,7 +203,7 @@ jobs:
         args:
         - -exc
         - |
-          ./mjackets-api/ci/scripts/example.sh
+          ./pull-request/ci/scripts/example.sh
         path: sh
     on_abort:
       inputs:
@@ -232,7 +236,7 @@ jobs:
     params:
       conclusion: success
       summary: mJackets sanity build compiled sucessfully.
-      title: Image built
+      title: Sanity Build Success
     put: build-check
 
 - name: documentation-check-pull-request
@@ -243,6 +247,10 @@ jobs:
       integration_tool: checkout
     trigger: true
     version: every
+
+  - inputs:
+    - pull-request
+    put: documentation-check
 
   - config:
       image_resource:
@@ -256,7 +264,11 @@ jobs:
         args:
         - -exc
         - |
-          ./mjackets-api/ci/scripts/documentation_coverage.sh
+          ls
+          cd pull-request/docs 
+          cmake configure .
+          make
+          python ../utilities/doxy-coverage/doxy-coverage.py docs_build/doxygen_docs/xml/ --threshold 100
         path: sh
     on_abort:
       inputs:
