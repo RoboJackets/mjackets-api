@@ -42,7 +42,15 @@
     #include "stm32f7xx_hal.h"
 #endif
 
-void SystemClock_Config(ClockInitStruct clock_init)
+#include "hardware_init.h"
+
+/**
+  * @brief  System Clock Configuration
+  *
+  * @param  None
+  * @retval None
+  */
+__attribute__((weak)) void SystemClock_Config(ClockInitStruct clock_init)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
@@ -113,7 +121,7 @@ void SystemClock_Config(ClockInitStruct clock_init)
   * @param  None
   * @retval None
   */
-void MPU_Config(void)
+__attribute__((weak)) void MPU_Config(void)
 {
   MPU_Region_InitTypeDef MPU_InitStruct;
   
@@ -140,7 +148,7 @@ void MPU_Config(void)
 }
 #endif
 
-void DWT_Config(void)
+__attribute__((weak)) void DWT_Config(void)
 {
   CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
   DWT->CYCCNT = 0;
@@ -153,7 +161,7 @@ void DWT_Config(void)
   * @param  None
   * @retval None
   */
-void CPU_CACHE_Enable(void)
+__attribute__((weak)) void CPU_CACHE_Enable(void)
 {
   /* Enable I-Cache */
   SCB_EnableICache();
@@ -172,7 +180,7 @@ void CPU_CACHE_Enable(void)
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t* file, uint32_t line)
+__attribute__((weak)) void assert_failed(uint8_t* file, uint32_t line)
 { 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

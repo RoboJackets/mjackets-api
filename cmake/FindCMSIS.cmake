@@ -141,12 +141,12 @@ foreach(COMP ${CMSIS_FIND_COMPONENTS})
         string(TOLOWER ${TYPE} TYPE_L)
 
         find_file(CMSIS_${FAMILY}_${TYPE}_STARTUP
-            NAMES startup_stm32${TYPE_L}.s
-            PATHS "${BSP_PATH}"
+            NAMES Startup.s
+            PATHS "${BSP_PATH}" "${BSP_PATH}/source"
             NO_DEFAULT_PATH
         )
         if(CMSIS_${FAMILY}_${TYPE}_STARTUP)
-            message(STATUS "Using startup_stm32${TYPE_L}.s found in ${BSP_PATH}")
+            message(STATUS "Using Startup file found in ${CMSIS_${FAMILY}_${TYPE}_STARTUP}")
         endif()
 
         if(NOT(CMSIS_${FAMILY}_${TYPE}_STARTUP))
@@ -175,9 +175,9 @@ foreach(COMP ${CMSIS_FIND_COMPONENTS})
 
         find_file(CUSTOM_CMSIS_STARTUP
             NAMES STM32${DEVICE}.ld
-            PATHS "${BSP_PATH}"
+            PATHS "${BSP_PATH}" "${BSP_PATH}/source"
             NO_DEFAULT_PATH
-            )
+        )
 
         if(CUSTOM_CMSIS_STARTUP)
             add_custom_target(CMSIS_LD_STM32_${DEVICE} DEPENDS ${CUSTOM_CMSIS_STARTUP})
