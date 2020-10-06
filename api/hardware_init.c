@@ -15,6 +15,8 @@
   ******************************************************************************
   */
 
+#include "hardware_init.h"
+
 #if defined STM32F0
     #include "stm32f0xx_hal_conf.h"
     #include "stm32f0xx_hal.h"
@@ -39,8 +41,6 @@
     #include "stm32f7xx_hal_conf.h"
     #include "stm32f7xx_hal.h"
 #endif
-
-#include "hardware_init.h"
 
 /**
   * @brief  System Clock Configuration

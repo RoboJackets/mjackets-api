@@ -5,6 +5,8 @@
  extern "C" {
 #endif
 
+#include <unistd.h>
+
 /**
  * @brief System clock initialization struct
  * 
