@@ -195,3 +195,87 @@ __attribute__((weak)) void HAL_MspInit(void)
   __HAL_RCC_PWR_CLK_ENABLE();
   __HAL_RCC_SYSCFG_CLK_ENABLE();
 }
+
+HAL_StatusTypeDef GpioClockInit(PinName pin)
+{
+    switch (pin.port)
+    {
+        assert_param(IS_GPIO_ALL_INSTANCE(pin.port));
+
+        #ifdef GPIOA
+            case GPIOA:
+                if !(__HAL_RCC_GPIOA_IS_CLK_ENABLED())
+                {
+                    __HAL_RCC_GPIOA_ENABLE();
+                }
+                break;
+        #endif // GPIOA
+        #ifdef GPIOB
+        case GPIOB:
+            if !(__HAL_RCC_GPIOB_IS_CLK_ENABLED())
+            {
+                __HAL_RCC_GPIOB_ENABLE();
+            }
+            break;
+        #endif // GPIOB
+        #ifdef GPIOC
+        case GPIOC:
+            if !(__HAL_RCC_GPIOC_IS_CLK_ENABLED())
+            {
+                __HAL_RCC_GPIOC_ENABLE();
+            }
+            break;
+        #endif // GPIOC
+        #ifdef GPIOD
+        case GPIOD:
+            if !(__HAL_RCC_GPIOD_IS_CLK_ENABLED())
+            {
+                __HAL_RCC_GPIOD_ENABLE();
+            }
+            break;
+        #endif // GPIOD
+        #ifdef GPIOE
+        case GPIOE:
+            if !(__HAL_RCC_GPIOE_IS_CLK_ENABLED())
+            {
+                __HAL_RCC_GPIOE_ENABLE();
+            }
+            break;
+        #endif // GPIOE
+        #ifdef GPIOF
+        case GPIOF:
+            if !(__HAL_RCC_GPIOF_IS_CLK_ENABLED())
+            {
+                __HAL_RCC_GPIOF_ENABLE();
+            }
+            break;
+        #endif // GPIOF
+        #ifdef GPIOG
+        case GPIOG:
+            if !(__HAL_RCC_GPIOG_IS_CLK_ENABLED())
+            {
+                __HAL_RCC_GPIOG_ENABLE();
+            }
+            break;
+        #endif // GPIOG
+        #ifdef GPIOH
+        case GPIOH:
+            if !(__HAL_RCC_GPIOH_IS_CLK_ENABLED())
+            {
+                __HAL_RCC_GPIOH_ENABLE();
+            }
+            break;
+        #endif // GPIOH
+        #ifdef GPIOI
+        case GPIOI:
+            if !(__HAL_RCC_GPIOI_IS_CLK_ENABLED())
+            {
+                __HAL_RCC_GPIOI_ENABLE();
+            }
+            break;
+        #endif // GPIOI
+        default:
+            return HAL_ERROR;
+    }
+    return HAL_OK;
+}
