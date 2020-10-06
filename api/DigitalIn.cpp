@@ -31,7 +31,10 @@ DigitalIn::DigitalIn(PinName pin, PullType pull) {
     pin_structure.Mode = GPIO_MODE_INPUT;
     pin_structure.Pull = pull;
     
-    HAL_GPIO_Init(pin.port, &pin_structure);
+    if (HAL_GPIO_Init(pin.port, &pin_structure) != HAL_OK
+    {
+        Error_Handler();
+    }
 }
 
 void DigitalIn::DeInit() {
