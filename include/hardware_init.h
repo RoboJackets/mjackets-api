@@ -1,5 +1,7 @@
+/** @cond SuppressGuard */
 #ifndef _HARDWARE_INIT_H
-#define _HARWARE_INIT_H
+#define _HARWARE_INIT_H 
+/** @endcond */
 
 #ifdef __cplusplus
  extern "C" {
@@ -25,19 +27,23 @@ typedef struct
     uint32_t FlashLatency;
 }ClockInitStruct;
 
-/* Clock Sources */
+/** @defgroup CLOCK_SOURCES Clock Sources
+ * @brief Clock sources used to initialized the system clock
+ * @{ 
+ */
 #define CLOCK_SOURCE_HSE 0x1
 #define CLOCK_SOURCE_LSE 0x2
 #define CLOCK_SOURCE_HSI 0x3
 #define CLOCK_SOURCE_LSI 0x4
+/** @} */
 
-/* Convenient System Frequency Values */
+/** Convenient System Frequency Values  */
 #define SYS_FREQ_100MHZ 0x5F5E100
 
 /**
  * @brief System clock configuration and initialization
  * 
- * @param clock_init 
+ * @param clock_init ClockInitStruct with the clock configuration parameters
  */
 void SystemClock_Config(ClockInitStruct clock_init);
 
@@ -63,7 +69,7 @@ void CPU_CACHE_Enable(void);
 #endif
 
 /**
- * @brief 
+ * @brief Configures the Data Watchpoint Trigger for tracking clock cycles
  * 
  */
 void DWT_Config(void);
@@ -89,4 +95,6 @@ void HAL_MspInit(void);
 }
 #endif
 
+/** @cond SuppressGuard */
 #endif // _HARWARE_INIT_H
+/** @endcond */
