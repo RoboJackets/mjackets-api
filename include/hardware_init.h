@@ -1,3 +1,5 @@
+/** @file */
+
 /** @cond SuppressGuard */
 #ifndef _HARDWARE_INIT_H
 #define _HARWARE_INIT_H 
@@ -31,10 +33,16 @@ typedef struct
  * @brief Clock sources used to initialized the system clock
  * @{ 
  */
-#define CLOCK_SOURCE_HSE 0x1
-#define CLOCK_SOURCE_LSE 0x2
+
+/** High Speed External Oscillator */
+#define CLOCK_SOURCE_HSE 0x1 
+/** Low Speed External Oscillator */
+#define CLOCK_SOURCE_LSE 0x2 
+/** High Speed Internal Oscillator */
 #define CLOCK_SOURCE_HSI 0x3
-#define CLOCK_SOURCE_LSI 0x4
+/** Low Speed Internal Oscillator */
+#define CLOCK_SOURCE_LSI 0x4 
+
 /** @} */
 
 /** Convenient System Frequency Values  */
