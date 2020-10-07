@@ -42,6 +42,7 @@ typedef struct
 #define CLOCK_SOURCE_HSI 0x3
 /** Low Speed Internal Oscillator */
 #define CLOCK_SOURCE_LSI 0x4 
+
 /** @} */
 
 /** Convenient System Frequency Values  */
