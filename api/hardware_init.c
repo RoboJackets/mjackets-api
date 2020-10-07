@@ -42,12 +42,6 @@
     #include "stm32f7xx_hal.h"
 #endif
 
-/**
-  * @brief  System Clock Configuration
-  *
-  * @param  None
-  * @retval None
-  */
 void SystemClock_Config(ClockInitStruct clock_init)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};

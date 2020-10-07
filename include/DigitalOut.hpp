@@ -15,6 +15,10 @@ public:
         PinMode mode = PinMode::PushPull, PinSpeed speed = PinSpeed::Low,
         bool inverted = false);
 
+    /**
+     * @brief Destroy the Digital Out object
+     * 
+     */
     ~DigitalOut();
 
     /** Change output state of pin
@@ -35,15 +39,35 @@ public:
      */
     bool read();
 
+    /**
+     * @brief Assignment operator overload to set pin value
+     * 
+     * @param rhs 
+     */
     void operator =(bool rhs) {
         write(rhs);
     }
 
+    /**
+     * @brief Boolean operator overload to set pin value
+     * 
+     * @return true 
+     * @return false 
+     */
     operator bool() {
         return read();
     }
 
 protected:
+    /**
+     * @brief GPIO pin associated with the class instance
+     * 
+     */
     PinName pin;
+
+    /**
+     * @brief Parameter defining whether the output logic should be inverted
+     * 
+     */
     bool inverted;
 };
