@@ -1,4 +1,4 @@
-.. _zephyr_doc:
+.. _mjackets_doc:
 
 Documentation Generation
 ########################

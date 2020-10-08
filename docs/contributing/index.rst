@@ -73,7 +73,7 @@ Prerequisites
 
 As a contributor, you'll want to be familiar with the mJackets project, how to
 configure, install, and use it, and how to set up your development environment
-as introduced in the mJackets `Getting Started Guide <../getting_started/index.rst>`.
+as introduced in the mJackets doc:`Getting Started Guide <../getting_started/index.rst>`.
 
 You should be familiar with common developer tools such as Git and CMake, and
 platforms such as GitHub.
@@ -96,15 +96,14 @@ Continuous Integration
 Continuous Integration (CI) is a tool to help auto-detect problems before they
 are merged into the main respository and have a chance to cause problems. Every
 time you submit a Pull Request (PR), the CI tool is run and it will assign a passing
-or failing mark to the request. If the CI fails, you will need to fix the error
+or failing mark to the request. If the CI checks fail, you will need to fix the error
 in your code before the code review. If the reason for the failure isn't
 obvious or it's a problem in the CI check itself, seek some help. The CI system
 verifies several aspects of the PR:
 
-* Git commit formatting
-* Coding Style
-* Sanity Check builds for multiple architectures and boards
-* Documentation build to verify any doc changes
+* Sanity check builds for multiple architectures and boards
+* Documentation coverage of the API
+* Code analysis
 
 The current status of the CI run can always be found at the bottom of the
 GitHub PR page, below the review status. Depending on the success or failure
@@ -138,7 +137,7 @@ if the function may block for extended periods of time. If applicable, state if
 the function is reentrant or accquires and releases locks.
 
 If the overall set of code is complex and new, consider editing or adding to
-the wiki.
+the online documentation.
 
 C/C++/Python is documented using doxygen. You can view the guide for writing doxygen
 comments and documentation `here <http://www.stack.nl/~dimitri/doxygen/manual/docblocks.html>`_ .
@@ -148,13 +147,14 @@ using what ever commenting style that format supports.
 
 Style and Formatting
 ********************
-In order to keep the code more readable, code should be formatted and styled
+In order to keep the code more readable, code for APIs, drivers, and tests should be formatted and styled
 uniformly according to the `Google C++ Style Guide`_ . This would be difficult
-to coordinate across multiple users, so we have a program that automatically
-restyles the code for you. If you submit a pull request before restyling the
+to coordinate across multiple users, so we include the ClangFormat utility to 
+automatically restyle the code for you. If you submit a pull request before restyling the
 code, it will likely fail the CI style check. You can auto-format the code
-by running `make pretty`. If you have a lot of code, you may have to run this
-a few times. You can check if the style is passing by running `make checkstyle`.
+by running `make format`. If you have a lot of code, you may have to run this
+a few times. You can check if the style is passing by running `make checkformat` from
+the `utilities` directory.
 If there are no errors, then you are good to go.
 
 .. _Google C++ Style Guide:

@@ -46,10 +46,8 @@ Contains useful tools and scripts for installing dependancies, flashing, etc.
 | Peripheral API     | Status          |
 |--------------------|-----------------|
 | Analog In          | Experimental    |
-| Delay              | Stable          |
-| Digital In         | Stable          |
-| Digital Out        | Stable          |
-| I2C                | TODO            |
+| Delay              | Unstable        |
+| Digital Input      | Unstable        |
+| Digital Output     | Unstable        |
 | SPI                | Dev in Progress |
 | External Interrupt | Dev in Progress |
-| Timer Interrupt    | TODO            |

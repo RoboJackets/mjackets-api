@@ -11,7 +11,7 @@ The mJackets Git repository has three types of branches:
 master
   Which contains the latest state of development
 
-topic-\*
+feat\\\*
   Topic branches that are used for shared development of a new feature
 
 vx.y-branch
