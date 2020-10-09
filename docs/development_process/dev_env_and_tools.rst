@@ -90,7 +90,7 @@ Development Group
 +++++++++++++++++
 
 Changes that introduce new features or functionality or change the way the
-overall system works need to be reviewed by the STM32 Development group.
+overall system works need to be reviewed by the mJackets API development group.
 
 A Pull-Request should have an Assignee
 =======================================
@@ -165,7 +165,7 @@ Closing Stale Issues and Pull Requests
 
 - The Pull requests and issues sections on Github are NOT discussion forums.
   They are items that we need to execute and drive to closure.
-  Use the mailing lists for discussions.
+  Use the slack channel for discussion.
 - In case of both issues and pull-requests the original poster needs to respond
   to questions and provide clarifications regarding the issue or the change.
   After one week without a response to a request, a second attempt to elicit
@@ -176,26 +176,18 @@ Closing Stale Issues and Pull Requests
 Continuous Integration
 ***********************
 
-All changes submitted to GitHub are subject to sanity tests to identify breakage 
-and regressions that can be immediately identified. Sanity testing additionally
-performs build tests of all boards and platforms. Documentation changes are also 
-verified through review and build testing to verify doc generation will be 
-successful.
-
-Any failures found during the CI test run will result in a negative review
-assigned automatically by the CI system.
-Developers are expected to fix issues and rework their patches and submit again.
+All pull requests into the master branch are subject to sanity tests to identify breakage 
+and regressions that can be immediately identified. Any failures found during the CI test run 
+will block the PR from proceeding. Developers are expected to fix issues and rework their 
+patches and submit again if this happens.
 
 The CI infrastructure currently runs the following tests:
 
-- Run ''checkpatch'' for code style issues (can vote -1 on errors; see note)
-- Gitlint: Git commit style based on project requirements
-- License Check: Check for conflicting licenses
-- Run ''sanitycheck'' script
-
-  - Build various samples for different boards (can vote -1 on errors)
-
+- Runs sanity builds targeting different boards to check that the API builds successfully. 
 - Verify documentation builds correctly.
+- Verify that API documentation is at 100% coverage.
+- Runs SonarQube analysis on the API to detect bugs and code analysis. The results are uploaded to 
+  SonarCloud. 
 
 .. _gh_labels:
 
@@ -218,11 +210,8 @@ being forgotten, speeds up reviewing, avoids duplicate issue reports, etc.
 
 These are the labels we currently have, grouped by type:
 
-Area
-====
-
 =============  ===============================================================
-Labels         ``Area:*``
+Labels         ``area:*``
 Applicable to  PRs  and issues
 Description    Indicates subsystems (e.g., I2C, Memory Management),
                project functions (e.g., Debugging, Documentation, Process),
@@ -237,7 +226,7 @@ Platform
 ========
 
 =============  ===============================================================
-Labels         ``Platform:*``
+Labels         ``board:*``
 Applicable to  PRs  and issues
 Description    An issue or PR which affects only a particular platform
 =============  ===============================================================
@@ -252,22 +241,11 @@ Description    The issue is to be discussed in an appropriate meeting if time
                permits
 =============  ===============================================================
 
-Stable API changes
-==================
-
-=============  ===============================================================
-Labels         ``Stable API Change``
-Applicable to  PRs  and issues
-Description    The issue or PR describes a change to a stable API. See
-               additional information in :ref:`stable_api_changes`
-=============  ===============================================================
-
 Minimum PR review time
 ======================
 
 =============  ===============================================================
-Labels         ``Hot Fix``, ``Trivial``, ``Maintainer``,
-               ``Security Review``, ``TSC``
+Labels         ``hotfix``, ``Trivial``, ``Maintainer``,
 Applicable to  PRs only
 Description    Depending on the PR complexity, an indication of how long a merge
                should be held to ensure proper review. See
@@ -284,9 +262,6 @@ Description    To classify the impact and importance of a bug or
                :ref:`feature <feature-tracking>`
 =============  ===============================================================
 
-Note: Issue priorities are generally set or changed during the bug-triage or TSC
-meetings.
-
 Miscellaneous labels
 ====================
 
@@ -294,14 +269,11 @@ For both PRs and issues
 -----------------------
 
 +------------------------+-------------------------------------------------------+
-|``Bug``                 | The issue is a bug, or the PR is fixing a bug         |
+|``bug``                 | The issue is a bug, or the PR is fixing a bug         |
 +------------------------+-------------------------------------------------------+
-|``Coverity``            | A Coverity detected issue or its fix                  |
+|``SonarQube``           | A SonarQube detected issue or its fix                 |
 +------------------------+-------------------------------------------------------+
-|``Waiting for response``| The mJackets developers are waiting for the submitter |
-|                        | to respond to a question, or address an issue.        |
-+------------------------+-------------------------------------------------------+
-|``Blocked``             | Blocked by another PR or issue                        |
+|``blocked``             | Blocked by another PR or issue                        |
 +------------------------+-------------------------------------------------------+
 |``In progress``         | For PRs: is work in progress and should not be        |
 |                        | merged yet. For issues: Is being worked on            |
@@ -311,7 +283,7 @@ For both PRs and issues
 +------------------------+-------------------------------------------------------+
 |``LTS``                 | Long term release branch related                      |
 +------------------------+-------------------------------------------------------+
-|``EXT``                 | Related to an external component (in ``ext/``)        |
+|``external``            | Related to an external component (in ``ext/``)        |
 +------------------------+-------------------------------------------------------+
 
 PR only labels
@@ -321,29 +293,29 @@ PR only labels
 ``DNM``          This PR should not be merged (Do Not Merge).
                  For work in progress, GitHub "draft" PRs are preferred
 ``Stale PR``     PR which seems abandoned, and requires attention by the author
-``Needs review`` The PR needs attention from the maintainers
-``Backport``     The PR is a backport or should be backported
+``needs review`` The PR needs attention from the maintainers
 ================ ===============================================================
 
 Issue only labels
 -----------------
 
 ==================== ===========================================================
-``Regression``       Something, which was working, but does not anymore
+``regression``       Something, which was working, but does not anymore
                      (bug subtype)
-``Question``         This issue is a question to the Zephyr developers
-``Enhancement``      Changes/Updates/Additions to existing
+``enhancement``      Changes/Updates/Additions to existing
                      :ref:`features <feature-tracking>`
-``Feature request``  A request for a new :ref:`feature <feature-tracking>`
-``Feature``          A :ref:`planned feature<feature-tracking>` with a milestone
-``Duplicate``        This issue is a duplicate of another issue
-                     (please specify)
-``Good first issue`` Good for a first time contributor to take
-``Release Notes``    Issues that need to be mentioned in release notes as known
+``feature request``  A request for a new :ref:`feature <feature-tracking>`
+``feature``          A :ref:`planned feature<feature-tracking>` with a milestone
+``hardware support`` A request or plan to port an existing feature or enhancement 
+                     to a particular hardware platform.
+``peripheral api``   Issue that add or modify peripheral APIs. 
+``duplicate``        This issue is a duplicate of another issue
+``good first issue`` Good for a first time contributor to take
+``release notes``    Issues that need to be mentioned in release notes as known
                      issues with additional information
 ==================== ===========================================================
 
-Any issue must be classified and labeled as either ``Bug``, ``Question``,
-``Enhancement``, ``Feature``, or ``Feature Request``. More information on how
+Any issue must be classified and labeled as either ``bug``, ``hardware support``,
+``enhancement``, ``feature``, or ``feature Request``. More information on how
 feature requests are handled and become features can be found in
 :ref:`Feature Tracking<feature-tracking>`.

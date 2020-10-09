@@ -181,7 +181,7 @@ than using obscure names that you must then explain through comments.
 When writing your comments, write for your audience: the next contributor who will need
 to understand your code. Be generous — the next one may be you!
 
-For automatically generating api documentation, it is important
+For automatically generating api documentation as well as for coverage checks, it is important
 that Doxygen Javadoc-style formatting is used when writing comments for functions and classes.
 
 File Comments
@@ -390,6 +390,28 @@ Below is an example for pulling in documentation for an API Class:
         :members:
  
 .. _Breathe Directives: https://breathe.readthedocs.io/en/latest/directives.html
+
+Code Example
+============
+
+Make sure to add some code snippets demonstrating how to use the API in an application.
+Below is an example of adding an example for a delay API.
+
+.. code-block:: reST
+
+    Example Usage:
+    **************
+
+    .. code-block:: cpp
+
+        while(1)
+        {
+            led1.Toggle();
+            DelayMs(100)    // wait 100 milliseconds
+            led2.Toggle();
+            DelayUs(1000);  // wait for 1000 microseconds
+        }
+    
 
 Including HAL Components
 ************************

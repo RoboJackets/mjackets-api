@@ -73,9 +73,7 @@ In order to declare an API ``stable``, the following steps need to be followed:
 #. A Pull Request must be opened that changes the corresponding entry in the
    :ref:`api_overview` table
 #. An notification must be sent to the #stm32-dev slack channel announcing the API
-   upgrade request
-#. The Pull Request must be submitted for discussion by the STM32 Development 
-   commitee where, barring any objections, the Pull Request will be merged
+   upgrade request. Barring any objections, the Pull request will be merged. 
 
 .. _stable_api_changes:
 
@@ -115,9 +113,9 @@ such a change is considered necessary in order to accept it in the project:
    Instead of a written description of the changes, the RFC issue may link to a
    Pull Request containing those changes in code form.
 #. The RFC issue must be labeled with the GitHub ``Stable API Change`` label
-#. The RFC issue must be submitted for discussion in the next STM32 Development meeting.
-#. An notification must be sent to the #stm32-dev slack channel with a subject identical 
-   to the RFC issue title and that links to the RFC issue
+#. The RFC issue must be submitted for discussion in the next development meeting.
+#. A notification must be sent to the #stm32-dev slack channel with a subject identical 
+   to the RFC issue title and that links to the RFC issue.
 
 The RFC will then receive feedback through issue comments and will also be
 discussed during the STM32 Development meeting.
@@ -148,7 +146,7 @@ The Pull Request must include the following:
 Once the steps above have been completed, the outcome of the proposal will
 depend on the approval of the actual Pull Request by the maintainer of the
 corresponding subystem. As with any other Pull Request, the author can request
-for it to be discussed and ultimately even voted on in the STM32 Development 
+for it to be discussed and ultimately even voted on in a development 
 meeting.
 
 If the Pull Request is merged then a notification must be sent to the #stm32-dev 
@@ -180,9 +178,7 @@ The following are the requirements for deprecating an existing API:
 
   - Mark as deprecated. This can be done by using the compiler itself
     (``__deprecated`` for  function declarations and ``__DEPRECATED_MACRO`` for
-    macro definitions), or by introducing a Kconfig option (typically one that
-    contains the ``DEPRECATED`` word in it) that, when enabled, reverts the APIs
-    back to their previous form
+    macro definitions).
   - Document the deprecation
   - Include the deprecation in the "API Changes" of the release notes for the
     next upcoming release
@@ -207,13 +203,13 @@ Retired
 In this phase, the API is removed.
 
 The target removal date is 2 releases after deprecation is announced.
-The Zephyr maintainers will decide when to actually remove the API: this
+The mJackets API maintainers will decide when to actually remove the API: this
 will depend on how many developers have successfully migrated from the
 deprecated API, and on how urgently the API needs to be removed.
 
 If it's OK to remove the API, it will be removed. The maintainers will remove
 the corresponding documentation, and communicate the removal in the usual ways:
-the release notes, mailing lists, Github issues and pull-requests.
+the release notes, slack channel, Github issues and pull-requests.
 
 If it's not OK to remove the API, the maintainers will continue to support
 migration and update the roadmap with the aim to remove the API in the next

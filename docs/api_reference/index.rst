@@ -12,3 +12,21 @@ API Reference
     Delay.rst
     mJackets.rst
     Miscellaneous.rst
+
+.. _api_status: 
+
+API Status
+##########
+
+
++----------------+--------------+
+| Peripheral API | Status       |
++----------------+--------------+
+| Analog Input   | Experimental |
++----------------+--------------+
+| Delay          | Unstable     |
++----------------+--------------+
+| Digital Input  | Unstable     |
++----------------+--------------+
+| Digital Output | Unstable     |
++----------------+--------------+

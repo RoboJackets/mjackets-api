@@ -18,8 +18,7 @@ Feature request
 
 Feature
   A committed and planned unit of functionality with a detailed design and
-  implementation proposal and an owner. Features must go through an RFC process
-  and must be vetted and discussed in the TSC before a target milestone is set.
+  implementation proposal and an owner.
 
 Hardware Support
   A request or plan to port an existing feature or enhancement to a particular
@@ -28,9 +27,9 @@ Hardware Support
 The following workflow should be used to process features:
 
 - Label new features requests as ``feature-request``
-- The project maintainers discuss ``feature-request`` items regularly and triages them.
-  Items are examined for similarity with existing features, how they fit with
-  the project goals and other timeline considerations. The priority is
+- The mJackets API project maintainers discuss ``feature-request`` items regularly 
+  and triage them. Items are examined for similarity with existing features, how 
+  they fit with the project goals and other timeline considerations. The priority is
   determined as follows:
 
   - High = Next milestone
@@ -98,8 +97,8 @@ Some changes do not require an RFC:
 - ...
 
 The process in itself consists in creating a GitHub issue with the :ref:`RFC
-label <gh_labels>` that documents the proposal thoroughly. There is an `RFC
-template`_ included in the main mJackets API GitHub repository that serves as a
+label <gh_labels>` that documents the proposal thoroughly. There is an RFC
+template`_ included in the mJackets API GitHub repository that serves as a
 guideline to write a new RFC.
 
 As with Pull Requests, RFCs might require discussion in order to move it forward 
@@ -153,4 +152,4 @@ and main stakeholders of the project can make progress on.
 Items labeled as ``features`` are short or long term release items that shall
 have an assignee and a milestone set.
 
-.. _`RFC template`: https://github.com/zephyrproject-rtos/zephyr/blob/master/.github/ISSUE_TEMPLATE/rfc---proposal.md
+.. _`RFC template`: https://github.com/RoboJackets/mjackets-api/blob/master/.github/ISSUE_TEMPLATE/rfc_proposal.md

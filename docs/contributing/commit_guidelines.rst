@@ -4,12 +4,7 @@ Commit Guidelines
 Changes are submitted as Git commits. Each commit message must contain:
 
 * A short and descriptive subject line that is less than 72 characters,
-  followed by a blank line. The subject line must include a prefix that
-  identifies the subsystem being changed, followed by a colon, and a short
-  title, for example:  ``doc: update wiki references to new site``.
-  (If you're updating an existing file, you can use
-  ``git log <filename>`` to see what developers used as the prefix for
-  previous patches of this file.)
+  followed by a blank line. 
 
 * A change description with your logic or reasoning for the changes, followed
   by a blank line.
@@ -47,16 +42,11 @@ Other Commit Expectations
 * Commits must build cleanly when applied on top of each other, thus avoiding
   breaking bisectability.
 
-* Commits must pass all CI checks (see `Continuous Integration`_ for more
-  information)
+* Commits must pass all CI checks
 
 * Each commit must address a single identifiable issue and must be
   logically self-contained. Unrelated changes should be submitted as
   separate commits.
-
-* You may submit pull request RFCs (requests for comments) to send work
-  proposals, progress snapshots of your work, or to get early feedback on
-  features or changes that will affect multiple areas in the code base.
 
 * When major new functionality is added, tests for the new functionality MUST be
   added to the automated test suite. All new APIs MUST be documented and tested
@@ -129,9 +119,9 @@ Contributing non-Apache 2.0 licensed components
 
 Importing code into mJackets from other projects that use a license
 other than the Apache 2.0 license needs to be fully understood in
-context and approved by the STM32 Development comittee. The comittee will
-automatically reject licenses that have not been approved by the `Open Source
-Initiative (OSI)`_.
+context and approved by the mJackets API project maintainers. Licenses that 
+have not been approved by the `Open Source Initiative (OSI)`_ will be 
+automatically rejected.
 
 .. _Open Source Initiative (OSI):
    https://opensource.org/licenses/alphabetical
@@ -144,10 +134,10 @@ pull requests (PR) following mJackets :ref:`Contribution workflow`.
 
 Before you begin working on including a new component to mJackets
 (Apache-2.0 licensed or not), you should start up a conversation
-in the #stm32-dev slack channel to see what the community thinks 
-about the idea.  Maybe there's someone else working on something 
-similar you can collaborate with, or a different approach may make 
-the new component unnecessary.
+in the #stm32-dev channel in the RoboJackets slack space to see 
+what the community thinks about the idea.  Maybe there's someone 
+else working on something similar you can collaborate with, or a 
+different approach may make the new component unnecessary.
 
 If the conclusion is that including a new component is the best
 solution, and this new component uses a license other than Apache-2.0,
@@ -158,12 +148,11 @@ these additional steps must be followed:
    :file:`doc/contribute/code_component_README` (and included
    `below`_ for reference)
 
-#. The STM32 Development comittee will evaluate the code
+#. The mJackets API project maintainers will evaluate the code
    component README as part of the PR commit and vote on accepting it 
    using the GitHub PR review tools.
 
-   - If rejected by the comittee, the contributor will be notified and 
-     the PR will be closed.
+   - If rejected, the contributor will be notified and the PR will be closed.
 
    - If there are no objections, the matter is closed. Approval can be
      accelerated by unanimous approval of the comitteee before the 
@@ -172,8 +161,8 @@ these additional steps must be followed:
 .. note::
 
    External components not under the Apache-2.0 license **cannot** be
-   included in a mJackets release without approval of the STM32 Development
-   comittee.
+   included in a mJackets release without approval of the mJackets API
+   project maintainers.
 
 .. _below:
 
