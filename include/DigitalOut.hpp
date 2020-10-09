@@ -26,18 +26,18 @@ public:
      * @param state Set output value of pin (0 or 1)
      *     In open-drain 0 is high-z, 1 is drive low
      */
-    void write(bool state);
+    void Write(bool state);
 
     /** Toggle pin output
      *
      */
-    void toggle();
+    void Toggle();
 
     /** Read current value of pin
      *
      * @return true (high) or false (low)
      */
-    bool read();
+    bool Read();
 
     /**
      * @brief Assignment operator overload to set pin value
@@ -45,7 +45,7 @@ public:
      * @param rhs 
      */
     void operator =(bool rhs) {
-        write(rhs);
+        Write(rhs);
     }
 
     /**
@@ -55,7 +55,7 @@ public:
      * @return false 
      */
     operator bool() {
-        return read();
+        return Read();
     }
 
 protected:
@@ -63,11 +63,11 @@ protected:
      * @brief GPIO pin associated with the class instance
      * 
      */
-    PinName pin;
+    PinName pin_;
 
     /**
      * @brief Parameter defining whether the output logic should be inverted
      * 
      */
-    bool inverted;
+    bool inverted_;
 };

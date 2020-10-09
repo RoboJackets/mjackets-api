@@ -18,7 +18,9 @@
 #include "DigitalOut.hpp"
 
 DigitalOut::DigitalOut(PinName pin, PullType pull, PinMode mode, PinSpeed speed,
-        bool inverted) : pin(pin), inverted(inverted) {
+        bool inverted){
+    pin_ = pin;
+    inverted_ = inverted;
     GPIO_InitTypeDef pin_structure = {};
     pin_structure.Pin = pin.pin;
     pin_structure.Mode = mode;
@@ -32,14 +34,14 @@ void DigitalOut::DeInit() {
     HAL_GPIO_DeInit(pin_.port, pin_.pin);
 }
 
-void DigitalOut::write(bool state) {
-    HAL_GPIO_WritePin(pin.port, pin.pin, (GPIO_PinState)(state != inverted));
+void DigitalOut::Write(bool state) {
+    HAL_GPIO_WritePin(pin_.port, pin_.pin, (GPIO_PinState)(state != inverted));
 }
 
-void DigitalOut::toggle() {
-    HAL_GPIO_TogglePin(pin.port, pin.pin);
+void DigitalOut::Toggle() {
+    HAL_GPIO_TogglePin(pin_.port, pin_.pin);
 }
 
-bool DigitalOut::read() {
-    return HAL_GPIO_ReadPin(pin.port, pin.pin);
+bool DigitalOut::Read() {
+    return HAL_GPIO_ReadPin(pin_.port, pin_.pin);
 }
