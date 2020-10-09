@@ -16,10 +16,10 @@ public:
         bool inverted = false);
 
     /**
-     * @brief Destroy the Digital Out object
+     * @brief Deinitializes the GPIO pin as a digital output
      * 
      */
-    ~DigitalOut();
+    void DeInit();
 
     /** Change output state of pin
      *

@@ -27,8 +27,9 @@ DigitalOut::DigitalOut(PinName pin, PullType pull, PinMode mode, PinSpeed speed,
     
     HAL_GPIO_Init(pin.port, &pin_structure);
 }
-DigitalOut::~DigitalOut() {
-    HAL_GPIO_DeInit(pin.port, pin.pin);
+
+void DigitalOut::DeInit() {
+    HAL_GPIO_DeInit(pin_.port, pin_.pin);
 }
 
 void DigitalOut::write(bool state) {
