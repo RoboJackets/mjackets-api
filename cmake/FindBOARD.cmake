@@ -8,10 +8,11 @@ endif()
 if (BOARD)
 
     if(BOARD STREQUAL "MTRAIN")
-        add_subdirectory(Robojackets/mTrain)
+        add_subdirectory(${MJACKETS_PATH}/boards/RoboJackets/mTrain)
     endif()
-
+    
     if(NOT BOARD_HAL_CONFIG)
+        string(TOLOWER ${FAMILY} FAMILY_LOWER)
         find_file(BOARD_HAL_CONFIG
             NAMES stm32${FAMILY_LOWER}xx_hal_conf.h
             PATHS "${BOARD_INCLUDE_DIRS}"
@@ -30,9 +31,9 @@ if (BOARD)
 endif()
 
 if(BOARD_HAL_CONFIG AND BOARD_PIN_DEFS)
-    set(BOARD_FOUND TRUE)
+    set(BOARD_${BOARD}_FOUND TRUE)
 else()
-    set(BOARD_FOUND FALSE)
+    set(BOARD_${BOARD}_FOUND FALSE)
 endif()
 
 include(FindPackageHandleStandardArgs)
