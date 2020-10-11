@@ -1,18 +1,36 @@
-if(NOT CMSIS_FIND_COMPONENTS)
-    set(CMSIS_FIND_COMPONENTS
+if(NOT BOARD_FIND_COMPONENTS)
+    set(BOARD_FIND_COMPONENTS
        MTRAIN
     )
 endif()
 
-if(BOARD STREQUAL "MTRAIN")
-    add_subdirectory(Robojackets/mTrain)
+
+if (BOARD)
+
+    if(BOARD STREQUAL "MTRAIN")
+        add_subdirectory(Robojackets/mTrain)
+    endif()
+
+    if(NOT BOARD_HAL_CONFIG)
+        find_file(BOARD_HAL_CONFIG
+            NAMES stm32${FAMILY_LOWER}xx_hal_conf.h
+            PATHS "${BOARD_INCLUDE_DIRS}"
+            NO_DEFAULT_PATH
+        )
+    endif()
+
+    if(NOT BOARD_PIN_DEFS)
+        find_file(BOARD_PIN_DEFS
+            NAMES PinDefs.hpp
+            PATHS "${BOARD_INCLUDE_DIRS}"
+            NO_DEFAULT_PATH
+        )
+    endif()
+
 endif()
 
-if( BOARD_HAL_CONFIG AND
-    BOARD_PIN_DEFS)
-
+if(BOARD_HAL_CONFIG AND BOARD_PIN_DEFS)
     set(BOARD_FOUND TRUE)
-
 else()
     set(BOARD_FOUND FALSE)
 endif()

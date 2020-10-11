@@ -12,6 +12,6 @@ add_library(BSP PUBLIC
 
 set(BOARD_INCLUDE_DIRS "${BSP_PATH}/include")
 
-target_include_directories(BSP PUBLIC $(BOARD_INCLUDE_DIRS))
+target_include_directories(BSP PUBLIC ${BOARD_INCLUDE_DIRS})
 target_link_libraries(BSP PUBLIC API)
 
