@@ -35,7 +35,7 @@ void DigitalOut::DeInit() {
 }
 
 void DigitalOut::Write(bool state) {
-    HAL_GPIO_WritePin(pin_.port, pin_.pin, (GPIO_PinState)(state != inverted));
+    HAL_GPIO_WritePin(pin_.port, pin_.pin, (GPIO_PinState)(state != inverted_));
 }
 
 void DigitalOut::Toggle() {
