@@ -15,6 +15,8 @@ extern "C" {
 
 extern void bsp_config(void);
 
+void BoardClockConfig(void);
+
 
 #ifdef __cplusplus
 }

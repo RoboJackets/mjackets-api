@@ -16,15 +16,39 @@
   ******************************************************************************
   */
 
-#include <mJackets.hpp>
 #include "board_init.h"
 
+#if defined STM32F0
+    #include "stm32f0xx_hal_conf.h"
+    #include "stm32f0xx_hal.h"
+#endif
+#if defined STM32F1
+    #include "stm32f1xx_hal_conf.h"
+    #include "stm32f1xx_hal.h"
+#endif
+#if defined STM32F2
+    #include "stm32f2xx_hal_conf.h"
+    #include "stm32f2xx_hal.h"
+#endif
+#if defined STM32F3
+    #include "stm32f3xx_hal_conf.h"
+    #include "stm32f3xx_hal.h"
+#endif
+#if defined STM32F4
+    #include "stm32f4xx_hal_conf.h"
+    #include "stm32f4xx_hal.h"
+#endif
+#if defined STM32F7
+    #include "stm32f7xx_hal_conf.h"
+    #include "stm32f7xx_hal.h"
+#endif
+
 void bsp_config(void) {
-  MPU_Config();
+  MpuConfig();
   CPU_CACHE_Enable();
   HAL_Init();
-  SystemClock_Config();
-  DWT_Config();
+  BoardClockConfig();
+  DwtConfig();
 
   // Enable all needed system clocks
   __HAL_RCC_GPIOA_CLK_ENABLE();
@@ -77,7 +101,7 @@ void bsp_config(void) {
   * @param  None
   * @retval None
   */
-void SystemClock_Config(void)
+void BoardClockConfig(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
@@ -124,7 +148,7 @@ void SystemClock_Config(void)
   }
 }
 
-void DWT_Config(void)
+void DwtConfig(void)
 {
     CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
     DWT->LAR = 0xC5ACCE55;
@@ -140,7 +164,7 @@ void DWT_Config(void)
   * @param  None
   * @retval None
   */
-void mtrain_MPU_Config(void)
+void MpuConfig(void)
 {
   MPU_Region_InitTypeDef MPU_InitStruct;
 
@@ -165,38 +189,3 @@ void mtrain_MPU_Config(void)
   /* Enable the MPU */
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 }
-
-/**
-  * @brief  CPU L1-Cache enable.
-  * @param  None
-  * @retval None
-  */
-void CPU_CACHE_Enable(void)
-{
-  /* Enable I-Cache */
-  SCB_EnableICache();
-
-  /* Enable D-Cache */
-  SCB_EnableDCache();
-}
-
-#ifdef  USE_FULL_ASSERT
-
-/**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
-void assert_failed(uint8_t* file, uint32_t line)
-{
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-
-  /* Infinite loop */
-  while (1)
-  {
-  }
-}
-#endif

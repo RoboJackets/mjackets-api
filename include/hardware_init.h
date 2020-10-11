@@ -53,7 +53,7 @@ typedef struct
  * 
  * @param clock_init ClockInitStruct with the clock configuration parameters
  */
-void SystemClock_Config(ClockInitStruct clock_init);
+void SystemClockConfig(ClockInitStruct clock_init);
 
 #ifdef __MPU_PRESENT
 /**
@@ -64,7 +64,7 @@ void SystemClock_Config(ClockInitStruct clock_init);
   * @param  None
   * @retval None
   */
-void MPU_Config(void);
+void MpuConfig(void);
 #endif
 
 #if defined(__ICACHE_PRESENT) && defined (__DCACHE_PRESENT)
@@ -80,7 +80,7 @@ void CPU_CACHE_Enable(void);
  * @brief Configures the Data Watchpoint Trigger for tracking clock cycles
  * 
  */
-void DWT_Config(void);
+void DwtConfig(void);
 
 #ifdef  USE_FULL_ASSERT
 /**

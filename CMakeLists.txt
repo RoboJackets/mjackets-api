@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.14.7)
 
+if(BOARD)
+    set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/cmake/stm32-gcc-arm-none-eabi.cmake)
+endif()
+
 project(
   mjackets-api
   LANGUAGES C CXX ASM
