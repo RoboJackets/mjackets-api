@@ -137,6 +137,7 @@ jobs:
         args:
         - -exc
         - |
+          set -e
           cd mjackets-api/docs 
           cmake configure .
           make
@@ -264,6 +265,7 @@ jobs:
         args:
         - -exc
         - |
+          set -e
           ls
           cd pull-request/docs 
           cmake configure .
