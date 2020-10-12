@@ -62,3 +62,9 @@ constexpr PinName LED1 = { GPIOE, GPIO_PIN_4 };
 constexpr PinName LED2 = { GPIOE, GPIO_PIN_3 };
 constexpr PinName LED3 = { GPIOE, GPIO_PIN_6 };
 constexpr PinName LED4 = { GPIOE, GPIO_PIN_5 };
+
+/* Unit Testing Aliases */
+constexpr PinName TEST_LED1 = LED1;
+constexpr PinName TEST_LED2 = LED2;
+constexpr PinName TEST_LED3 = LED3;
+constexpr PinName TEST_LED4 = LED4;
