@@ -320,15 +320,15 @@ JavaDoc Tags
 ============
 
 +---------------------------------+-------------------------------------------------------------+---------------------------------------+
-| Tag & Parameter	              | Usage	                                                    | Applies to                            |
+| Tag & Parameter                 | Usage                                                       | Applies to                            |
 +=================================+=============================================================+=======================================+
-| *@author* John Smith            | Describes an author.	                                    | Class, Interface, Enum                |
+| *@author* John Smith            | Describes an author.                                        | Class, Interface, Enum                |
 +---------------------------------+-------------------------------------------------------------+---------------------------------------+
-| *@param* name description       |	Describes a method parameter.                               | Method	                            |
+| *@param* name description       |	Describes a method parameter.                               | Method                                |
 +---------------------------------+-------------------------------------------------------------+---------------------------------------+
-| *@return* description	          | Describes the return value.	                                | Method	                            |
+| *@return* description	          | Describes the return value.	                                | Method                                |
 +---------------------------------+-------------------------------------------------------------+---------------------------------------+
-| *@throws* classname description | Describes an exception that may be thrown from this method. | Method	                            |
+| *@throws* classname description | Describes an exception that may be thrown from this method. | Method                                |
 +---------------------------------+-------------------------------------------------------------+---------------------------------------+
 | *@deprecated* description       | Describes an outdated method.                               | Class, Interface, Enum, Field, Method |
 +---------------------------------+-------------------------------------------------------------+---------------------------------------+
