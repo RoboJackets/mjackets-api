@@ -11,3 +11,12 @@ CMakeCache.txt
 CMakeFiles/
 CMakeDoxygenDefaults.cmake
 cmake_install.cmake
+CMakeDoxyfile.in
+Makefile
+
+*.bin
+*.elf
+
+docs/docs_build/
+docs/CMakeFiles/
+docs/Makefile
