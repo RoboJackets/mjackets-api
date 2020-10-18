@@ -54,6 +54,7 @@ resources:
   source:
     access_token: ((github-com/token.token))
     repository: RoboJackets/mjackets-api
+    base_branch: master
   type: pull-request
 
 jobs:
@@ -92,7 +93,7 @@ jobs:
             -Dsonar.cfamily.build-wrapper-output=bw-output \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.cfamily.cache.enabled=false \
-            -Dsonar.scm.disabled=true
+            -Dsonar.scm.disabled=false
         path: sh
     on_abort:
       inputs:
@@ -195,6 +196,7 @@ jobs:
   - get: pull-request
     params:
       integration_tool: checkout
+      list_changed_files: true
     trigger: true
     version: every
 
@@ -217,8 +219,12 @@ jobs:
         - -exc
         - |
           set -e
-          ls
-          cd mjackets-api
+          apt install jq -y
+          cd pull-request
+          PULL_REQUEST_KEY=`jq '.pr' .git/resource/version.json`
+          PULL_REQUEST_KEY="${PULL_REQUEST_KEY%\"}"
+          PULL_REQUEST_KEY="${PULL_REQUEST_KEY#\"}"
+          git submodule init && git submodule update
           cmake configure . -D BOARD=MTRAIN
           build-wrapper-linux-x86-64 --out-dir bw-output make
           sonar-scanner \
@@ -228,7 +234,8 @@ jobs:
             -Dsonar.cfamily.build-wrapper-output=bw-output \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.cfamily.cache.enabled=false \
-            -Dsonar.scm.disabled=true
+            -Dsonar.scm.disabled=false \
+            -Dsonar.pullrequest.key=$PULL_REQUEST_KEY
         path: sh
     on_abort:
       inputs:
