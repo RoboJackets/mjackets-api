@@ -1,10 +1,10 @@
-project(Test LANGUAGES C CXX)
+project(TEST LANGUAGES C CXX)
 
 function(add_test test_file)
+
     get_filename_component(test_name ${test_file} NAME_WE)
 
-    add_executable(${test_name}.elf
-        ../rtos_hooks.c
+    add_executable(${test_name}.elf EXCLUDE_FROM_ALL
         ${test_file}
     )
 
