@@ -9,7 +9,7 @@ resource_types:
 - name: pull-request
   source:
     repository: teliaoss/github-pr-resource
-  type: registry-image
+  type: docker-image
 - name: sonar-runner
   source:
     repository: cathive/concourse-sonarqube-resource
@@ -25,7 +25,7 @@ resources:
     pull_request: pull-request
     repository: mjackets-api
     resource_name: build-check
-    token: ((github-com/token))
+    token: ((github-com/token.token))
   type: github-check
 - icon: check-bold
   name: documentation-check
@@ -35,14 +35,14 @@ resources:
     pull_request: pull-request
     repository: mjackets-api
     resource_name: documentation-check
-    token: ((github-com/token))
+    token: ((github-com/token.token))
   type: github-check
 - icon: github
   name: mjackets-api
   public: true
   source:
     branch: master
-    password: ((github-com/token))
+    password: ((github-com/token.token))
     uri: https://github.com/RoboJackets/mjackets-api
     username: x-access-token
   type: git
@@ -52,8 +52,9 @@ resources:
   name: pull-request
   public: true
   source:
-    access_token: ((github-com/token))
+    access_token: ((github-com/token.token))
     repository: RoboJackets/mjackets-api
+    base_branch: master
   type: pull-request
 
 jobs:
@@ -80,7 +81,19 @@ jobs:
         args:
         - -exc
         - |
-          ./mjackets-api/ci/scripts/example.sh
+          set -e
+          ls
+          cd mjackets-api
+          cmake configure . -D BOARD=MTRAIN
+          build-wrapper-linux-x86-64 --out-dir bw-output make
+          sonar-scanner \
+            -Dsonar.organization=robojackets \
+            -Dsonar.projectKey=RoboJackets_mjackets-api \
+            -Dsonar.sources=. \
+            -Dsonar.cfamily.build-wrapper-output=bw-output \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.cfamily.cache.enabled=false \
+            -Dsonar.scm.disabled=false
         path: sh
     on_abort:
       inputs:
@@ -137,6 +150,7 @@ jobs:
         args:
         - -exc
         - |
+          set -e
           cd mjackets-api/docs 
           cmake configure .
           make
@@ -182,6 +196,7 @@ jobs:
   - get: pull-request
     params:
       integration_tool: checkout
+      list_changed_files: true
     trigger: true
     version: every
 
@@ -203,7 +218,24 @@ jobs:
         args:
         - -exc
         - |
-          ./pull-request/ci/scripts/example.sh
+          set -e
+          apt install jq -y
+          cd pull-request
+          PULL_REQUEST_KEY=`jq '.pr' .git/resource/version.json`
+          PULL_REQUEST_KEY="${PULL_REQUEST_KEY%\"}"
+          PULL_REQUEST_KEY="${PULL_REQUEST_KEY#\"}"
+          git submodule init && git submodule update
+          cmake configure . -D BOARD=MTRAIN
+          build-wrapper-linux-x86-64 --out-dir bw-output make
+          sonar-scanner \
+            -Dsonar.organization=robojackets \
+            -Dsonar.projectKey=RoboJackets_mjackets-api \
+            -Dsonar.sources=. \
+            -Dsonar.cfamily.build-wrapper-output=bw-output \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.cfamily.cache.enabled=false \
+            -Dsonar.scm.disabled=false \
+            -Dsonar.pullrequest.key=$PULL_REQUEST_KEY
         path: sh
     on_abort:
       inputs:
@@ -264,6 +296,7 @@ jobs:
         args:
         - -exc
         - |
+          set -e
           ls
           cd pull-request/docs 
           cmake configure .

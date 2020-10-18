@@ -122,14 +122,14 @@ resources:
     pull_request: pull-request
     repository: mjackets-api
     resource_name: build-check
-    token: ((github-com/token))
+    token: ((github-com/token.token))
   type: github-check
 - icon: github
   name: concourse-pipeline-library
   public: true
   source:
     branch: main
-    password: ((github-com/token))
+    password: ((github-com/token.token))
     uri: https://github.com/RoboJackets/concourse-pipeline-library
     username: x-access-token
   type: git
@@ -138,7 +138,7 @@ resources:
   public: true
   source:
     branch: master
-    password: ((github-com/token))
+    password: ((github-com/token.token))
     paths:
     - ci/dockerfiles/mjackets-build/Dockerfile
     uri: https://github.com/RoboJackets/mjackets-api
@@ -161,5 +161,5 @@ resources:
     pull_request: pull-request
     repository: mjackets-api
     resource_name: push-check
-    token: ((github-com/token))
+    token: ((github-com/token.token))
   type: github-check
