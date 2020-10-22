@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Clang Format Github Action
-        uses: RafikFarhad/clang-format-github-action@v1
+        uses: RafikFarhad/clang-format-github-action@v1-rc2
         with:
           style: Google
           sources: api/*.cpp, api/*.c, include/*.hpp, include/*.h
