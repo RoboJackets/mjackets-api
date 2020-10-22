@@ -17,6 +17,16 @@ resource_types:
   type: docker-image
 
 resources:
+- name: format-check
+  icon: check-bold
+  public: true
+  source:
+    check_name: API Format
+    pull_request: pull-request
+    repository: mjackets-api
+    resource_name: format-check
+    token: ((github-com/token.token))
+  type: github-check
 - icon: check-bold
   name: build-check
   public: true
@@ -128,6 +138,64 @@ jobs:
       summary: mJackets sanity build compiled sucessfully.
       title: Sanity Build Success
     put: build-check
+
+- name: format-check-master
+  plan:
+  - get: mjackets-api
+    trigger: true
+
+  - inputs:
+    - mjackets-api
+    put: format-check
+  - config:
+      image_resource:
+        source:
+          repository: robojackets/mjackets-dev
+        type: docker-image
+      inputs:
+      - name: mjackets-api
+      platform: linux
+      run:
+        args:
+        - -exc
+        - |
+          set -e
+          cd mjackets-api
+          cpplint ./api/* ./include/*
+        path: sh
+    on_abort:
+      inputs:
+      - format-check
+      - mjackets-api
+      params:
+        conclusion: cancelled
+      put: format-check
+    on_error:
+      inputs:
+      - format-check
+      - mjackets-api
+      params:
+        conclusion: action_required
+      put: format-check
+    on_failure:
+      inputs:
+      - format-check
+      - mjackets-api
+      params:
+        conclusion: format
+        summary: Resolve any formatting issues using the clang-format utility. 
+        title: Some API files are not properly formatted
+      put: format-check
+    task: format-check
+
+  - inputs:
+    - format-check
+    - mjackets-api
+    params:
+      conclusion: success
+      summary: mJackets API is properly formatted.
+      title: API is Formatted Correctly
+    put: format-check
 
 - name: documentation-check-master
   plan:
@@ -336,4 +404,62 @@ jobs:
       summary: mJackets API has 100% documentation coverage.
       title: 100% Documenation Coverage
     put: documentation-check
+
+- name: format-check-pull-request
+  plan:
+  - get: pull-request
+    trigger: true
+
+  - inputs:
+    - pull-request
+    put: format-check
+  - config:
+      image_resource:
+        source:
+          repository: robojackets/mjackets-dev
+        type: docker-image
+      inputs:
+      - name: pull-request
+      platform: linux
+      run:
+        args:
+        - -exc
+        - |
+          set -e
+          cd pull-request
+          cpplint ./api/* ./include/*
+        path: sh
+    on_abort:
+      inputs:
+      - format-check
+      - pull-request
+      params:
+        conclusion: cancelled
+      put: pull-request
+    on_error:
+      inputs:
+      - format-check
+      - pull-request
+      params:
+        conclusion: action_required
+      put: format-check
+    on_failure:
+      inputs:
+      - format-check
+      - pull-request
+      params:
+        conclusion: failure
+        summary: Resolve any formatting issues using the clang-format utility. 
+        title: Some API files are not properly formatted
+      put: format-check
+    task: format-check
+
+  - inputs:
+    - format-check
+    - pull-request
+    params:
+      conclusion: success
+      summary: mJackets API is properly formatted.
+      title: API is Formatted Correctly
+    put: format-check
 
