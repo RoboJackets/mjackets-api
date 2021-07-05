@@ -1,3 +1,5 @@
+# This value is overridden during Concourse jobs to use a local copy of the image.
+# If you are changing the base image here, you should also change it in the Concourse pipeline configuration.
 ARG base_image=ubuntu:20.04
 
 FROM ${base_image}

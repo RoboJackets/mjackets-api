@@ -192,7 +192,7 @@ resources:
   public: true
   source:
     repository: ubuntu
-    tag: latest
+    tag: "20.04"
   tags:
   - resources
   type: registry-image
