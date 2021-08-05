@@ -45,7 +45,7 @@ resources:
   public: true
   source:
     branch: master
-    password: (("github.com"/token))
+    password: (("github.com"/token.token))
     uri: https://github.com/RoboJackets/mjackets-api
     username: x-access-token
   type: git
@@ -57,7 +57,7 @@ resources:
   name: pull-request
   public: true
   source:
-    access_token: (("github.com"/token))
+    access_token: (("github.com"/token.token))
     repository: RoboJackets/mjackets-api
     base_branch: master
   type: pull-request
@@ -88,6 +88,7 @@ jobs:
         - git -C mjackets-api rev-parse HEAD > commit-sha/value
         path: sh
     task: get-commit-sha
+
   - load_var: commit
     file: commit-sha/value
     format: trim
@@ -157,6 +158,30 @@ jobs:
   - get: mjackets-api
     trigger: true
 
+  - config:
+      image_resource:
+        source:
+          repository: alpine/git
+        type: registry-image
+      inputs:
+      - name: mjackets-api
+      outputs:
+      - name: commit-sha
+      platform: linux
+      run:
+        args:
+        - -e
+        - -x
+        - -c
+        - git -C mjackets-api rev-parse HEAD > commit-sha/value
+        path: sh
+    task: get-commit-sha
+
+  - load_var: commit
+    file: commit-sha/value
+    format: trim
+    reveal: true
+
   - inputs: []
     put: documentation-check
 
@@ -214,8 +239,19 @@ jobs:
     params:
       integration_tool: checkout
       list_changed_files: true
+      submodules: true
     trigger: true
     version: every
+
+  - load_var: commit
+    file: pull-request/.git/resource/head_sha
+    format: trim
+    reveal: true
+
+  - load_var: pull_request_key
+    file: pull-request/.git/resource/pr
+    format: trim
+    reveal: true
 
   - inputs: []
     put: build-check
@@ -229,15 +265,12 @@ jobs:
       - name: pull-request
       params:
         SONAR_TOKEN: ((kv/"sonarcloud.io"))
+        PULL_REQUEST_KEY: ((.:pull_request_key))
       platform: linux
       run:
         args:
         - -exc
         - |
-          PULL_REQUEST_KEY=`cat .git/resource/pr`
-          PULL_REQUEST_KEY="${PULL_REQUEST_KEY%\"}"
-          PULL_REQUEST_KEY="${PULL_REQUEST_KEY#\"}"
-          git submodule init && git submodule update
           cmake configure . -D BOARD=MTRAIN
           build-wrapper-linux-x86-64 --out-dir bw-output make
           sonar-scanner \
@@ -289,6 +322,11 @@ jobs:
       integration_tool: checkout
     trigger: true
     version: every
+
+  - load_var: commit
+    file: pull-request/.git/resource/head_sha
+    format: trim
+    reveal: true
 
   - inputs: []
     put: documentation-check
